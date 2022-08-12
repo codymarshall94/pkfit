@@ -10,8 +10,6 @@ import GenerateBtn from "./components/GenerateBtn";
 import Workout from "./components/Workout";
 
 function App() {
-  const [upperBody, setUpperBody] = useState(UPPERBODY);
-  const [lowerBody, setLowerBody] = useState(LOWERBODY);
   const [workoutType, setWorkoutType] = useState(null);
   const [exerciseAmount, setExerciseAmount] = useState(null);
   const [reps, setReps] = useState(null);
