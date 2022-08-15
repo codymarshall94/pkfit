@@ -1,0 +1,13 @@
+.workout-item {
+    display: flex;
+    align-items: center;
+    background-color: #EEF8FE;
+    border-radius: .5rem;
+    padding: .15rem;
+}
+
+.workout-image {
+    height: 3rem;
+    border: .125rem solid black;
+    border-radius: .5rem;
+}
