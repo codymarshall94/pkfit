@@ -12,7 +12,7 @@ function Workout({ workout }) {
           sx={{
             display: "flex",
             justifyContent: "center",
-            marginBottom: "2rem",
+            marginBottom: "5rem",
             height: "15rem",
             overflowY: "auto",
           }}
