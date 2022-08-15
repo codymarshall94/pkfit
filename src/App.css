@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
+  height: 100vh;
 }
 
 .App-logo {
