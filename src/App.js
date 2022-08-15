@@ -3,8 +3,6 @@ import { LOWERBODY } from "./lowerbody";
 import { UPPERBODY } from "./upperbody";
 import "./App.css";
 import Header from "./components/Header";
-import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
 import ExerciseSelector from "./components/ExerciseSelector";
 import GenerateBtn from "./components/GenerateBtn";
 import Workout from "./components/Workout";
