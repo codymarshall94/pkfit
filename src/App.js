@@ -8,12 +8,16 @@ import Chip from "@mui/material/Chip";
 import ExerciseSelector from "./components/ExerciseSelector";
 import GenerateBtn from "./components/GenerateBtn";
 import Workout from "./components/Workout";
+import DescriptionModal from "./components/DescriptionModal";
 
 function App() {
   const [workoutType, setWorkoutType] = useState(null);
   const [exerciseAmount, setExerciseAmount] = useState(null);
   const [reps, setReps] = useState(null);
   const [workout, setWorkout] = useState(null);
+  const [selectedExercise, setSelectedExercise] = useState(null);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
 
   //function to generate workout
   const generateWorkout = () => {
@@ -45,6 +49,23 @@ function App() {
     }
   };
 
+  /*
+  const handleReps = () => {
+    let sets;
+    if (exerciseAmount === 5) {
+      sets = 3
+    }
+
+    if (exerciseAmount === 10) {
+      sets = 2
+    }
+  } */
+
+  const openModalWithExercise = (item) => {
+    setSelectedExercise(item);
+    handleOpen();
+  }
+
   const handleTypeClick = (type) => {
     setWorkoutType(type);
   };
@@ -68,16 +89,10 @@ function App() {
         handleTypeClick={handleTypeClick}
         handleAmountClick={handleAmountClick}
         handleRepsClick={handleRepsClick}
+        workoutType={workoutType}
+        exerciseAmount={exerciseAmount}
+        reps={reps}
       />
-      {/*Show Selections*/}
-      <Box sx={{ margin: "1rem" }}>
-        {workoutType ? <Chip label={workoutType} variant="outlined" /> : null}
-        {exerciseAmount ? (
-          <Chip label={exerciseAmount} variant="outlined" />
-        ) : null}
-        {reps ? <Chip label={reps} variant="outlined" /> : null}
-      </Box>
-
       {/*Generate Workout Button*/}
       <GenerateBtn
         generateWorkout={generateWorkout}
@@ -86,7 +101,8 @@ function App() {
         reps={reps}
       />
       {/*Display exercise list*/}
-      <Workout workout={workout} />
+      <Workout workout={workout} openModalWithExercise={openModalWithExercise}/>
+      <DescriptionModal selectedExercise={selectedExercise} open={open} setOpen={setOpen} />
     </div>
   );
 }
