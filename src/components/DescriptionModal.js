@@ -57,13 +57,14 @@ function DescriptionModal({ open, setOpen, selectedExercise }) {
               </Typography>
             </>
           ) : null}
-          <Button
-            variant="contained"
-            onClick={handleClose}
-            sx={{ position: "absolute", right: "1rem", bottom: "1rem" }}
-          >
-            Close
-          </Button>
+          <Box sx={{display: 'flex', justifyContent: 'flex-end', marginTop: '2rem'}}>
+            <Button
+              variant="contained"
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </Box>
