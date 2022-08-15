@@ -21,7 +21,7 @@ function DescriptionModal({ open, setOpen, selectedExercise }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            height: "50%",
+            height: "auto",
             width: "90%",
             backgroundColor: "white",
             borderRadius: ".25rem",
