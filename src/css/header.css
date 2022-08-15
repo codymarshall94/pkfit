@@ -2,11 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5rem;
+    height: 3rem;
     background-color: #004276;
 }
 
 .header-logo {
-    font-size: 3rem;
+    font-size: 1.5rem;
     color: white;
 }
