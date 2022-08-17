@@ -6,8 +6,23 @@
     padding: .15rem;
 }
 
-.workout-image {
+.workout-image-container {
     height: 3rem;
-    border: .125rem solid black;
+    width: 3rem;
+}
+
+.workout-image {
+    height: 100%;
+    width: 100%;
+    border: .025rem solid black;
     border-radius: .5rem;
+    object-fit: cover;
+}
+
+.workout-reps-text {
+    color: #413D3E;
+}
+
+.workout-name-text {
+    font-weight: 500;
 }
