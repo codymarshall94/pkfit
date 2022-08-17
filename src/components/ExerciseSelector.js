@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Box } from "@mui/material";
 import React from "react";
 
-function TargetArea({handleTypeClick, handleRepsClick, handleAmountClick, workoutType, exerciseAmount, reps}) {
+function TargetArea({handleTypeClick, handleGoalClick, handleAmountClick, workoutType, exerciseAmount, goal}) {
   return (
     <Box>
       <Box>
@@ -20,11 +20,11 @@ function TargetArea({handleTypeClick, handleRepsClick, handleAmountClick, workou
         </ButtonGroup>
       </Box>
       <Box>
-        <h3>Reps</h3>
+        <h3>Workout Style</h3>
         <ButtonGroup>
-          <Button color="success" variant={reps === "6-10" ? "contained" : "outlined" } onClick={() => handleRepsClick("6-10")}>6-10</Button>
-          <Button color="success" variant={reps === "10-15" ? "contained" : "outlined" } onClick={() => handleRepsClick("10-15")}>10-15</Button>
-          <Button color="success" variant={reps === "Time" ? "contained" : "outlined" } onClick={() => handleRepsClick("Time")}>Time</Button>
+          <Button color="success" variant={goal === "Power" ? "contained" : "outlined" } onClick={() => handleGoalClick("Power")}>Power</Button>
+          <Button color="success" variant={goal === "Strength" ? "contained" : "outlined" } onClick={() => handleGoalClick("Strength")}>Strength</Button>
+          <Button color="success" variant={goal === "Conditioning" ? "contained" : "outlined" } onClick={() => handleGoalClick("Conditioning")}>Conditioning</Button>
         </ButtonGroup>
       </Box>
     </Box>
