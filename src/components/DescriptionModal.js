@@ -39,7 +39,7 @@ function DescriptionModal({ open, setOpen, selectedExercise }) {
               height: "20rem"
             }}
           >
-            {selectedExercise !== null ? (
+            {selectedExercise && selectedExercise.exercise.image !== null ? (
             <img src={selectedExercise.exercise.image} alt="" className="modal-image" />
           ) : (
             <img
