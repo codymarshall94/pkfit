@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import "../css/descriptionmodal.css";
 
 function DescriptionModal({ open, setOpen, selectedExercise }) {
   const handleClose = () => setOpen(false);
@@ -29,18 +30,24 @@ function DescriptionModal({ open, setOpen, selectedExercise }) {
             padding: "1rem",
           }}
         >
+          
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               marginBottom: "1rem",
+              height: "20rem"
             }}
           >
+            {selectedExercise !== null ? (
+            <img src={selectedExercise.exercise.image} alt="" className="modal-image" />
+          ) : (
             <img
               src={require("../images/placeholderthumb.png")}
               alt=""
               className="modal-image"
             />
+          )}
           </Box>
           {selectedExercise !== null ? (
             <>
@@ -57,11 +64,14 @@ function DescriptionModal({ open, setOpen, selectedExercise }) {
               </Typography>
             </>
           ) : null}
-          <Box sx={{display: 'flex', justifyContent: 'flex-end', marginTop: '2rem'}}>
-            <Button
-              variant="contained"
-              onClick={handleClose}
-            >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: "2rem",
+            }}
+          >
+            <Button variant="contained" onClick={handleClose}>
               Close
             </Button>
           </Box>
