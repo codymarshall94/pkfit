@@ -1,142 +1,29 @@
-import React, { useState } from "react";
-import { LOWERBODY } from "./lowerbody";
-import { UPPERBODY } from "./upperbody";
-import "./App.css";
+import React from "react";
 import Header from "./components/Header";
-import ExerciseSelector from "./components/ExerciseSelector";
-import GenerateBtn from "./components/GenerateBtn";
-import Workout from "./components/Workout";
-import DescriptionModal from "./components/DescriptionModal";
+import Box from "@mui/system/Box";
+import "./App.css";
+import { Link } from "react-router-dom";
 
 function App() {
-  const [workoutType, setWorkoutType] = useState(null);
-  const [exerciseAmount, setExerciseAmount] = useState(null);
-  const [goal, setGoal] = useState(null);
-  const [reps, setReps] = useState(null);
-  const [sets, setSets] = useState(null);
-  const [workout, setWorkout] = useState(null);
-  const [selectedExercise, setSelectedExercise] = useState(null);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-
-  let repsArray = [];
-  let shuffled;
-  let newArr;
-  let shuffledUpper;
-  let shuffledLower;
-  let newUpper;
-  let newLower;
-  let fullWorkArr;
-
-  //function to generate workout
-  const generateWorkout = () => {
-    handleSets();
-    handleReps();
-
-    if (workoutType === "Lower") {
-      shuffled = [...LOWERBODY].sort(() => Math.random() - 0.5);
-      newArr = shuffled.slice(0, exerciseAmount);
-      setWorkout(newArr);
-    }
-    if (workoutType === "Upper") {
-      shuffled = [...UPPERBODY].sort(() => Math.random() - 0.5);
-      newArr = shuffled.slice(0, exerciseAmount);
-      setWorkout(newArr);
-    }
-    if (workoutType === "Full") {
-      shuffledUpper = [...UPPERBODY].sort(() => Math.random() - 0.5);
-      shuffledLower = [...LOWERBODY].sort(() => Math.random() - 0.5);
-      newUpper = shuffledUpper.slice(0, exerciseAmount / 2);
-      newLower = shuffledLower.slice(0, exerciseAmount / 2 + 1);
-      fullWorkArr = newUpper.concat(newLower);
-      setWorkout(fullWorkArr);
-    }
-  };
-
-  const handleReps = () => {
-    if (goal === "Power") {
-      setReps("1-5 @ 85-100%");
-    }
-    if (goal === "Strength") {
-      setReps("6-8 @ 70-90%");
-    }
-    if (goal === "Conditioning") {
-      setReps("12-20");
-    }
-  };
-
-  /*
-  const handleReps = () => {
-    if (reps === "6-10") {
-      for (let i = 0; i < 8; i++) {
-        let randomNum = Math.round(Math.random() * (10 - 6) + 6);
-        repsArray.push(randomNum);
-      }
-    }
-    console.log(repsArray);
-  }; */
-
-  const handleSets = () => {
-    if (exerciseAmount === 5) {
-      setSets(3);
-    }
-    if (exerciseAmount === 10) {
-      setSets(2);
-    }
-  };
-
-  const openModalWithExercise = (item) => {
-    setSelectedExercise(item);
-    handleOpen();
-  };
-
-  const handleTypeClick = (type) => {
-    setWorkoutType(type);
-  };
-
-  const handleAmountClick = (amount) => {
-    setExerciseAmount(amount);
-  };
-
-  const handleGoalClick = (g) => {
-    setGoal(g);
-  };
-
   return (
     <div className="App">
       <Header />
-      {/*Title*/}
-      <h1 className="app-title">Parkour Workout Generator</h1>
-      {/*Button To Select if lower/upper/full*/}
-      {/*Select rep ranges*/}
-      <ExerciseSelector
-        handleTypeClick={handleTypeClick}
-        handleAmountClick={handleAmountClick}
-        handleGoalClick={handleGoalClick}
-        workoutType={workoutType}
-        exerciseAmount={exerciseAmount}
-        goal={goal}
-      />
-      {/*Generate Workout Button*/}
-      <GenerateBtn
-        generateWorkout={generateWorkout}
-        workoutType={workoutType}
-        exerciseAmount={exerciseAmount}
-        goal={goal}
-      />
-      {/*Display exercise list*/}
-      <Workout
-        workout={workout}
-        openModalWithExercise={openModalWithExercise}
-        sets={sets}
-        reps={reps}
-        repsArray={repsArray}
-      />
-      <DescriptionModal
-        selectedExercise={selectedExercise}
-        open={open}
-        setOpen={setOpen}
-      />
+      <Box sx={{bgcolor: '#F3F3F4', height: '50px'}}></Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-start",
+          flexDirection: "column",
+          padding: "1rem",
+        }}
+      >
+        <h1 className="home-title">Parkour Workout Generator</h1>
+        <h3>Quick workouts for at Home or at the Gym</h3>
+      </Box>
+      <Box className="home-image-container" >
+        <img className="home-image" src={require('./images/homePageImage.jpg')} alt="" />
+      </Box>
+      <Link to="/generator" className="home-button" style={{ textDecoration: 'none' }}>Generate Now</Link>
     </div>
   );
 }
