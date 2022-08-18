@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
@@ -27,7 +27,7 @@ function Workout({ workout, openModalWithExercise, sets, reps, isVisible, setIsV
           }}
         >
           {workout.map((exercise) => (
-            <>
+            <Fragment key={exercise.id}>
               {transition((style, item) =>
                 item ? (
                   <AnimatedGridItem
@@ -89,7 +89,7 @@ function Workout({ workout, openModalWithExercise, sets, reps, isVisible, setIsV
                   </AnimatedGridItem>
                 ) : null
               )}
-            </>
+            </Fragment>
           ))}
         </Grid>
       </Box>
