@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
-import { animated, useTransition, config } from "react-spring";
+import { animated, useTransition } from "react-spring";
 import "../css/workout.css";
 
 function Workout({ workout, openModalWithExercise, sets, reps, isVisible, setIsVisible }) {
