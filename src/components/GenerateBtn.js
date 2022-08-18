@@ -7,6 +7,7 @@ function GenerateBtn({ generateWorkout, workoutType, exerciseAmount, goal }) {
     <Box sx={{ margin: "1rem" }}>
       <Button
         variant="contained"
+        color="primary"
         onClick={() => generateWorkout()}
         disabled={workoutType && exerciseAmount && goal ? false : true}
       >
