@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LOWERBODY } from "../lowerbody";
 import { UPPERBODY } from "../upperbody";
 import Header from "./Header";
@@ -16,6 +16,7 @@ function Generator() {
     const [workout, setWorkout] = useState(null);
     const [selectedExercise, setSelectedExercise] = useState(null);
     const [open, setOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
     const handleOpen = () => setOpen(true);
   
     let repsArray = [];
@@ -26,9 +27,14 @@ function Generator() {
     let newUpper;
     let newLower;
     let fullWorkArr;
-  
+
+    useEffect(() => {
+      setTimeout(() => setIsVisible(true), 150);
+    }, [workout])
+    
     //function to generate workout
     const generateWorkout = () => {
+      setIsVisible(false);
       handleSets();
       handleReps();
   
@@ -129,6 +135,8 @@ function Generator() {
           sets={sets}
           reps={reps}
           repsArray={repsArray}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
         />
         <DescriptionModal
           selectedExercise={selectedExercise}

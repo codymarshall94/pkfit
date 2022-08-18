@@ -18,7 +18,7 @@ function App() {
         }}
       >
         <h1 className="home-title">Parkour Workout Generator</h1>
-        <h3>Quick workouts for at Home or at the Gym</h3>
+        <h3>Quick workouts for anywhere you are</h3>
       </Box>
       <Box className="home-image-container" >
         <img className="home-image" src={require('./images/homePageImage.jpg')} alt="" />
