@@ -3,7 +3,7 @@ import React from "react";
 
 function TargetArea({handleTypeClick, handleGoalClick, handleAmountClick, workoutType, exerciseAmount, goal}) {
   return (
-    <Box>
+    <Box sx={{margin: "1.5rem 0"}}>
       <Box>
         <h3>Workout Type</h3>
         <ButtonGroup>
