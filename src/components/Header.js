@@ -7,6 +7,7 @@ function Header() {
     <div className='header'>
         <Link to="/" style={{ textDecoration: 'none' }}><h4 className='header-logo'>pkFit</h4></Link>
         <Link to="/generator" style={{ textDecoration: 'none' }}><span className='header-link'>Generate</span></Link>
+        <Link to="/skills" style={{ textDecoration: 'none' }}><span className='header-link'>Skills</span></Link>
     </div>
   )
 }
