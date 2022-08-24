@@ -26,6 +26,7 @@ function TargetArea({handleTypeClick, handleGoalClick, handleAmountClick, workou
           <Button color="success" variant={goal === "Strength" ? "contained" : "outlined" } onClick={() => handleGoalClick("Strength")}>Strength</Button>
           <Button color="success" variant={goal === "Conditioning" ? "contained" : "outlined" } onClick={() => handleGoalClick("Conditioning")}>Conditioning</Button>
         </ButtonGroup>
+        
       </Box>
     </Box>
   );
