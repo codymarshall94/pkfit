@@ -30,12 +30,11 @@ function Skills() {
           <Grid item xs={6} key={index}>
             <Link to={`/exercises`}>
               <Box
-              onClick={() => dispatch(changeSkill(skill.name))}
+                className="skill-card"
+                onClick={() => dispatch(changeSkill(skill.name))}
                 sx={{
                   position: "relative",
                   height: "12rem",
-                  border: ".025rem solid black",
-                  borderRadius: ".5rem",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
