@@ -1,29 +1,29 @@
 .workout-item {
-    display: flex;
-    align-items: center;
-    background-color: #EEF8FE;
-    border-radius: .5rem;
-    padding: .15rem;
-    box-shadow: 0px 2px 10px -6px rgba(0, 0, 0, 0.3)
+  display: flex;
+  align-items: center;
+  background-color: #eef8fe;
+  border-radius: 0.5rem;
+  padding: 0.15rem;
+  box-shadow: 0px 2px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
 .workout-image-container {
-    height: 3rem;
-    width: 3rem;
+  height: 3rem;
+  width: 3rem;
 }
 
 .workout-image {
-    height: 100%;
-    width: 100%;
-    border: .025rem solid black;
-    border-radius: .5rem;
-    object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border: 0.025rem solid black;
+  border-radius: 0.5rem;
+  object-fit: cover;
 }
 
 .workout-reps-text {
-    color: #413D3E;
+  color: #413d3e;
 }
 
 .workout-name-text {
-    font-weight: 500;
+  font-weight: 500;
 }

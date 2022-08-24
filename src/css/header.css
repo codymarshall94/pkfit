@@ -1,24 +1,24 @@
 .header {
-    top: 0;
-    width: 100vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 3rem;
-    padding: 1rem;
-    background-color: #293241;
-    z-index: 999;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  padding: 1rem;
+  background-color: #293241;
+  z-index: 999;
 }
 
 .header-logo {
-    font-size: 1.5rem;
-    color: white;
+  font-size: 1.5rem;
+  color: white;
 }
 
 .header-link {
-    color: white;
+  color: white;
 }
 
 .header-link:hover {
-    border-bottom: .015rem solid white;
+  border-bottom: 0.015rem solid white;
 }
