@@ -20,6 +20,7 @@ root.render(
         <Route path="generator" element={<Generator />} />
         <Route path="skills" element={<Skills />} />
         <Route path="exercises" element={<Exercises />} />
+        <Route path="*" element={<App />} />
       </Routes>
     </BrowserRouter>
   </Provider>
