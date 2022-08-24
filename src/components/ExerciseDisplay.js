@@ -18,8 +18,6 @@ function ExerciseDisplay() {
         <Grid
           container
           key={exer.id}
-          xs={12}
-          lg={7}
           className="workout-item"
           sx={{ margin: ".25rem" }}
         >
