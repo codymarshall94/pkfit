@@ -1,4 +1,5 @@
 .header {
+  position: sticky;
   top: 0;
   width: 100vw;
   display: flex;
@@ -21,4 +22,8 @@
 
 .header-link:hover {
   border-bottom: 0.015rem solid white;
+}
+
+.header-links {
+  padding: 0 .5rem;
 }
