@@ -19,15 +19,15 @@ function Skills() {
   const dispatch = useDispatch();
 
   return (
-    <Box>
+    <Box sx={{height: "100vh", overflow: "hidden"}}>
       <Header />
       <Grid
         container
         spacing={1}
-        sx={{ display: "flex", justifyContent: "center", padding: "1rem" }}
+        sx={{ display: "flex", justifyContent: "center", padding: "1rem", height: "100%", alignItems: "center" }}
       >
         {skills.map((skill, index) => (
-          <Grid item xs={6} key={index}>
+          <Grid item xs={6} md={4} lg={2} key={index}>
             <Link to={`/exercises`}>
               <Box
                 className="skill-card"

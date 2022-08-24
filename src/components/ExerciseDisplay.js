@@ -13,7 +13,7 @@ function ExerciseDisplay() {
   );
 
   return (
-    <Box sx={{ padding: "1rem" }}>
+    <Box sx={{ padding: "1rem" }} className="workout-item-container">
       {filteredExercises.map((exer) => (
         <Grid
           container
@@ -41,6 +41,7 @@ function ExerciseDisplay() {
           <Grid
             item
             xs={8}
+            lg={9}
             sx={{
               display: "flex",
               width: "1rem",
