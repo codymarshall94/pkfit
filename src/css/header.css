@@ -1,10 +1,13 @@
 .header {
+    top: 0;
+    width: 100vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 3rem;
     padding: 1rem;
     background-color: #293241;
+    z-index: 999;
 }
 
 .header-logo {
