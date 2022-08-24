@@ -1,4 +1,4 @@
-/*.workout-item {
+.workout-item {
   display: flex;
   align-items: center;
   background-color: #eef8fe;
@@ -27,4 +27,3 @@
 .workout-name-text {
   font-weight: 500;
 }
-*/
