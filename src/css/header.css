@@ -27,3 +27,12 @@
 .header-links {
   padding: 0 .5rem;
 }
+
+@media (min-width: 992px) { 
+  .header-logo {
+    position: absolute;
+    top: .5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

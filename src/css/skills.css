@@ -34,3 +34,9 @@
   box-shadow: 0 4px 10px -3px gray;
   padding: .5rem;
 }
+
+@media (min-width: 992px) { 
+  .exercise-header {
+    text-align: center;
+  }
+ }

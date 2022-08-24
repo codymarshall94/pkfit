@@ -1,3 +1,8 @@
+.workout-item-container {
+  margin: auto;
+  width: 90vw;
+}
+
 .workout-item {
   display: flex;
   align-items: center;
@@ -27,3 +32,10 @@
 .workout-name-text {
   font-weight: 500;
 }
+
+
+@media (min-width: 992px) { 
+  .workout-item-container {
+    width: 30vw;
+  }
+ }
