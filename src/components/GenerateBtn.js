@@ -13,6 +13,7 @@ function GenerateBtn({ generateWorkout, workoutType, exerciseAmount, goal }) {
       >
         GENERATE
       </Button>
+      
     </Box>
   );
 }
