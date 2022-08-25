@@ -5,15 +5,20 @@ import Modal from "@mui/material/Modal";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import "../css/descriptionmodal.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { openModal } from "../redux/modal";
 
-function DescriptionModal({ open, setOpen, selectedExercise }) {
-  const handleClose = () => setOpen(false);
+function DescriptionModal() {
+  const { isOpen } = useSelector((state) => state.modal);
+  const { selectedItem } = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
 
   return (
     <Box>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={isOpen}
+        onClose={() => dispatch(openModal())}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -31,54 +36,65 @@ function DescriptionModal({ open, setOpen, selectedExercise }) {
             padding: "1rem",
           }}
         >
-          
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               marginBottom: "1rem",
-              height: "16rem"
+              height: "16rem",
             }}
           >
-            {selectedExercise && selectedExercise.exercise.image !== null ? (
-            <img src={selectedExercise.exercise.image} alt="" className="modal-image" />
-          ) : (
-            <img
-              src={require("../images/placeholderthumb.png")}
-              alt=""
-              className="modal-image"
-            />
-          )}
+            {selectedItem && selectedItem.exer.image !== null ? (
+              <img src={selectedItem.exer.image} alt="" className="modal-image" />
+            ) : (
+              <img
+                src={require("../images/placeholderthumb.png")}
+                alt=""
+                className="modal-image"
+              />
+            )}
           </Box>
           <Box className="modal-description">
-          {selectedExercise !== null ? (
-            <>
-              <Typography
-                id="modal-modal-title"
-                variant="2"
-                component="h2"
-                sx={{ display: "flex", justifyContent: "center", fontWeight: "bold" }}
-              >
-                {selectedExercise.exercise.name}
-              </Typography>
-              <Typography id="modal-modal-description" variant="h6"
-                component="h2" sx={{ mt: 2, fontWeight: "bold" }}>
-                Instructions
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                {selectedExercise.exercise.description}
-              </Typography>
-              <Box>
-              <Typography id="modal-modal-description" variant="h6"
-                component="h2" sx={{ mt: 2, fontWeight: "bold" }}>
-                Great For
-              </Typography>
-              {selectedExercise.exercise.usedFor.map(use => (
-                  <Chip label={use} key={use}/>
+            {selectedItem !== null ? (
+              <>
+                <Typography
+                  id="modal-modal-title"
+                  variant="2"
+                  component="h2"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {selectedItem.exer.name}
+                </Typography>
+                <Typography
+                  id="modal-modal-description"
+                  variant="h6"
+                  component="h2"
+                  sx={{ mt: 2, fontWeight: "bold" }}
+                >
+                  Instructions
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  {selectedItem.exer.description}
+                </Typography>
+                <Box>
+                  <Typography
+                    id="modal-modal-description"
+                    variant="h6"
+                    component="h2"
+                    sx={{ mt: 2, fontWeight: "bold" }}
+                  >
+                    Great For
+                  </Typography>
+                  {selectedItem.exer.usedFor.map((use) => (
+                    <Chip label={use} key={use} />
                   ))}
-              </Box>
-            </>
-          ) : null}
+                </Box>
+              </>
+            ) : null}
           </Box>
           <Box
             sx={{
@@ -87,7 +103,7 @@ function DescriptionModal({ open, setOpen, selectedExercise }) {
               marginTop: "2rem",
             }}
           >
-            <Button variant="contained" onClick={handleClose}>
+            <Button variant="contained" onClick={() => dispatch(openModal())}>
               Close
             </Button>
           </Box>
