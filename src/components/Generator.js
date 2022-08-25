@@ -22,10 +22,8 @@ function Generator() {
   const [reps, setReps] = useState(null);
   const [sets, setSets] = useState(null);
   const [workout, setWorkout] = useState(null);
-  const [selectedExercise, setSelectedExercise] = useState(null);
   const [open, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const handleOpen = () => setOpen(true);
 
   let repsArray = [];
   let shuffled;
@@ -102,11 +100,6 @@ function Generator() {
     }
   };
 
-  const openModalWithExercise = (item) => {
-    setSelectedExercise(item);
-    handleOpen();
-  };
-
   const handleTypeClick = (type) => {
     setWorkoutType(type);
   };
@@ -138,7 +131,6 @@ function Generator() {
       />
       <Workout
         workout={workout}
-        openModalWithExercise={openModalWithExercise}
         sets={sets}
         reps={reps}
         repsArray={repsArray}
@@ -146,7 +138,6 @@ function Generator() {
         setIsVisible={setIsVisible}
       />
       <DescriptionModal
-        selectedExercise={selectedExercise}
         open={open}
         setOpen={setOpen}
       />
