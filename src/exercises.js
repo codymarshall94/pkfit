@@ -176,7 +176,7 @@ export const EXERCISES = [
         name: 'Behind the back Dip',
         description: 'Lower body by bending arms until slight stretch is felt in chest or shoulder, or rear end touches floor. Raise body and repeat.',
         image: null,
-        usedFor: ["Dash, Lazy"],
+        usedFor: ["Dash", "Lazy"],
         category: ["Vault"],
         exerciseType: "Upperbody",
     },
