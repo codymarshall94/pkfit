@@ -53,7 +53,6 @@ function Exercises() {
             : "No Description"}
         </h4>
       </Box>
-
       <ExerciseDisplay />
     </Box>
   );

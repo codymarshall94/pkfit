@@ -1,4 +1,6 @@
 .workout-item-container {
+  display: flex;
+  justify-content: center;
   margin: auto;
   width: 90vw;
 }
@@ -6,6 +8,7 @@
 .workout-item {
   display: flex;
   align-items: center;
+  cursor: pointer;
   background-color: #eef8fe;
   border-radius: 0.5rem;
   padding: 0.15rem;

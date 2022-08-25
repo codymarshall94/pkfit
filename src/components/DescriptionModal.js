@@ -23,13 +23,17 @@ function DescriptionModal() {
         aria-describedby="modal-modal-description"
       >
         <Box
-          style={{
+          sx={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             height: "auto",
-            width: "90%",
+            width: "auto",
+            minWidth: { xs: "90%", lg: "50%"},
+            maxWidth: "90%",
+            minHeight: "20rem",
+            maxHeight: "80%",
             backgroundColor: "white",
             borderRadius: ".25rem",
             boxShadow: 24,
