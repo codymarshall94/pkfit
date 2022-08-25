@@ -4,13 +4,16 @@ import Grid from "@mui/material/Grid";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import { animated, useTransition } from "react-spring";
 import "../css/workout.css";
+import { useDispatch } from "react-redux";
+import { handleSelectedItem } from "../redux/modal";
 
-function Workout({ workout, openModalWithExercise, sets, reps, isVisible, setIsVisible }) {
+function Workout({ workout, sets, reps, isVisible }) {
+  const AnimatedGridItem = animated(Grid);
+  const dispatch = useDispatch();
   const transition = useTransition(isVisible, {
     from: { opacity: 0, height: 0 },
     enter: { opacity: 1, height: 50 },
   });
-  const AnimatedGridItem = animated(Grid);
 
   if (workout) {
     return (
@@ -26,18 +29,18 @@ function Workout({ workout, openModalWithExercise, sets, reps, isVisible, setIsV
             overflowX: "hidden",
           }}
         >
-          {workout.map((exercise) => (
-            <Fragment key={exercise.id}>
+          {workout.map((exer) => (
+            <Fragment key={exer.id}>
               {transition((style, item) =>
                 item ? (
                   <AnimatedGridItem
-                    key={exercise.id}
+                    key={exer.id}
                     item
                     xs={11}
                     lg={7}
                     className="workout-item"
                     style={style}
-                    onClick={() => openModalWithExercise({ exercise })}
+                    onClick={() => dispatch(handleSelectedItem({ exer }))}
                     sx={{ margin: ".25rem" }}
                   >
                     <Grid
@@ -47,9 +50,9 @@ function Workout({ workout, openModalWithExercise, sets, reps, isVisible, setIsV
                       className="workout-image-container"
                       sx={{ display: "flex", alignItems: "center" }}
                     >
-                      {exercise.image !== null ? (
+                      {exer.image !== null ? (
                         <img
-                          src={exercise.image}
+                          src={exer.image}
                           className="workout-image"
                           alt=""
                           height="80px"
@@ -74,7 +77,7 @@ function Workout({ workout, openModalWithExercise, sets, reps, isVisible, setIsV
                         paddingLeft: ".25rem",
                       }}
                     >
-                      <span className="workout-name-text">{exercise.name}</span>
+                      <span className="workout-name-text">{exer.name}</span>
                       <span className="workout-reps-text">
                         {sets} x {reps}
                       </span>
