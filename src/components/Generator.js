@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import { LOWERBODY } from "../lowerbody";
-//import { UPPERBODY } from "../upperbody";
 import Header from "./Header";
 import ExerciseSelector from "./ExerciseSelector";
 import GenerateBtn from "./GenerateBtn";
@@ -32,7 +30,9 @@ function Generator() {
   let shuffledLower;
   let newUpper;
   let newLower;
-  let fullWorkArr;
+  let shuffledFiltered;
+  let shuffledFilteredUpper;
+  let shuffledFilteredLower;
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 150);
@@ -43,25 +43,38 @@ function Generator() {
     setIsVisible(false);
     handleSets();
     handleReps();
+    shuffled = [...filteredLower].sort(() => Math.random() - 0.5);
 
     switch (workoutType) {
       case "Lower":
         shuffled = [...filteredLower].sort(() => Math.random() - 0.5);
-        newArr = shuffled.slice(0, exerciseAmount);
+        shuffledFiltered = shuffled.filter(
+          (exer) => exer[`is${goal}`] === true
+        );
+        newArr = shuffledFiltered.slice(0, exerciseAmount);
         setWorkout(newArr);
         break;
       case "Upper":
         shuffled = [...filteredUpper].sort(() => Math.random() - 0.5);
-        newArr = shuffled.slice(0, exerciseAmount);
+        shuffledFiltered = shuffled.filter(
+          (exer) => exer[`is${goal}`] === true
+        );
+        newArr = shuffledFiltered.slice(0, exerciseAmount);
         setWorkout(newArr);
         break;
       case "Full":
         shuffledUpper = [...filteredUpper].sort(() => Math.random() - 0.5);
         shuffledLower = [...filteredLower].sort(() => Math.random() - 0.5);
-        newUpper = shuffledUpper.slice(0, exerciseAmount / 2);
-        newLower = shuffledLower.slice(0, exerciseAmount / 2 + 1);
-        fullWorkArr = newUpper.concat(newLower);
-        setWorkout(fullWorkArr);
+        shuffledFilteredUpper = shuffledUpper.filter(
+          (exer) => exer[`is${goal}`] === true
+        );
+        shuffledFilteredLower = shuffledLower.filter(
+          (exer) => exer[`is${goal}`] === true
+        );
+        newUpper = shuffledFilteredUpper.slice(0, exerciseAmount / 2);
+        newLower = shuffledFilteredLower.slice(0, exerciseAmount / 2 + 1);
+        newArr = newUpper.concat(newLower);
+        setWorkout(newArr);
         break;
       default:
         break;
@@ -69,35 +82,36 @@ function Generator() {
   };
 
   const handleReps = () => {
-    if (goal === "Power") {
-      setReps("1-5 @ 85-100%");
-    }
-    if (goal === "Strength") {
-      setReps("6-8 @ 70-90%");
-    }
-    if (goal === "Conditioning") {
-      setReps("12-20");
+    switch (goal) {
+      case "Power":
+        setReps([1, 5]);
+        break;
+      case "Strength":
+        setReps([6, 8]);
+        break;
+      case "Conditioning":
+        setReps([12, 20]);
+        break;
+      default:
+        break;
     }
   };
 
+  //handleRespsAssort is a future code to create variation in rep ranges
   /*
-    const handleReps = () => {
-      if (reps === "6-10") {
-        for (let i = 0; i < 8; i++) {
-          let randomNum = Math.round(Math.random() * (10 - 6) + 6);
-          repsArray.push(randomNum);
-        }
-      }
-      console.log(repsArray);
-    }; */
+  const handleRepsAssort = () => {
+    let min = repss[0];
+    let max = repss[1];
+    for (let i = 0; i < exerciseAmount; i++) {
+      let randomNum = Math.round(Math.random() * (max - min) + min);
+      repsArray.push(randomNum);
+    }
+    console.log(repsArray);
+  };
+  */
 
   const handleSets = () => {
-    if (exerciseAmount === 5) {
-      setSets(3);
-    }
-    if (exerciseAmount === 10) {
-      setSets(2);
-    }
+    setSets(10 / exerciseAmount);
   };
 
   const handleTypeClick = (type) => {
@@ -137,10 +151,7 @@ function Generator() {
         isVisible={isVisible}
         setIsVisible={setIsVisible}
       />
-      <DescriptionModal
-        open={open}
-        setOpen={setOpen}
-      />
+      <DescriptionModal open={open} setOpen={setOpen} />
     </div>
   );
 }
