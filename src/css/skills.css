@@ -1,11 +1,13 @@
 .skill-card {
   border-radius: .5em;
   text-decoration: none;
+  height: 12rem;
   background: white;
   box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
   transition: .1s ease;
   color: black;
   font-size: 2rem;
+  overflow: hidden;
 }
 
 .skill-card:hover {
@@ -25,6 +27,7 @@
 .skill-category-text {
   position: absolute;
   font-size: 1em;
+  max-width: 100%;
   left: 50%;
   transform: translateX(-50%);
   color: inherit;
@@ -43,5 +46,11 @@
 @media (min-width: 992px) { 
   .exercise-header {
     text-align: center;
+  }
+ }
+
+ @media (max-width: 992px) { 
+  .skill-card{
+    height: 12rem;
   }
  }
