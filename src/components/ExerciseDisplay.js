@@ -16,11 +16,11 @@ function ExerciseDisplay() {
   );
 
   return (
-    <>
+    <Box sx={{display: "flex", justifyContent: "center", pt: "2rem"}}>
       <Grid
         container
         className="workout-item-container"
-        sx={{ margin: ".25rem" }}
+        sx={{ margin: ".25rem", width: {sm: "60%", lg: "50%"} }}
       >
         {filteredExercises.map((exer) => (
           <Grid
@@ -76,7 +76,7 @@ function ExerciseDisplay() {
         ))}
       </Grid>
       <DescriptionModal />
-    </>
+    </Box>
   );
 }
 
