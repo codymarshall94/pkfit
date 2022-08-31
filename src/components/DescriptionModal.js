@@ -15,7 +15,7 @@ function DescriptionModal() {
   const dispatch = useDispatch();
 
   return (
-    <Box>
+    <Box sx={{height: "90vh"}}>
       <Modal
         open={isOpen}
         onClose={() => dispatch(openModal())}
@@ -32,8 +32,7 @@ function DescriptionModal() {
             width: "auto",
             minWidth: { xs: "90%", lg: "50%"},
             maxWidth: "90%",
-            minHeight: "20rem",
-            maxHeight: "80%",
+            maxHeight: "80vh",
             backgroundColor: "white",
             borderRadius: ".25rem",
             boxShadow: 24,
