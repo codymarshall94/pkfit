@@ -21,7 +21,8 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
             left: "50%",
             transform: "translate(-50%, -50%)",
             height: "auto",
-            maxHeight: "100%",
+            maxHeight: "100vh",
+            overflow: "hidden",
             width: { xs: "90%", lg: "40%", xl: "20%" },
             bgcolor: "white",
             border: "0.025rem solid #000",
@@ -44,18 +45,18 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
             sx={{ position: "absolute", top: ".75rem", right: ".75rem" }}
             onClick={() => handleOpenHowTo()}
           />
-          <Box sx={{ borderBottom: "0.025rem solid #D3D6DA" }}>
+          <Box sx={{ borderBottom: "0.025rem solid #D3D6DA", p: 1 }}>
             <Typography
               variant="h6"
               component="h3"
-              className="howto-modal-instruct"
+              sx={{fontSize: {xs: "1rem"}}}
             >
               Select your preferred options of the <b>3 categories</b>.
             </Typography>
             <Typography
               variant="h6"
               component="h3"
-              className="howto-modal-instruct"
+              sx={{fontSize: {xs: "1rem"}}}
             >
               Once all options are selected. Click <b>generate</b> and your
               workout will show below.
@@ -63,7 +64,7 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
             <Typography
               variant="h6"
               component="h3"
-              className="howto-modal-instruct"
+              sx={{fontSize: {xs: "1rem"}}}
             >
               You may hit <b>generate</b> to regenerate the workout
             </Typography>
