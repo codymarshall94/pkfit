@@ -1,7 +1,6 @@
 .skill-card {
   border-radius: .5em;
   text-decoration: none;
-  height: 12rem;
   background: white;
   box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
   transition: .1s ease;
@@ -12,7 +11,7 @@
 
 .skill-card:hover {
   background: #ee6c4d;
-  transform: scale(1.02);
+  transform: scale(1);
   font-size: 4rem;
   color: white;
 }
@@ -49,8 +48,3 @@
   }
  }
 
- @media (max-width: 992px) { 
-  .skill-card{
-    height: 12rem;
-  }
- }

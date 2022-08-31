@@ -24,7 +24,7 @@ function Workout({ workout, sets, reps, isVisible }) {
             display: "flex",
             justifyContent: "center",
             marginBottom: "5rem",
-            height: "16rem",
+            height: {xs: "20rem", lg: "auto"},
             overflowY: "auto",
             overflowX: "hidden",
           }}
@@ -41,7 +41,7 @@ function Workout({ workout, sets, reps, isVisible }) {
                     className="workout-item"
                     style={style}
                     onClick={() => dispatch(handleSelectedItem({ exer }))}
-                    sx={{ margin: ".25rem" }}
+                    sx={{ margin: ".25rem", height: "3rem" }}
                   >
                     <Grid
                       item
@@ -79,7 +79,7 @@ function Workout({ workout, sets, reps, isVisible }) {
                     >
                       <span className="workout-name-text">{exer.name}</span>
                       <span className="workout-reps-text">
-                        {sets} x {reps[0]}-{reps[1]}
+                        {sets} x {exer.isStatic ? "30-60s" : `${reps[0]}-${reps[1]}`}
                       </span>
                     </Grid>
                     <Grid
