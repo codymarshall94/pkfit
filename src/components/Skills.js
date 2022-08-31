@@ -34,7 +34,7 @@ function Skills() {
           variant="h2"
           component="h3"
           sx={{
-            fontSize: { xs: "1.75rem", lg: "2rem" },
+            fontSize: { xs: "1.25rem", lg: "2rem" },
             fontWeight: "bold",
             textAlign: "center",
             padding: "1rem"
@@ -66,6 +66,7 @@ function Skills() {
                   alignItems: "center",
                   justifyContent: "center",
                   textDecoration: "none",
+                  height: {xs: "8rem", sm: "10rem", md: "12rem", lg: "14rem"},
                 }}
               >
                 <img
