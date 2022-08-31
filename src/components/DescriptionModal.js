@@ -33,6 +33,7 @@ function DescriptionModal() {
             minWidth: { xs: "90%", lg: "50%"},
             maxWidth: "90%",
             maxHeight: "80vh",
+            overflow: "hidden",
             backgroundColor: "white",
             borderRadius: ".25rem",
             boxShadow: 24,
@@ -44,7 +45,7 @@ function DescriptionModal() {
               display: "flex",
               justifyContent: "center",
               marginBottom: "1rem",
-              height: "16rem",
+              height: {xs: "8rem", lg: "16rem"},
             }}
           >
             {selectedItem && selectedItem.exer.image !== null ? (
