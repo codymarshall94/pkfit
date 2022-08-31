@@ -27,6 +27,7 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
             bgcolor: "white",
             border: "0.025rem solid #000",
             boxShadow: 24,
+            fontSize: "16px",
             p: {xs: 2, lg: 4},
           }}
         >
@@ -49,14 +50,14 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
             <Typography
               variant="h6"
               component="h3"
-              sx={{fontSize: {xs: "1rem"}}}
+              sx={{fontSize: {xs: ".9em", lg: "1.1em"}, padding: ".25rem 0"}}
             >
               Select your preferred options of the <b>3 categories</b>.
             </Typography>
             <Typography
               variant="h6"
               component="h3"
-              sx={{fontSize: {xs: "1rem"}}}
+              sx={{fontSize: {xs: ".9em", lg: "1.1em"}, padding: ".25rem 0"}}
             >
               Once all options are selected. Click <b>generate</b> and your
               workout will show below.
@@ -64,7 +65,7 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
             <Typography
               variant="h6"
               component="h3"
-              sx={{fontSize: {xs: "1rem"}}}
+              sx={{fontSize: {xs: ".9em", lg: "1.1em"}, padding: ".25rem 0"}}
             >
               You may hit <b>generate</b> to regenerate the workout
             </Typography>
@@ -72,32 +73,32 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
           <Typography
             variant="h6"
             component="h3"
-            sx={{ fontSize: "1rem", fontWeight: "bold", margin: ".5rem 0", textAlign: "center" }}
+            sx={{ fontSize: "1em", fontWeight: "bold", margin: ".5rem 0", textAlign: "center" }}
           >
             Options
           </Typography>
-          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0" }}>
+          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0", fontSize: {xs: ".8em", lg: "1em"} }}>
             <b>Upper</b> - Push and pull movements
           </Typography>
-          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0" }}>
+          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0", fontSize: {xs: ".8em", lg: "1em"} }}>
             <b>Lower</b> - Jump, balance and tendon strengthening exercises
           </Typography>
-          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0" }}>
+          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0", fontSize: {xs: ".8em", lg: "1em"} }}>
             <b>Full</b> - Combination of both upper and lower
           </Typography>
-          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0" }}>
+          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0", fontSize: {xs: ".8em", lg: "1em"} }}>
             <b>5 or 10</b> - Amount of exercises you want to preform, generally{" "}
             <b>5-15 minutes</b>
           </Typography>
-          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0" }}>
+          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0", fontSize: {xs: ".8em", lg: "1em"} }}>
             <b>Power</b> - Movements you will train with alot of speed or force
             applied
           </Typography>
-          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0" }}>
+          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0", fontSize: {xs: ".8em", lg: "1em"} }}>
             <b>Strength</b> - Heavier movements overcoming resistance and
             increasing muscle density
           </Typography>
-          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0" }}>
+          <Typography id="modal-modal-description" sx={{ p: "0.25rem 0", fontSize: {xs: ".8em", lg: "1em"} }}>
             <b>Conditioning</b> - Movements to improve endurance, increase
             flexibility and strengthen ligaments
           </Typography>
