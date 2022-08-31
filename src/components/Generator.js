@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
+import InfoIcon from "@mui/icons-material/Info";
 import ExerciseSelector from "./ExerciseSelector";
 import GenerateBtn from "./GenerateBtn";
 import Workout from "./Workout";
 import DescriptionModal from "./DescriptionModal";
 import { EXERCISES } from "../exercises";
+import HowToModal from "./HowToModal";
 
 const filteredUpper = EXERCISES.filter((exer) =>
   exer.exerciseType.includes("Upperbody")
@@ -21,6 +23,7 @@ function Generator() {
   const [sets, setSets] = useState(null);
   const [workout, setWorkout] = useState(null);
   const [open, setOpen] = useState(false);
+  const [openHowTo, setOpenHowTo] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   let repsArray = [];
@@ -110,6 +113,10 @@ function Generator() {
   };
   */
 
+  const handleOpenHowTo = () => {
+    setOpenHowTo(!openHowTo);
+  };
+
   const handleSets = () => {
     setSets(10 / exerciseAmount);
   };
@@ -129,6 +136,16 @@ function Generator() {
   return (
     <div className="App">
       <Header />
+      <InfoIcon
+        sx={{
+          fontSize: { xs: "2rem", lg: "3rem" },
+          position: "absolute",
+          right: "1rem",
+          top: "3.5rem",
+          cursor: "pointer",
+        }}
+        onClick={() => handleOpenHowTo()}
+      />
       <ExerciseSelector
         handleTypeClick={handleTypeClick}
         handleAmountClick={handleAmountClick}
@@ -152,6 +169,7 @@ function Generator() {
         setIsVisible={setIsVisible}
       />
       <DescriptionModal open={open} setOpen={setOpen} />
+      <HowToModal openHowTo={openHowTo} handleOpenHowTo={handleOpenHowTo} />
     </div>
   );
 }
