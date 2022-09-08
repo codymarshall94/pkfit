@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import { animated, useTransition } from "react-spring";
@@ -17,7 +16,6 @@ function Workout({ workout, sets, reps, isVisible }) {
 
   if (workout) {
     return (
-      <Box sx={{ marginTop: "2rem" }}>
         <Grid
           container
           sx={{
@@ -34,7 +32,6 @@ function Workout({ workout, sets, reps, isVisible }) {
               {transition((style, item) =>
                 item ? (
                   <AnimatedGridItem
-                    key={exer.id}
                     item
                     xs={11}
                     lg={7}
@@ -95,7 +92,6 @@ function Workout({ workout, sets, reps, isVisible }) {
             </Fragment>
           ))}
         </Grid>
-      </Box>
     );
   }
 }
