@@ -52,14 +52,14 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
               component="h3"
               sx={{fontSize: {xs: ".9em", lg: "1.1em"}, padding: ".25rem 0"}}
             >
-              Select your preferred options of the <b>3 categories</b>.
+              Select your preferred options from the <b>3 categories</b>.
             </Typography>
             <Typography
               variant="h6"
               component="h3"
               sx={{fontSize: {xs: ".9em", lg: "1.1em"}, padding: ".25rem 0"}}
             >
-              Once all options are selected. Click <b>generate</b> and your
+              Once all options are selected, click <b>generate</b> and your
               workout will show below.
             </Typography>
             <Typography
@@ -67,7 +67,7 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
               component="h3"
               sx={{fontSize: {xs: ".9em", lg: "1.1em"}, padding: ".25rem 0"}}
             >
-              You may hit <b>generate</b> to regenerate the workout
+              You may hit <b>generate</b> to regenerate the workout.
             </Typography>
           </Box>
           <Typography
