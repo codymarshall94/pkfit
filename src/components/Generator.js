@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import InfoIcon from "@mui/icons-material/Info";
+import Box from '@mui/material/Box';
 import ExerciseSelector from "./ExerciseSelector";
 import GenerateBtn from "./GenerateBtn";
 import Workout from "./Workout";
@@ -134,11 +135,11 @@ function Generator() {
   };
 
   return (
-    <div className="App">
+    <Box sx={{textAlign: "center", margin: "auto"}}>
       <Header />
       <InfoIcon
         sx={{
-          fontSize: { xs: "2rem", lg: "3rem" },
+          fontSize: { xs: "2rem", lg: "2.5rem" },
           position: "absolute",
           right: "1rem",
           top: "3.5rem",
@@ -170,7 +171,7 @@ function Generator() {
       />
       <DescriptionModal open={open} setOpen={setOpen} />
       <HowToModal openHowTo={openHowTo} handleOpenHowTo={handleOpenHowTo} />
-    </div>
+    </Box>
   );
 }
 
