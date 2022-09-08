@@ -15,7 +15,6 @@ function DescriptionModal() {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{height: "90vh"}}>
       <Modal
         open={isOpen}
         onClose={() => dispatch(openModal())}
@@ -113,7 +112,6 @@ function DescriptionModal() {
           </Box>
         </Box>
       </Modal>
-    </Box>
   );
 }
 
