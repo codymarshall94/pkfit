@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
+import Box from "@mui/material/Box";
 import InfoIcon from "@mui/icons-material/Info";
-import Box from '@mui/material/Box';
+import { EXERCISES } from "../exercises";
+import Header from "./Header";
 import ExerciseSelector from "./ExerciseSelector";
 import GenerateBtn from "./GenerateBtn";
 import Workout from "./Workout";
 import DescriptionModal from "./DescriptionModal";
-import { EXERCISES } from "../exercises";
 import HowToModal from "./HowToModal";
 
 const filteredUpper = EXERCISES.filter((exer) =>
@@ -42,7 +42,6 @@ function Generator() {
     setTimeout(() => setIsVisible(true), 150);
   }, [workout]);
 
-  //function to generate workout
   const generateWorkout = () => {
     setIsVisible(false);
     handleSets();
@@ -101,19 +100,6 @@ function Generator() {
     }
   };
 
-  //handleRespsAssort is a future code to create variation in rep ranges
-  /*
-  const handleRepsAssort = () => {
-    let min = repss[0];
-    let max = repss[1];
-    for (let i = 0; i < exerciseAmount; i++) {
-      let randomNum = Math.round(Math.random() * (max - min) + min);
-      repsArray.push(randomNum);
-    }
-    console.log(repsArray);
-  };
-  */
-
   const handleOpenHowTo = () => {
     setOpenHowTo(!openHowTo);
   };
@@ -130,12 +116,12 @@ function Generator() {
     setExerciseAmount(amount);
   };
 
-  const handleGoalClick = (g) => {
-    setGoal(g);
+  const handleGoalClick = (goal) => {
+    setGoal(goal);
   };
 
   return (
-    <Box sx={{textAlign: "center", margin: "auto"}}>
+    <Box sx={{ textAlign: "center", margin: "auto" }}>
       <Header />
       <InfoIcon
         sx={{
