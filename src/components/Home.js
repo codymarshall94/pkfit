@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 function Home() {
   return (
@@ -24,15 +25,21 @@ function Home() {
           alt=""
         />
       </Box>
-      <Link
-        to="/generator"
-        className="home-button"
-        style={{ textDecoration: "none" }}
-      >
-        Generate Now
+      <Link to="/generator" style={{ textDecoration: "none" }}>
+        <Button color="primary" variant="contained">
+          Generate Now
+        </Button>
       </Link>
     </Box>
   );
 }
 
 export default Home;
+
+/*
+<Link to="/generator">
+     <Button color="primary" variant="contained">
+        Generate Now
+     </Button>
+ </Link>
+*/
