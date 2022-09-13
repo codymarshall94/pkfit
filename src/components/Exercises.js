@@ -9,14 +9,14 @@ import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const jumpDesc =
-  "Exercises that help with Precisions, Strides or just overall leg strength";
+  "Exercises that help with Precisions, Strides and overall leg strength.";
 const vaultDesc =
-  "Exercises that promote pushing power and improving hip drive";
+  "Exercises that promote pushing power and improving hip drive.";
 const swingDesc =
-  "Exercises that increase grip strength, hip drive and engagement of the core";
+  "Exercises that increase grip strength, hip drive and engagement of the core.";
 const balanceDesc =
-  "Exercises that work on coordination and stabilization of smaller muscles";
-const climbDesc = "Exercises that increase grip and pulling strength";
+  "Exercises that work on coordination and stabilization of smaller muscles.";
+const climbDesc = "Exercises that increase grip and pulling strength.";
 
 function Exercises() {
   //grabbing state from redux store
@@ -39,7 +39,7 @@ function Exercises() {
           </Button>
         </Link>
         <h1>{value}</h1>
-        <h4>
+        <h4 className="skill-section-desc">
           {value === "Jump"
             ? jumpDesc
             : value === "Vault"

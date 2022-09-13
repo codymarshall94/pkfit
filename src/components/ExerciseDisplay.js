@@ -11,16 +11,17 @@ import DescriptionModal from "./DescriptionModal";
 function ExerciseDisplay() {
   const { value } = useSelector((state) => state.skills);
   const dispatch = useDispatch();
-  let filteredExercises = EXERCISES.filter((exer) =>
-    exer.category.includes(value)
-  );
+  let filteredExercises = EXERCISES.sort((a, b) => {
+    //sorting alphabetically before filtering out the category
+    return a.name === b.name ? 0 : a.name < b.name ? -1 : 1;
+  }).filter((exer) => exer.category.includes(value));
 
   return (
-    <Box sx={{display: "flex", justifyContent: "center", pt: "2rem"}}>
+    <Box sx={{ display: "flex", justifyContent: "center", pt: "2rem" }}>
       <Grid
         container
         className="workout-item-container"
-        sx={{ margin: ".25rem", width: {sm: "60%", lg: "50%"} }}
+        sx={{ margin: ".25rem", width: { sm: "60%", lg: "50%" } }}
       >
         {filteredExercises.map((exer) => (
           <Grid

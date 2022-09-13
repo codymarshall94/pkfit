@@ -19,10 +19,12 @@ function Workout({ workout, sets, reps, isVisible }) {
         <Grid
           container
           sx={{
+            margin: "auto",
             display: "flex",
             justifyContent: "center",
             marginBottom: "5rem",
             height: {xs: "20rem", lg: "auto"},
+            width: {md: "60%", lg: "50%", xl: "40%"},
             overflowY: "auto",
             overflowX: "hidden",
           }}

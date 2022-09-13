@@ -693,7 +693,7 @@ export const EXERCISES = [
         isCore: false,
     }, 
     {
-        id: 45,
+        id: 46,
         name: "Hip kip",
         description: "Hands flat on top of ledge with arms in a support position. Drive upwards with the heels, leaning the chest forward. Pushing through the arms, allow your hands to come off the bar and land both feet on top of the obstacle. Lowering back down to the initial position.",
         image: null,
