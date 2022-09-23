@@ -25,9 +25,8 @@ This project uses Yarn as package-manager
 
 ```npm install --global yarn```
 
-### Installation
-```yarn install pkfit
-cd pkfit```
+### Installation`yarn install pkfit
+cd pkfit
 
 ### Run Locally
 Clone the project
