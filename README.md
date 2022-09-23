@@ -15,8 +15,8 @@ A PWA that generates a workout specific to parkour and the users goals. This pro
 
 ### Features
 
-Fully custom exercises
-Simple UI
+- Fully custom exercises
+- Simple UI
 
 ## Getting started
 
