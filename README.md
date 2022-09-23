@@ -23,11 +23,11 @@ Simple UI
 ### Prerequisites
 This project uses Yarn as package-manager
 
-npm install --global yarn
+```npm install --global yarn```
 
 ### Installation
-yarn install pkfit
-cd pkfit
+```yarn install pkfit
+cd pkfit```
 
 ### Run Locally
 Clone the project
@@ -36,9 +36,9 @@ Clone the project
 
 Go to the project directory
 
-cd pkfit
+```cd pkfit```
 
 Install dependencies
 
-yarn install
+```yarn install```
 
