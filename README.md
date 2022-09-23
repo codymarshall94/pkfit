@@ -1,4 +1,4 @@
-# PkFit
+<h1 align="center">PkFit</h1>
 
 ## About the Project
 
