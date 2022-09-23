@@ -1,4 +1,5 @@
-<h1 align="center">PkFit</h1> ![run](https://user-images.githubusercontent.com/43764448/192064491-6498b698-2537-400e-bc0c-aa5605ed0004.png)
+# PkFit ![run](https://user-images.githubusercontent.com/43764448/192065217-3789790c-b8a5-4dca-a680-635cf0cd7dac.png)
+
 
 ## About the Project   ![information](https://user-images.githubusercontent.com/43764448/192064555-7b4b82b5-8618-49c5-900f-fca9c5bc3a8a.png) 
 
