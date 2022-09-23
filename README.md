@@ -6,6 +6,8 @@ A PWA that generates a workout specific to parkour and the users goals. This pro
 
 ### Tech Stack
 
+Javascript
+CSS
 React
 React Router
 Redux
@@ -29,4 +31,14 @@ cd pkfit
 
 ### Run Locally
 Clone the project
+
+```https://github.com/codymarshall94/pkfit.git```
+
+Go to the project directory
+
+cd pkfit
+
+Install dependencies
+
+yarn install
 
