@@ -1,9 +1,6 @@
 <h1 align="center">PkFit</h1> ![run](https://user-images.githubusercontent.com/43764448/192064491-6498b698-2537-400e-bc0c-aa5605ed0004.png)
 
-<div>
-  ## ![information](https://user-images.githubusercontent.com/43764448/192064555-7b4b82b5-8618-49c5-900f-fca9c5bc3a8a.png)
-  About the Project
-</div>
+ ![information](https://user-images.githubusercontent.com/43764448/192064555-7b4b82b5-8618-49c5-900f-fca9c5bc3a8a.png) ## About the Project
 
 A PWA that generates a workout specific to parkour and the users goals. This project was built with the intent to allow coaches and parkour practitioners to get a workout within seconds. With a very simple and intuitive layout, there is no guessing. 
 
