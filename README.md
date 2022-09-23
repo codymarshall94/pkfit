@@ -3,7 +3,9 @@
 
 ## About the Project   ![information](https://user-images.githubusercontent.com/43764448/192064555-7b4b82b5-8618-49c5-900f-fca9c5bc3a8a.png) 
 
-A PWA that generates a workout specific to parkour and the users goals. This project was built with the intent to allow coaches and parkour practitioners to get a workout within seconds. With a very simple and intuitive layout, there is no guessing. 
+A web app that generates a workout specific to parkour and the users goals. This project was built with the intent to allow coaches and parkour practitioners to get a workout within seconds. With a very simple and intuitive layout, there is no guessing. 
+
+
 
 ### Tech Stack  ![settings](https://user-images.githubusercontent.com/43764448/192064589-bb41a8b7-9220-48ba-b7ec-d95f90fde13d.png)
 
@@ -15,7 +17,6 @@ A PWA that generates a workout specific to parkour and the users goals. This pro
 - Material UI
 
 ### Features  ![stars](https://user-images.githubusercontent.com/43764448/192064659-fb6a9c1c-e2d2-473c-ad84-e0089ff4c45c.png)
-
 
 - Fully custom exercises
 - Simple UI
