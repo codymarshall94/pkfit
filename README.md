@@ -6,12 +6,12 @@ A PWA that generates a workout specific to parkour and the users goals. This pro
 
 ### Tech Stack
 
-Javascript
-CSS
-React
-React Router
-Redux
-Material UI
+- Javascript
+- CSS
+- React
+- React Router
+- Redux
+- Material UI
 
 ### Features
 
