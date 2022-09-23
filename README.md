@@ -35,7 +35,7 @@ This project uses Yarn as package-manager
 
 ```cd pkfit```
 
-### Run Locally  ![toolbox](https://user-images.githubusercontent.com/43764448/192064774-09be8704-3500-40ba-bb54-1f82220fdc8d.png)
+### Run Locally  ![run (2)](https://user-images.githubusercontent.com/43764448/192065513-0fa22318-c75e-4d59-a760-0af1c4baf5a7.png)
 
 Clone the project
 
