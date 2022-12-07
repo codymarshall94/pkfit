@@ -65,7 +65,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" sx={{minHeight: "3rem"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
