@@ -23,7 +23,7 @@ const pages = [
   { name: "Skills", link: "/skills" },
   { name: "Generator", link: "/generator" },
 ];
-const settings = ["Profile", "Settings", "Logout"];
+const settings = ["Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -125,8 +125,7 @@ function Navbar() {
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
-                      alt="Cody Marshall"
-                      src="/static/images/avatar/2.jpg"
+                      alt={user}
                     />
                   </IconButton>
                 </Tooltip>
