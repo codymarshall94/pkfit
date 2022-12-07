@@ -2,11 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import "../../App.css"
 
 function Home() {
   return (
-    <Box>
-      <Box sx={{ bgcolor: "#F3F3F4", height: "50px" }}></Box>
+    <Box
+      className="home-container"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
