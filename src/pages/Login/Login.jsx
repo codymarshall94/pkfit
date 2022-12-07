@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [errorMesage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const login = async () => {
@@ -20,7 +21,23 @@ function Login() {
       console.log(user.email);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      switch (error.code) {
+        case "auth/invalid-email":
+          setErrorMessage("Invalid email");
+          break;
+        case "auth/user-disabled":
+          setErrorMessage("User disabled");
+          break;
+        case "auth/user-not-found":
+          setErrorMessage("User not found");
+          break;
+        case "auth/wrong-password":
+          setErrorMessage("Wrong password");
+          break;
+        default:
+          setErrorMessage("Something went wrong");
+          break;
+      }
     }
   };
 
@@ -47,7 +64,6 @@ function Login() {
             className="auth-input"
             value={loginEmail}
             onChange={(e) => setLoginEmail(e.target.value)}
-            placeholder="Email"
           />
         </Box>
         <Box className="auth-input-group">
@@ -60,7 +76,6 @@ function Login() {
             className="auth-input"
             value={loginPassword}
             onChange={(e) => setLoginPassword(e.target.value)}
-            placeholder="Password"
           />
         </Box>
         <Button
@@ -78,6 +93,7 @@ function Login() {
             Sign up
           </Link>
         </span>
+        <span style={{color: "red", marginTop: "1rem"}}>{errorMesage}</span>
       </Box>
     </Box>
   );

@@ -8,6 +8,7 @@ import "../../css/reglogin.css";
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const register = async () => {
     try {
@@ -18,7 +19,20 @@ function Register() {
       );
       console.log(user);
     } catch (error) {
-      console.log(error);
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          setErrorMessage("Email already in use");
+          break;
+        case "auth/invalid-email":
+          setErrorMessage("Invalid email");
+          break;
+        case "auth/weak-password":
+          setErrorMessage("Weak password");
+          break;
+        default:
+          setErrorMessage("Something went wrong");
+          break;
+      }
     }
   };
 
@@ -79,6 +93,7 @@ function Register() {
             Log in
           </Link>
         </span>
+        <span style={{color: "red", marginTop: "1rem"}}>{errorMessage}</span>
       </Box>
     </Box>
   );
