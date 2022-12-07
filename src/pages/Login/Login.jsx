@@ -3,10 +3,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const navigate = useNavigate();
 
   const login = async () => {
     try {
@@ -16,6 +18,7 @@ function Login() {
         loginPassword
       );
       console.log(user.email);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
