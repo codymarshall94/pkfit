@@ -19,7 +19,7 @@ function Skills() {
   const dispatch = useDispatch();
 
   return (
-    <Box sx={{ height: "100vh", overflow: "hidden" }}>
+    <>
       <Box
         sx={{
           display: "flex",
@@ -35,7 +35,7 @@ function Skills() {
             fontSize: { xs: "1.25rem", lg: "2rem" },
             fontWeight: "bold",
             textAlign: "center",
-            padding: "1rem"
+            padding: "1rem",
           }}
         >
           Exercises for all fundamental skills to get you moving
@@ -64,7 +64,7 @@ function Skills() {
                   alignItems: "center",
                   justifyContent: "center",
                   textDecoration: "none",
-                  height: {xs: "8rem", sm: "10rem", md: "12rem", lg: "14rem"},
+                  height: { xs: "8rem", sm: "10rem", md: "12rem", lg: "14rem" },
                 }}
               >
                 <img
@@ -78,7 +78,7 @@ function Skills() {
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </>
   );
 }
 
