@@ -12,7 +12,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { auth } from "./firebase-config";
 import { setUser } from "./redux/reducers/userSlice";
-import { Box } from "@mui/material";
 
 function App() {
   const user = useSelector((state) => state.user.user);
