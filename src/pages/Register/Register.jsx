@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 import { Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import "../../css/reglogin.css";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -9,13 +11,18 @@ function Register() {
 
   const register = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-      console.log(user)
-    }
-    catch (error) {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user);
+    } catch (error) {
       console.log(error);
     }
   };
+
+  //https://dribbble.com/shots/15377791-Ocula-UI-UX-Login-Screen-Interaction-1
 
   return (
     <Box
@@ -28,26 +35,51 @@ function Register() {
         justifyContent: "center",
       }}
     >
-      <h1>Register</h1>
-      <input
-        type="email"
-        value={registerEmail}
-        onChange={(e) => {
-          setRegisterEmail(e.target.value);
-        }}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={registerPassword}
-        onChange={(e) => {
-          setRegisterPassword(e.target.value);
-        }}
-        placeholder="Password"
-      />
-      <Button color="primary" variant="contained" onClick={() => register()}>
-        Register
-      </Button>
+      <Box className="register-container">
+        <h1 className="form-title">Create a PkFit Account</h1>
+        <Box className="auth-input-group">
+          <label htmlFor="email" className="auth-label">
+            E-Mail
+          </label>
+          <input
+            className="auth-input"
+            id="email"
+            type="email"
+            value={registerEmail}
+            onChange={(e) => {
+              setRegisterEmail(e.target.value);
+            }}
+          />
+        </Box>
+        <Box className="auth-input-group">
+          <label htmlFor="password" className="auth-label">
+            Password
+          </label>
+          <input
+            id="password"
+            className="auth-input"
+            type="password"
+            value={registerPassword}
+            onChange={(e) => {
+              setRegisterPassword(e.target.value);
+            }}
+          />
+        </Box>
+        <Button
+          sx={{ width: "100%" }}
+          color="primary"
+          variant="contained"
+          onClick={() => register()}
+        >
+          Register
+        </Button>
+        <span className="auth-help-link">
+          Already have an account?{" "}
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            Log in
+          </Link>
+        </span>
+      </Box>
     </Box>
   );
 }

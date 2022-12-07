@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 import { Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -9,7 +10,11 @@ function Login() {
 
   const login = async () => {
     try {
-      const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
       console.log(user.email);
     } catch (error) {
       console.log(error);
@@ -27,22 +32,50 @@ function Login() {
         justifyContent: "center",
       }}
     >
-      <h1>Login</h1>
-      <input
-        type="email"
-        value={loginEmail}
-        onChange={(e) => setLoginEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={loginPassword}
-        onChange={(e) => setLoginPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <Button color="primary" variant="contained" onClick={() => login()}>
-        Login
-      </Button>
+      <Box className="register-container">
+        <h1 className="form-title">Welcome back!</h1>
+        <Box className="auth-input-group">
+          <label htmlFor="email" className="auth-label">
+            E-Mail
+          </label>
+          <input
+            id="email"
+            type="email"
+            className="auth-input"
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
+            placeholder="Email"
+          />
+        </Box>
+        <Box className="auth-input-group">
+          <label htmlFor="password" className="auth-label">
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            className="auth-input"
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
+            placeholder="Password"
+          />
+        </Box>
+        <Button
+          sx={{ width: "100%" }}
+          color="primary"
+          variant="contained"
+          onClick={() => login()}
+        >
+          Login
+        </Button>
+        <span className="auth-help-link">Forgot your password?</span>
+        <span className="auth-help-link">
+          Dont have an account yet?{" "}
+          <Link to="/register" style={{ textDecoration: "none" }}>
+            Sign up
+          </Link>
+        </span>
+      </Box>
     </Box>
   );
 }
