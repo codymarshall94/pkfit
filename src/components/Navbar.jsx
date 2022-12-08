@@ -23,7 +23,7 @@ const pages = [
   { name: "Skills", link: "/skills" },
   { name: "Generator", link: "/generator" },
 ];
-const settings = ["Logout"];
+const settings = ["Saved Workouts", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -47,8 +47,15 @@ function Navbar() {
   };
 
   const handleUserMenuClick = (setting) => {
-    if (setting === "Logout") {
-      logout();
+    switch (setting) {
+      case "Logout":
+        logout();
+        break;
+      case "Saved Workouts":
+        navigate("/saved-workouts");
+        break;
+      default:
+        break;
     }
     handleCloseUserMenu();
   };
