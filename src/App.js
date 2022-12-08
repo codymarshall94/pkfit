@@ -9,23 +9,21 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import { Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { auth } from "./firebase-config";
 import { setUser } from "./redux/reducers/userSlice";
+import SavedWorkouts from "./pages/SavedWorkouts/SavedWorkouts";
 
 function App() {
-  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
-      dispatch(setUser(currentUser.email));
+      dispatch(setUser({ email: currentUser.email, uid: currentUser.uid }));
     } else {
       dispatch(setUser(null));
     }
   });
-
-  console.log(user);
 
   return (
     <div className="App">
@@ -37,7 +35,8 @@ function App() {
         <Route path="exercises" element={<Exercises />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
-        <Route path="*" element={<App />} />
+        <Route path="saved-workouts" element={<SavedWorkouts />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </div>
   );
