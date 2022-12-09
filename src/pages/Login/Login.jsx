@@ -18,7 +18,7 @@ function Login() {
         loginEmail,
         loginPassword
       );
-      console.log(user.email);
+      console.log(user);
       navigate("/");
     } catch (error) {
       switch (error.code) {
@@ -93,7 +93,7 @@ function Login() {
             Sign up
           </Link>
         </span>
-        <span style={{color: "red", marginTop: "1rem"}}>{errorMesage}</span>
+        <span style={{ color: "red", marginTop: "1rem" }}>{errorMesage}</span>
       </Box>
     </Box>
   );
