@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import InfoIcon from "@mui/icons-material/Info";
 import { EXERCISES } from "../../exercises";
 import ExerciseSelector from "../../components/ExerciseSelector";
@@ -7,6 +8,7 @@ import GenerateBtn from "../../components/GenerateBtn";
 import Workout from "../../components/Workout";
 import DescriptionModal from "../../components/DescriptionModal";
 import HowToModal from "../../components/HowToModal";
+import SaveWorkoutModal from "../../components/SaveWorkoutModal";
 
 const filteredUpper = EXERCISES.filter((exer) =>
   exer.exerciseType.includes("Upperbody")
@@ -25,6 +27,7 @@ function Generator() {
   const [open, setOpen] = useState(false);
   const [openHowTo, setOpenHowTo] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [openSaveModal, isOpenSaveModal] = useState(false);
 
   let repsArray = [];
   let shuffled;
@@ -36,6 +39,8 @@ function Generator() {
   let shuffledFiltered;
   let shuffledFilteredUpper;
   let shuffledFilteredLower;
+
+  console.log(workout);
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 150);
@@ -119,6 +124,10 @@ function Generator() {
     setGoal(goal);
   };
 
+  const handleSaveWorkout = () => {
+    console.log("save workout");
+  };
+
   return (
     <Box sx={{ textAlign: "center", margin: "auto" }}>
       <InfoIcon
@@ -153,7 +162,18 @@ function Generator() {
         isVisible={isVisible}
         setIsVisible={setIsVisible}
       />
+      {workout && (
+        <Button onClick={() => isOpenSaveModal(true)}>Save Workout</Button>
+      )}
       <DescriptionModal open={open} setOpen={setOpen} />
+      <SaveWorkoutModal
+        isOpen={openSaveModal}
+        setIsOpen={isOpenSaveModal}
+        workout={workout}
+        workoutType={workoutType}
+        exerciseAmount={exerciseAmount}
+        goal={goal}
+      />
       <HowToModal openHowTo={openHowTo} handleOpenHowTo={handleOpenHowTo} />
     </Box>
   );
