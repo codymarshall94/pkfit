@@ -37,7 +37,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/saved-workouts" element={<SavedWorkouts />} />
-        <Route path="/saved-workouts/:id" element={<Workout />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </div>

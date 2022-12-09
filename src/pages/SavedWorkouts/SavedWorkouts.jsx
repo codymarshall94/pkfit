@@ -7,13 +7,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 function SavedWorkouts() {
   const [workouts, setWorkouts] = useState();
   const { user } = useSelector((state) => state.user);
   const userWorkouts = query(colRef, where("user", "==", user.uid));
-  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(userWorkouts, (querySnapshot) => {
@@ -30,10 +28,6 @@ function SavedWorkouts() {
   const handleDelete = (id) => {
     deleteDoc(doc(colRef, id));
     console.log("deleted");
-  };
-
-  const handleWorkoutClick = (id) => {
-    navigate(`/saved-workouts/${id}`);
   };
 
   if (!workouts) {
@@ -75,7 +69,6 @@ function SavedWorkouts() {
                 alignItems: "flex-start",
                 justifyContent: "flex-start",
               }}
-              onClick={() => handleWorkoutClick(workout.id)}
             >
               <ListItemText component="h1">
                 {workout.name.toUpperCase()}
