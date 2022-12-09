@@ -6,7 +6,14 @@ import { addDoc, serverTimestamp } from "firebase/firestore";
 import { colRef } from "../firebase-config";
 import { useSelector } from "react-redux";
 
-function SaveWorkoutModal({ isOpen, setIsOpen, workout }) {
+function SaveWorkoutModal({
+  isOpen,
+  setIsOpen,
+  workout,
+  workoutType,
+  exerciseAmount,
+  goal,
+}) {
   const [workoutName, setWorkoutName] = useState("");
   const { user } = useSelector((state) => state.user);
 
@@ -54,6 +61,8 @@ function SaveWorkoutModal({ isOpen, setIsOpen, workout }) {
             value={workoutName}
             onChange={(e) => setWorkoutName(e.target.value)}
             type="text"
+            placeholder={`${exerciseAmount} ${workoutType} for ${goal}`}
+            required
           />
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button onClick={() => handleSave()}>Save</Button>
