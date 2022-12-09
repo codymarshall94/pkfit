@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { auth } from "./firebase-config";
 import { setUser } from "./redux/reducers/userSlice";
 import SavedWorkouts from "./pages/SavedWorkouts/SavedWorkouts";
+import Workout from "./components/Workout";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,12 +31,13 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="generator" element={<Generator />} />
-        <Route path="skills" element={<Skills />} />
-        <Route path="exercises" element={<Exercises />} />
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
-        <Route path="saved-workouts" element={<SavedWorkouts />} />
+        <Route path="/generator" element={<Generator />} />
+        <Route path="/skills" element={<Skills />} />
+        <Route path="/exercises" element={<Exercises />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/saved-workouts" element={<SavedWorkouts />} />
+        <Route path="/saved-workouts/:id" element={<Workout />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </div>
