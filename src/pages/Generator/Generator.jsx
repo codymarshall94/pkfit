@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import InfoIcon from "@mui/icons-material/Info";
 import { useSelector } from "react-redux";
 import { EXERCISES } from "../../exercises";
 import ExerciseSelector from "../../components/ExerciseSelector";
@@ -28,7 +27,6 @@ function Generator() {
   const [exerciseAmount, setExerciseAmount] = useState(null);
   const [workout, setWorkout] = useState(null);
   const [open, setOpen] = useState(false);
-  const [openInfoModal, setOpenInfoModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [openSaveModal, isOpenSaveModal] = useState(false);
 
@@ -119,10 +117,6 @@ function Generator() {
       default:
         break;
     }
-  };
-
-  const handleOpenInfoModal = () => {
-    setOpenInfoModal(!openInfoModal);
   };
 
   return (
