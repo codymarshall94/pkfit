@@ -5,12 +5,12 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import "../css/howtomodal.css";
 
-function HowToModal({ openHowTo, handleOpenHowTo }) {
+function InfoModal({ openInfoModal, handleOpenInfoModal }) {
   return (
     <Box sx={{ bgColor: "white" }}>
       <Modal
-        open={openHowTo}
-        onClose={() => handleOpenHowTo()}
+        open={openInfoModal}
+        onClose={() => handleOpenInfoModal()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -44,7 +44,7 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
           </Typography>
           <CloseIcon
             sx={{ position: "absolute", top: ".75rem", right: ".75rem" }}
-            onClick={() => handleOpenHowTo()}
+            onClick={() => handleOpenInfoModal()}
           />
           <Box sx={{ borderBottom: "0.025rem solid #D3D6DA", p: 1 }}>
             <Typography
@@ -108,4 +108,4 @@ function HowToModal({ openHowTo, handleOpenHowTo }) {
   );
 }
 
-export default HowToModal;
+export default InfoModal;
