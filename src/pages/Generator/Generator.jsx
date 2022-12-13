@@ -8,7 +8,6 @@ import ExerciseSelector from "../../components/ExerciseSelector";
 import GenerateBtn from "../../components/GenerateBtn";
 import Workout from "../../components/Workout";
 import DescriptionModal from "../../components/DescriptionModal";
-import HowToModal from "../../components/HowToModal";
 import SaveWorkoutModal from "../../components/SaveWorkoutModal";
 import { Link } from "react-router-dom";
 
@@ -201,10 +200,6 @@ function Generator() {
         workoutType={workoutType}
         exerciseAmount={exerciseTime}
         goal={goal}
-      />
-      <HowToModal
-        openInfoModal={openInfoModal}
-        handleOpenInfoModal={handleOpenInfoModal}
       />
     </Box>
   );
