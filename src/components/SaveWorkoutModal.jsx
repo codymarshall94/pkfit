@@ -11,7 +11,7 @@ function SaveWorkoutModal({
   setIsOpen,
   workout,
   workoutType,
-  exerciseAmount,
+  exerciseTime,
   goal,
 }) {
   const [workoutName, setWorkoutName] = useState("");
@@ -61,7 +61,7 @@ function SaveWorkoutModal({
             value={workoutName}
             onChange={(e) => setWorkoutName(e.target.value)}
             type="text"
-            placeholder={`${exerciseAmount} ${workoutType} for ${goal}`}
+            placeholder={`${exerciseTime} ${workoutType} for ${goal}`}
             required
           />
           <Box sx={{ display: "flex", justifyContent: "center" }}>
