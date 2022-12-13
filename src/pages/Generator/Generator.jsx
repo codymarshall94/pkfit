@@ -132,16 +132,6 @@ function Generator() {
         margin: "auto",
       }}
     >
-      <InfoIcon
-        sx={{
-          fontSize: { xs: "2rem", lg: "2.5rem" },
-          position: "absolute",
-          right: "1rem",
-          top: "3.5rem",
-          cursor: "pointer",
-        }}
-        onClick={() => handleOpenInfoModal()}
-      />
       <Box
         sx={{
           position: "absolute",
