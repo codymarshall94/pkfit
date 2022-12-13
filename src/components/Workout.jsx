@@ -81,7 +81,7 @@ function Workout({ workout, sets, reps, isVisible }) {
                     >
                       <span className="workout-name-text">{exer.name}</span>
                       <span className="workout-reps-text">
-                        {sets} x {exer.isStatic ? "30-60s" : `${reps[0]}-${reps[1]}`}
+                        {exer.sets} x {exer.reps}
                       </span>
                     </Grid>
                     <Grid
