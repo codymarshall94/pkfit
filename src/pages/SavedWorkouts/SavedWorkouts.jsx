@@ -37,7 +37,7 @@ function SavedWorkouts() {
       <Box sx={{ width: "100%", padding: "1rem" }}>
         <h1>Saved Workouts</h1>
         {workouts.length === 0 && (
-          <Box sx={{margin: "1rem 0"}}>
+          <Box sx={{ margin: "1rem 0" }}>
             <p>You have no saved workouts</p>
             <Link
               to="/generator"
@@ -54,15 +54,15 @@ function SavedWorkouts() {
               position: "relative",
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-              width: "100%",
+              justifyContent: "center",
+              width: {sm: "100%", md: "50%", lg: "25%"},
+              margin: "1rem auto",
               borderBottom: ".15rem solid black",
+
             }}
           >
             <ListItemButton
               sx={{
-                width: "100%",
                 padding: "1rem",
                 display: "flex",
                 flexDirection: "column",
