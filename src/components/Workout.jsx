@@ -19,12 +19,15 @@ function Workout({ workout, sets, reps, isVisible }) {
         <Grid
           container
           sx={{
+            position: "relative",
             margin: "auto",
+            marginBottom: "3rem",
             display: "flex",
             justifyContent: "center",
-            marginBottom: "5rem",
-            height: {xs: "20rem", lg: "auto"},
-            width: {md: "60%", lg: "50%", xl: "40%"},
+            alignItems: "flex-start",
+            height: "auto", 
+            maxHeight: "20rem",
+            width: "100%",
             overflowY: "auto",
             overflowX: "hidden",
           }}
@@ -40,7 +43,7 @@ function Workout({ workout, sets, reps, isVisible }) {
                     className="workout-item"
                     style={style}
                     onClick={() => dispatch(handleSelectedItem({ exer }))}
-                    sx={{ margin: ".25rem", height: "3rem" }}
+                    sx={{ height: "3rem", margin: ".25rem 0" }}
                   >
                     <Grid
                       item
