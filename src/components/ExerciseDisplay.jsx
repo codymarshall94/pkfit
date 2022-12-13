@@ -21,7 +21,7 @@ function ExerciseDisplay() {
       <Grid
         container
         className="workout-item-container"
-        sx={{ margin: ".25rem", width: { sm: "60%", lg: "50%" } }}
+        sx={{ margin: ".25rem", width: { sm: "60%", lg: "90%" } }}
       >
         {filteredExercises.map((exer) => (
           <Grid
