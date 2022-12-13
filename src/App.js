@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { auth } from "./firebase-config";
 import { setUser } from "./redux/reducers/userSlice";
 import SavedWorkouts from "./pages/SavedWorkouts/SavedWorkouts";
-import Workout from "./components/Workout";
 
 function App() {
   const dispatch = useDispatch();
