@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import { onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore";
-import { colRef } from "../../firebase-config";
-import { useSelector } from "react-redux";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ClearIcon from "@mui/icons-material/Clear";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import Box from "@mui/material/Box";
 import { setSelectedWorkout } from "../../redux/reducers/selectedWorkoutSlice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore";
+import { colRef } from "../../firebase-config";
 
 function SavedWorkouts() {
   const [workouts, setWorkouts] = useState();
