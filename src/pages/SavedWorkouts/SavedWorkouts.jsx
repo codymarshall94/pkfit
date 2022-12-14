@@ -7,11 +7,16 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSelectedWorkout } from "../../redux/reducers/selectedWorkoutSlice";
+import { useNavigate } from "react-router-dom";
 
 function SavedWorkouts() {
   const [workouts, setWorkouts] = useState();
   const { user } = useSelector((state) => state.user);
   const userWorkouts = query(colRef, where("user", "==", user.uid));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(userWorkouts, (querySnapshot) => {
@@ -28,6 +33,20 @@ function SavedWorkouts() {
   const handleDelete = (id) => {
     deleteDoc(doc(colRef, id));
     console.log("deleted");
+  };
+
+  const handleSelectedWorkout = (selected) => {
+    const { id, name, createdAt, user, exercises } = selected;
+
+    const workout = {
+      id,
+      name,
+      createdAt: createdAt.toDate().toDateString(),
+      user,
+      exercises,
+    };
+    dispatch(setSelectedWorkout(workout));
+    navigate(`/saved-workouts/${id}}`);
   };
 
   if (!workouts) {
@@ -55,11 +74,11 @@ function SavedWorkouts() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              width: {sm: "100%", md: "50%", lg: "25%"},
+              width: { sm: "100%", md: "50%", lg: "25%" },
               margin: "1rem auto",
               borderBottom: ".15rem solid black",
-
             }}
+            onClick={() => handleSelectedWorkout(workout)}
           >
             <ListItemButton
               sx={{
