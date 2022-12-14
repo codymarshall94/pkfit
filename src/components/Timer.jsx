@@ -73,7 +73,7 @@ function Timer() {
           ></circle>
         </svg>
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box sx={{ display: "flex", justifyContent: "center", marginY: ".5rem"}}>
         {lengthOptions.map((option) => (
           <Box
             key={option}
