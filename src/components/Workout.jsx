@@ -6,13 +6,15 @@ import "../css/workout.css";
 import { useDispatch } from "react-redux";
 import { handleSelectedItem } from "../redux/modal";
 
-function Workout({ workout, sets, reps, isVisible }) {
+function Workout({ workout, isVisible }) {
   const AnimatedGridItem = animated(Grid);
   const dispatch = useDispatch();
   const transition = useTransition(isVisible, {
     from: { opacity: 0, height: 0 },
     enter: { opacity: 1, height: 50 },
   });
+
+  console.log(workout);
 
   if (workout) {
     return (
