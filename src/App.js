@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { auth } from "./firebase-config";
 import { setUser } from "./redux/reducers/userSlice";
 import SavedWorkouts from "./pages/SavedWorkouts/SavedWorkouts";
+import SavedWorkout from "./pages/SavedWorkout/SavedWorkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/saved-workouts" element={<SavedWorkouts />} />
+        <Route path="/saved-workouts/:id" element={<SavedWorkout />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </div>
