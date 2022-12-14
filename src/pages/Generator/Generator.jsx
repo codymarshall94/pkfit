@@ -17,43 +17,41 @@ const filteredLower = EXERCISES.filter((exer) =>
   exer.exerciseType.includes("Lowerbody")
 );
 
+const powerReps = [1,3,5];
+const strengthReps = [5,6,8,10];
+const conditioningReps = [8,10,12,15];
+
 function Generator() {
   const user = useSelector((state) => state.user.user);
   const [workoutType, setWorkoutType] = useState(null);
   const [exerciseTime, setExerciseTime] = useState(null);
   const [goal, setGoal] = useState(null);
   const [reps, setReps] = useState(null);
-  const [sets, setSets] = useState(null);
   const [exerciseAmount, setExerciseAmount] = useState(null);
   const [workout, setWorkout] = useState(null);
   const [open, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [openSaveModal, isOpenSaveModal] = useState(false);
 
-  let repsArray = [];
-  let shuffled;
-  let newArr;
-  let shuffledUpper;
-  let shuffledLower;
-  let newUpper;
-  let newLower;
-
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 150);
   }, [workout]);
 
-  const generateWorkout = async () => {
+  const generateWorkout = () => {
+    let workoutArary = [];
+    let newArr = [];
+    let sets;
     setIsVisible(false);
 
     switch (exerciseAmount) {
       case 2:
-        setSets(2);
+        sets = 2;
         break;
       case 3:
-        setSets(3);
+        sets = 3;
         break;
       case 5:
-        setSets(4);
+        sets = 4;
         break;
       default:
         break;
@@ -61,24 +59,36 @@ function Generator() {
 
     switch (workoutType) {
       case "Full":
-        if (exerciseTime) shuffled = EXERCISES.sort(() => Math.random() - 0.5);
-        newArr = shuffled.slice(0, exerciseAmount);
-        setWorkout(newArr);
+        let shuffledFull = EXERCISES.sort(() => Math.random() - 0.5);
+        newArr = shuffledFull.slice(0, exerciseAmount);
         break;
       case "Upper":
-        shuffledUpper = filteredUpper.sort(() => Math.random() - 0.5);
-        newUpper = shuffledUpper.slice(0, exerciseAmount);
-        setWorkout(newUpper);
-        console.log(newUpper);
+        let shuffledUpper = filteredUpper.sort(() => Math.random() - 0.5);
+        newArr = shuffledUpper.slice(0, exerciseAmount);
         break;
       case "Lower":
-        shuffledLower = filteredLower.sort(() => Math.random() - 0.5);
-        newLower = shuffledLower.slice(0, exerciseAmount);
-        setWorkout(newLower);
+        let shuffledLower = filteredLower.sort(() => Math.random() - 0.5);
+        newArr = shuffledLower.slice(0, exerciseAmount);
         break;
       default:
         break;
     }
+
+    newArr.forEach((exer) => {
+      let exercise = {
+        id: exer.id,
+        name: exer.name,
+        reps: exer.isStatic
+          ? "30-60s"
+          : reps[Math.floor(Math.random() * reps.length)],
+        sets: sets,
+        description: exer.description,
+        image: exer.image,
+        usedFor: exer.usedFor,
+      };
+      workoutArary.push(exercise);
+    });
+    setWorkout(workoutArary);
   };
 
   const handleTypeClick = (type) => {
@@ -106,13 +116,13 @@ function Generator() {
     setGoal(goal);
     switch (goal) {
       case "Power":
-        setReps([1, 5]);
+        setReps(powerReps);
         break;
       case "Strength":
-        setReps([6, 8]);
+        setReps(strengthReps);
         break;
       case "Conditioning":
-        setReps([12, 20]);
+        setReps(conditioningReps);
         break;
       default:
         break;
@@ -160,9 +170,6 @@ function Generator() {
       >
         <Workout
           workout={workout}
-          reps={reps}
-          sets={sets}
-          repsArray={repsArray}
           isVisible={isVisible}
           setIsVisible={setIsVisible}
         />
