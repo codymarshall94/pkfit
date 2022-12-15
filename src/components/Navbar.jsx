@@ -72,7 +72,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{minHeight: "3rem"}}>
+    <AppBar position="fixed" sx={{ minHeight: "3rem" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -109,59 +109,85 @@ function Navbar() {
             >
               pkFit
             </Typography>
-            <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center"}}>
-              {!user ? (
-                <>
-                  <Link
-                    to="/register"
-                    style={{
-                      textDecoration: "none",
-                      color: "white",
-                    }}
-                  >
-                    Register
-                  </Link>
-                  <Link
-                    to="/login"
-                    style={{ textDecoration: "none", color: "white", padding: "0 1rem" }}
-                  >
-                    Login
-                  </Link>
-                </>
-              ) : (
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt={user}
-                    />
-                  </IconButton>
-                </Tooltip>
-              )}
 
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+           
+          </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.name}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={() => handleUserMenuClick(setting)}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <IconButton
+                <Link
+                  to={page.link}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  {page.name}
+                </Link>
+              </Button>
+            ))}
+          </Box>
+          <Box sx={{ flexGrow: 1, display: "flex", alignItems: "flex-end" }}>
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleUserMenuClick(setting)}
+                >
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          {!user ? (
+            <>
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                }}
+              >
+                Register
+              </Link>
+              <Link
+                to="/login"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  padding: "0 1rem",
+                }}
+              >
+                Login
+              </Link>
+            </>
+          ) : (
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt={user} />
+              </IconButton>
+            </Tooltip>
+          )}
+
+           <IconButton
+              sx={{display: { xs: "flex", md: "none" } }}
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -197,25 +223,6 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                <Link
-                  to={page.link}
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  {page.name}
-                </Link>
-              </Button>
-            ))}
-            
-          </Box>
         </Toolbar>
       </Container>
     </AppBar>
