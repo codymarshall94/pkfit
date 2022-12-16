@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 
 function GenerateBtn({ generateWorkout, workoutType, exerciseAmount, goal }) {
   return (
-    <Box sx={{ margin: "1rem" }}>
+    <Box sx={{ margin: "2rem" }}>
       <Button
         variant="contained"
         color="primary"
@@ -13,9 +13,7 @@ function GenerateBtn({ generateWorkout, workoutType, exerciseAmount, goal }) {
       >
         GENERATE
       </Button>
-      
     </Box>
   );
 }
-
 export default GenerateBtn;
