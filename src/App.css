@@ -14,17 +14,10 @@ Skill Buttons - #EFD09E
   align-items: center;
   text-align: center;
   height: 100vh;
-  overflow: hidden;
 }
 
 .home-container {
   margin: 0 auto;
-}
-
-.home-title {
-  font-weight: bold;
-  font-size: 2rem;
-  padding: 1rem 0;
 }
 
 .home-image-container {
