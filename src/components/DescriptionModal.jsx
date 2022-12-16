@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
-import "../css/descriptionmodal.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { openModal } from "../redux/modal";
