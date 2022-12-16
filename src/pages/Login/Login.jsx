@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
-import { Box, Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import InputLabel from "@mui/material/InputLabel";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -52,40 +56,50 @@ function Login() {
         justifyContent: "center",
       }}
     >
-      <Box className="register-container">
-        <h1 className="form-title">Welcome back!</h1>
-        <Box className="auth-input-group">
-          <label htmlFor="email" className="auth-label">
-            E-Mail
-          </label>
-          <input
-            id="email"
-            type="email"
-            className="auth-input"
-            value={loginEmail}
-            onChange={(e) => setLoginEmail(e.target.value)}
-          />
-        </Box>
-        <Box className="auth-input-group">
-          <label htmlFor="password" className="auth-label">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            className="auth-input"
-            value={loginPassword}
-            onChange={(e) => setLoginPassword(e.target.value)}
-          />
-        </Box>
-        <Button
-          sx={{ width: "100%" }}
-          color="primary"
-          variant="contained"
-          onClick={() => login()}
+        <Typography variant="h1">Welcome Back</Typography>
+        <Box
+          component="form"
+          className="register-container"
+          onSubmit={(e) => login(e)}
+          sx={{
+            width: { xs: "90%", sm: "50%", md: "40%", xl: "30%" },
+          }}
         >
-          Login
-        </Button>
+          <Box className="auth-input-group">
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <TextField
+              sx={{ width: "100%" }}
+              size="small"
+              margin="normal"
+              id="email"
+              type="email"
+              value={loginEmail}
+              onChange={(e) => setLoginEmail(e.target.value)}
+              required
+            />
+          </Box>
+          <Box className="auth-input-group">
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <TextField
+              sx={{ width: "100%" }}
+              size="small"
+              margin="normal"
+              id="password"
+              type="password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              required
+            />
+          </Box>
+          <Button
+            sx={{ width: "100%", marginTop: "1rem" }}
+            color="primary"
+            variant="contained"
+            onClick={() => login()}
+          >
+            Login
+          </Button>
+        </Box>
         <span className="auth-help-link">Forgot your password?</span>
         <span className="auth-help-link">
           Dont have an account yet?{" "}
@@ -95,7 +109,6 @@ function Login() {
         </span>
         <span style={{ color: "red", marginTop: "1rem" }}>{errorMesage}</span>
       </Box>
-    </Box>
   );
 }
 

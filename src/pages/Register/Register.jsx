@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
-import { Box, Button } from "@mui/material";
+import { Box, Button, InputLabel, Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import "../../css/reglogin.css";
 
@@ -10,7 +11,8 @@ function Register() {
   const [registerPassword, setRegisterPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const register = async () => {
+  const register = async (e) => {
+    e.preventDefault();
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
@@ -49,52 +51,61 @@ function Register() {
         justifyContent: "center",
       }}
     >
-      <Box className="register-container">
-        <h1 className="form-title">Create a PkFit Account</h1>
+      <Typography variant="h1">Create an account</Typography>
+      <Box
+        component="form"
+        className="register-container"
+        onSubmit={(e) => register(e)}
+        sx={{
+          width: { xs: "90%", sm: "50%", md: "40%", xl: "30%" },
+        }}
+      >
         <Box className="auth-input-group">
-          <label htmlFor="email" className="auth-label">
-            E-Mail
-          </label>
-          <input
-            className="auth-input"
+          <InputLabel htmlFor="email">E-mail</InputLabel>
+          <TextField
+            sx={{ width: "100%" }}
+            size="small"
             id="email"
+            margin="normal"
             type="email"
             value={registerEmail}
             onChange={(e) => {
               setRegisterEmail(e.target.value);
             }}
+            required
           />
         </Box>
         <Box className="auth-input-group">
-          <label htmlFor="password" className="auth-label">
-            Password
-          </label>
-          <input
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <TextField
+            sx={{ width: "100%" }}
+            size="small"
             id="password"
-            className="auth-input"
+            margin="normal"
             type="password"
             value={registerPassword}
             onChange={(e) => {
               setRegisterPassword(e.target.value);
             }}
+            required
           />
         </Box>
         <Button
-          sx={{ width: "100%" }}
+          sx={{ width: "100%", marginTop: "1rem" }}
           color="primary"
           variant="contained"
-          onClick={() => register()}
+          type="submit"
         >
           Register
         </Button>
-        <span className="auth-help-link">
-          Already have an account?{" "}
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            Log in
-          </Link>
-        </span>
-        <span style={{color: "red", marginTop: "1rem"}}>{errorMessage}</span>
       </Box>
+      <span className="auth-help-link">
+        Already have an account?{" "}
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          Log in
+        </Link>
+      </span>
+      <span style={{ color: "red", marginTop: "1rem" }}>{errorMessage}</span>
     </Box>
   );
 }
