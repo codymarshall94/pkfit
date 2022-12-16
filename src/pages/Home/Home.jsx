@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import "../../App.css"
+import "../../App.css";
+import { Typography } from "@mui/material";
 
 function Home() {
   return (
@@ -22,8 +23,8 @@ function Home() {
           padding: "1rem",
         }}
       >
-        <h1 className="home-title">Parkour Workout Generator</h1>
-        <h3>Quick workouts for anywhere you are</h3>
+        <Typography variant="h1">Workout Generator</Typography>
+        <Typography variant="h2">Quick workouts for anywhere you are</Typography>
       </Box>
       <Box className="home-image-container">
         <img
@@ -32,21 +33,13 @@ function Home() {
           alt=""
         />
       </Box>
-      <Link to="/generator" style={{ textDecoration: "none" }}>
-        <Button color="primary" variant="contained">
+      <Button color="primary" variant="contained">
+        <Link to="/generator" style={{ textDecoration: "none", color: "white" }}>
           Generate Now
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     </Box>
   );
 }
 
 export default Home;
-
-/*
-<Link to="/generator">
-     <Button color="primary" variant="contained">
-        Generate Now
-     </Button>
- </Link>
-*/
