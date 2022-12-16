@@ -28,6 +28,7 @@ const settings = ["Saved Workouts", "Logout"];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [activePage, setActivePage] = useState("");
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
 
@@ -72,14 +73,12 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ minHeight: "3rem" }}>
+    <AppBar position="fixed" sx={{ minHeight: "3rem" }} color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -88,15 +87,15 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            pkFit
+           <Link to="/" className="nav-link" onClick={() => setActivePage("Home")}>
+                pkFit
+              </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <Typography
               variant="h5"
               noWrap
-              component="a"
-              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -107,22 +106,21 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              pkFit
+              <Link to="/" className="nav-link" onClick={() => setActivePage("Home")}>
+                pkFit
+              </Link>
             </Typography>
-
-           
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
+              <Button key={page.name} onClick={handleCloseNavMenu}>
                 <Link
                   to={page.link}
-                  style={{ textDecoration: "none", color: "white" }}
+                  onClick={() => setActivePage(page.name)}
+                  className={
+                    activePage === page.name ? "active-link" : "nav-link"
+                  }
                 >
                   {page.name}
                 </Link>
@@ -159,24 +157,21 @@ function Navbar() {
           {!user ? (
             <>
               <Link
-                to="/register"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                }}
-              >
-                Register
-              </Link>
-              <Link
                 to="/login"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                  padding: "0 1rem",
-                }}
+                className="nav-link"
+                onClick={() => setActivePage("Login")}
               >
                 Login
               </Link>
+              <Button variant="contained" color="primary">
+                <Link
+                  to="/register"
+                  onClick={() => setActivePage("Sign Up")}
+                  className="sign-up-btn"
+                >
+                  Sign Up
+                </Link>
+              </Button>
             </>
           ) : (
             <Tooltip title="Open settings">
@@ -186,43 +181,43 @@ function Navbar() {
             </Tooltip>
           )}
 
-           <IconButton
-              sx={{display: { xs: "flex", md: "none" } }}
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Link to={page.link} style={{ textDecoration: "none" }}>
-                    {page.name}
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
+          <IconButton
+            sx={{ display: { xs: "flex", md: "none" } }}
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="inherit"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: "block", md: "none" },
+            }}
+          >
+            {pages.map((page) => (
+              <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                <Link to={page.link} style={{ textDecoration: "none" }}>
+                  {page.name}
+                </Link>
+              </MenuItem>
+            ))}
+          </Menu>
         </Toolbar>
       </Container>
     </AppBar>
