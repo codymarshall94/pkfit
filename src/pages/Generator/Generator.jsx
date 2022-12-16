@@ -9,6 +9,7 @@ import Workout from "../../components/Workout";
 import DescriptionModal from "../../components/DescriptionModal";
 import SaveWorkoutModal from "../../components/SaveWorkoutModal";
 import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 const filteredUpper = EXERCISES.filter((exer) =>
   exer.exerciseType.includes("Upperbody")
@@ -17,9 +18,9 @@ const filteredLower = EXERCISES.filter((exer) =>
   exer.exerciseType.includes("Lowerbody")
 );
 
-const powerReps = [1,3,5];
-const strengthReps = [5,6,8,10];
-const conditioningReps = [8,10,12,15];
+const powerReps = [1, 3, 5];
+const strengthReps = [5, 6, 8, 10];
+const conditioningReps = [8, 10, 12, 15];
 
 function Generator() {
   const user = useSelector((state) => state.user.user);
@@ -136,14 +137,7 @@ function Generator() {
         margin: "auto",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          top: { xs: "10%", sm: "20%" },
-          left: "50%",
-          transform: "translateX(-50%)",
-        }}
-      >
+      <Box sx={{marginBottom: "4rem"}}>
         <ExerciseSelector
           handleTypeClick={handleTypeClick}
           handleTimeClick={handleTimeClick}
@@ -161,11 +155,7 @@ function Generator() {
       </Box>
       <Box
         sx={{
-          position: "absolute",
-          top: "40%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: { xs: "100%", md: "80%", lg: "60%" },
+          width: { xs: "100%" },
         }}
       >
         <Workout
@@ -174,11 +164,17 @@ function Generator() {
           setIsVisible={setIsVisible}
         />
         {user && workout && (
-          <Button onClick={() => isOpenSaveModal(true)}>Save Workout</Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={() => isOpenSaveModal(true)}
+          >
+            Save Workout
+          </Button>
         )}
         {!user && workout && (
           <Link to="/login" style={{ textDecoration: "none" }}>
-            Log in to save this workout
+            <Typography variant="h6">Log in to save this workout</Typography>
           </Link>
         )}
       </Box>
@@ -189,7 +185,7 @@ function Generator() {
         setIsOpen={isOpenSaveModal}
         workout={workout}
         workoutType={workoutType}
-        exerciseAmount={exerciseTime}
+        exerciseTime={exerciseTime}
         goal={goal}
       />
     </Box>
