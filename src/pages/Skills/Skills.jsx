@@ -30,10 +30,7 @@ function Skills() {
       >
         <Typography
           variant="h2"
-          component="h3"
           sx={{
-            fontSize: { xs: "1.25rem", lg: "2rem" },
-            fontWeight: "bold",
             textAlign: "center",
             padding: "1rem",
           }}
