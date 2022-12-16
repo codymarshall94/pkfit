@@ -14,8 +14,6 @@ function Workout({ workout, isVisible }) {
     enter: { opacity: 1, height: 50 },
   });
 
-  console.log(workout);
-
   if (workout) {
     return (
         <Grid
@@ -27,9 +25,9 @@ function Workout({ workout, isVisible }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "flex-start",
-            height: "auto", 
-            maxHeight: "20rem",
             width: "100%",
+            height: "auto",
+            maxHeight: "20rem",
             overflowY: "auto",
             overflowX: "hidden",
           }}
@@ -41,7 +39,7 @@ function Workout({ workout, isVisible }) {
                   <AnimatedGridItem
                     item
                     xs={11}
-                    lg={7}
+                    lg={12}
                     className="workout-item"
                     style={style}
                     onClick={() => dispatch(handleSelectedItem({ exer }))}
@@ -72,6 +70,7 @@ function Workout({ workout, isVisible }) {
                     <Grid
                       item
                       xs={8}
+                      lg={9}
                       sx={{
                         display: "flex",
                         width: "1rem",
@@ -89,6 +88,7 @@ function Workout({ workout, isVisible }) {
                     <Grid
                       item
                       xs={1}
+                      lg={1}
                       sx={{ display: "flex", alignItems: "center" }}
                     >
                       <ArrowCircleRightOutlinedIcon />
