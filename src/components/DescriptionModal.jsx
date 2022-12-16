@@ -29,7 +29,7 @@ function DescriptionModal() {
             transform: "translate(-50%, -50%)",
             height: "auto",
             width: "auto",
-            minWidth: { xs: "90%", lg: "10%"},
+            minWidth: { xs: "90%", sm: "60", md: "50%", lg: "30%"},
             maxWidth: {xs: "90%", lg: "30%"},
             maxHeight: "80vh",
             overflow: "hidden",
@@ -57,7 +57,7 @@ function DescriptionModal() {
               />
             )}
           </Box>
-          <Box className="modal-description">
+          <Box>
             {selectedItem !== null ? (
               <>
                 <Typography
@@ -66,7 +66,6 @@ function DescriptionModal() {
                   component="h2"
                   sx={{
                     display: "flex",
-                    justifyContent: "center",
                     fontWeight: "bold",
                   }}
                 >
