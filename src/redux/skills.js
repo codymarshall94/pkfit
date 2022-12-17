@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  value: "",
+  skill: "",
 }
 
 export const skillSlice = createSlice({
@@ -9,7 +9,7 @@ export const skillSlice = createSlice({
   initialState,
   reducers: {
     changeSkill: (state, action) => {
-      state.value = action.payload
+      state.skill = action.payload
     },
   },
 })
