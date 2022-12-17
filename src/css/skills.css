@@ -1,19 +1,24 @@
 .skill-card {
+  display: flex;
   border-radius: .5em;
-  text-decoration: none;
   background: white;
   box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
   transition: .1s ease;
-  color: black;
-  font-size: 2rem;
   overflow: hidden;
+  animation: fadeIn 1s ease;
 }
 
 .skill-card:hover {
-  background: #EFD09E;
-  transform: scale(1);
-  font-size: 4rem;
+  transition: .5s ease;
+  background: #EE6C4D;
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+  transform: translateY(-5px);
+}
+
+.skill-card:hover .skill-card-text {
+  transition: .5s ease;
   color: white;
+  transform: scale(2);
 }
 
 .skill-category-image {
@@ -23,18 +28,23 @@
   opacity: 0.5;
 }
 
-.skill-category-text {
-  position: absolute;
-  font-size: 1em;
+.skill-card-text {
   max-width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: inherit;
-  transition: .45s ease;
 }
 
 .skill-section-desc {
   color: #757575;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -20%, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
 }
 
 @media (min-width: 992px) { 
