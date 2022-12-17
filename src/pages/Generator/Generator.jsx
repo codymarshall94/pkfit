@@ -133,8 +133,11 @@ function Generator() {
   return (
     <Box
       sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         textAlign: "center",
-        margin: "auto",
+        marginTop: "5rem",
       }}
     >
       <Box sx={{marginBottom: "4rem"}}>
@@ -155,7 +158,7 @@ function Generator() {
       </Box>
       <Box
         sx={{
-          width: { xs: "100%" },
+          width: { xs: "100%", md: "70%", lg: "50%", xl: "30%" },
         }}
       >
         <Workout
