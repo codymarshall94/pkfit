@@ -1,9 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Button from "@mui/material/Button";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux";
 
 const jumpDesc =
   "Exercises that help with Precisions, Strides and overall leg strength.";
@@ -16,31 +14,26 @@ const balanceDesc =
 const climbDesc = "Exercises that increase grip and pulling strength.";
 
 function ExerciseHeader() {
-    const { value } = useSelector((state) => state.skills);
+  const { skill } = useSelector((state) => state.skills);
 
   return (
-    <Box>
-        <Link to="/skills" style={{ textDecoration: "none" }}>
-          <Button variant="outlined" startIcon={<ArrowBackIcon />}>
-            Back
-          </Button>
-        </Link>
-        <h1>{value}</h1>
-        <h4 className="skill-section-desc">
-          {value === "Jump"
+    <Box sx={{position: "relative"}}>
+        <Typography variant="h1">{skill}</Typography>
+        <Typography variant="h3">
+          {skill === "Jump"
             ? jumpDesc
-            : value === "Vault"
+            : skill === "Vault"
             ? vaultDesc
-            : value === "Swing"
+            : skill === "Swing"
             ? swingDesc
-            : value === "Balance"
+            : skill === "Balance"
             ? balanceDesc
-            : value === "Climb"
+            : skill === "Climb"
             ? climbDesc
             : "No Description"}
-        </h4>
-      </Box>
-  )
+        </Typography>
+    </Box>
+  );
 }
 
-export default ExerciseHeader
+export default ExerciseHeader;
