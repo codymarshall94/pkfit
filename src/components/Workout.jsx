@@ -16,89 +16,93 @@ function Workout({ workout, isVisible }) {
 
   if (workout) {
     return (
-        <Grid
-          container
-          sx={{
-            position: "relative",
-            margin: "auto",
-            marginBottom: "3rem",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            width: "100%",
-            height: "auto",
-            maxHeight: "20rem",
-            overflowY: "auto",
-            overflowX: "hidden",
-          }}
-        >
-          {workout.map((exer) => (
-            <Fragment key={exer.id}>
-              {transition((style, item) =>
-                item ? (
-                  <AnimatedGridItem
+      <Grid
+        container
+        sx={{
+          position: "relative",
+          margin: "auto",
+          marginBottom: "3rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          width: "100%",
+          height: "auto",
+          maxHeight: "20rem",
+          overflowY: "auto",
+          overflowX: "hidden",
+        }}
+      >
+        {workout.map((exer) => (
+          <Fragment key={exer.id}>
+            {transition((style, item) =>
+              item ? (
+                <AnimatedGridItem
+                  item
+                  xs={11}
+                  lg={12}
+                  className="workout-item"
+                  style={style}
+                  onClick={() => dispatch(handleSelectedItem({ exer }))}
+                  sx={{
+                    height: "3rem",
+                    margin: ".25rem 0",
+                    backgroundColor: "listBackground.main",
+                  }}
+                >
+                  <Grid
                     item
-                    xs={11}
-                    lg={12}
-                    className="workout-item"
-                    style={style}
-                    onClick={() => dispatch(handleSelectedItem({ exer }))}
-                    sx={{ height: "3rem", margin: ".25rem 0" }}
+                    xs={3}
+                    lg={2}
+                    className="workout-image-container"
+                    sx={{ display: "flex", alignItems: "center" }}
                   >
-                    <Grid
-                      item
-                      xs={3}
-                      lg={2}
-                      className="workout-image-container"
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
-                      {exer.image !== null ? (
-                        <img
-                          src={exer.image}
-                          className="workout-image"
-                          alt=""
-                          height="80px"
-                        />
-                      ) : (
-                        <img
-                          src={require("../images/placeholderthumb.png")}
-                          className="workout-image"
-                          alt=""
-                        />
-                      )}
-                    </Grid>
-                    <Grid
-                      item
-                      xs={8}
-                      lg={9}
-                      sx={{
-                        display: "flex",
-                        width: "1rem",
-                        justifyContent: "flex-start",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        paddingLeft: ".25rem",
-                      }}
-                    >
-                      <span className="workout-name-text">{exer.name}</span>
-                      <span className="workout-reps-text">
-                        {exer.sets} x {exer.reps}
-                      </span>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={1}
-                      lg={1}
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
-                      <ArrowCircleRightOutlinedIcon />
-                    </Grid>
-                  </AnimatedGridItem>
-                ) : null
-              )}
-            </Fragment>
-          ))}
-        </Grid>
+                    {exer.image !== null ? (
+                      <img
+                        src={exer.image}
+                        className="workout-image"
+                        alt=""
+                        height="80px"
+                      />
+                    ) : (
+                      <img
+                        src={require("../images/placeholderthumb.png")}
+                        className="workout-image"
+                        alt=""
+                      />
+                    )}
+                  </Grid>
+                  <Grid
+                    item
+                    xs={8}
+                    lg={9}
+                    sx={{
+                      display: "flex",
+                      width: "1rem",
+                      justifyContent: "flex-start",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      paddingLeft: ".25rem",
+                    }}
+                  >
+                    <span className="workout-name-text">{exer.name}</span>
+                    <span className="workout-reps-text">
+                      {exer.sets} x {exer.reps}
+                    </span>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={1}
+                    lg={1}
+                    sx={{ display: "flex", alignItems: "center" }}
+                  >
+                    <ArrowCircleRightOutlinedIcon />
+                  </Grid>
+                </AnimatedGridItem>
+              ) : null
+            )}
+          </Fragment>
+        ))}
+      </Grid>
     );
   }
 }
