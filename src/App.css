@@ -1,17 +1,4 @@
-/*
-Webpage Theme
-Main Button - #ee6c4d
-Header - #272727
-Workout Item - #90A9B7
-Selection Buttons - #6A8D73
-Skill Buttons - #EFD09E
-*/
-
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   height: 100vh;
 }
@@ -28,4 +15,38 @@ Skill Buttons - #EFD09E
   object-fit: contain;
   height: 100%;
   width: 100%;
+}
+
+.home-word-in {
+  animation: bounce-in-right 2s ease;
+}
+
+.home-word-out {
+  animation: bounce-in-left 2s ease;
+}
+
+@keyframes bounce-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% { transform: translateX(); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes bounce-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% { transform: translateX(0); }
+  100% { transform: translateX(0); }
 }
