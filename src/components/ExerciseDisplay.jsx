@@ -9,12 +9,12 @@ import { handleSelectedItem } from "../redux/modal";
 import DescriptionModal from "./DescriptionModal";
 
 function ExerciseDisplay() {
-  const { value } = useSelector((state) => state.skills);
+  const { skill } = useSelector((state) => state.skills);
   const dispatch = useDispatch();
   let filteredExercises = EXERCISES.sort((a, b) => {
     //sorting alphabetically before filtering out the category
     return a.name === b.name ? 0 : a.name < b.name ? -1 : 1;
-  }).filter((exer) => exer.category.includes(value));
+  }).filter((exer) => exer.category.includes(skill));
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", pt: "2rem" }}>
@@ -22,7 +22,7 @@ function ExerciseDisplay() {
         container
         className="workout-item-container"
         sx={{
-          width: { sm: "60%", lg: "90%" },
+          width: { sm: "60%", lg: "60%" },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -36,7 +36,7 @@ function ExerciseDisplay() {
             lg={7}
             className="workout-item"
             onClick={() => dispatch(handleSelectedItem({ exer }))}
-            sx={{ margin: ".25rem" }}
+            sx={{ margin: ".25rem", backgroundColor: "listBackground.main" }}
           >
             <Grid
               item
