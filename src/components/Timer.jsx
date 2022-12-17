@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import "../css/timer.css";
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
 
 const lengthOptions = [30, 60, 90, 120];
 let interval;
@@ -17,6 +19,7 @@ function Timer() {
     if (time <= 0) {
       clearInterval(interval);
       setIsPlaying(false);
+      setTime(length);
     }
   }, [time, length]);
 
@@ -50,7 +53,9 @@ function Timer() {
     <Box>
       <Box className="timer">
         <Box className="timer-overlay"></Box>
-        <Box id="countdown-number">{time}s</Box>
+        <Typography variant="h6" id="countdown-number">
+          {time}s
+        </Typography>
         <svg viewBox="0 0 100 100">
           <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="10%" stopColor="#f18971" />
@@ -73,26 +78,46 @@ function Timer() {
           ></circle>
         </svg>
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", marginY: ".5rem"}}>
+      <Box sx={{ display: "flex", justifyContent: "center", marginY: "2rem" }}>
         {lengthOptions.map((option) => (
-          <Box
+          <Button
+            variant={length === option ? "contained" : "outlined"}
             key={option}
-            className="btn-circle"
+            className="btn-square"
             onClick={() => {
               handleUserOption(option);
             }}
           >
-            {option}s
-          </Box>
+            <Typography
+              variant="h6"
+              sx={{
+                color: length === option ? "white" : "text.primary",
+              }}
+            >
+              {option}
+            </Typography>
+          </Button>
         ))}
       </Box>
       <Box className="btn-container">
-        <Box className="btn-pause btn" onClick={() => startTimer()}>
-          <Box className="btn-circle"><PlayArrowIcon /></Box>
-        </Box>
-        <Box className="btn-stop btn" onClick={() => resetTimer()}>
-          <div className="btn-circle"><RestartAltIcon /></div>
-        </Box>
+        <Button
+          variant="contained"
+          className="btn-circle"
+          onClick={() => startTimer()}
+          sx={{
+            backgroundColor: "primary.main",
+          }}
+        >
+          <PlayArrowIcon />
+        </Button>
+        <Button
+          variant="contained"
+          className="btn-circle"
+          onClick={() => resetTimer()}
+          sx={{ backgroundColor: "primary.main" }}
+        >
+          <RestartAltIcon />
+        </Button>
       </Box>
     </Box>
   );
