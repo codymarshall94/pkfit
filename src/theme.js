@@ -41,18 +41,24 @@ const theme = createTheme({
       dark: "#7DC921",
       contrastText: "#FFFFFF",
     },
+    listBackground: {
+      main: "#84B8CE",
+    },
   },
   typography: {
     fontFamily: "Montserrat, sans-serif",
     h1: {
-      fontSize: "3rem",
+      fontSize: {
+        xs: "2rem",
+        sm: "3rem",
+      },
       fontWeight: 700,
       lineHeight: 1.167,
       letterSpacing: "-0.01562em",
       color: "#434344",
     },
     h2: {
-      fontSize: "1.5rem",
+      fontSize: {xs: "1rem", sm: "1.5rem"},
       fontWeight: 700,
       lineHeight: 1.2,
       color: "#434344",
