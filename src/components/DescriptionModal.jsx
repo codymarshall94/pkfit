@@ -28,7 +28,7 @@ function DescriptionModal() {
             transform: "translate(-50%, -50%)",
             height: "auto",
             width: "auto",
-            minWidth: { xs: "90%", sm: "60", md: "50%", lg: "30%"},
+            minWidth: { xs: "90%", sm: "60", md: "60%", lg: "50%", xl: "30%"},
             maxWidth: {xs: "90%", lg: "30%"},
             maxHeight: "80vh",
             overflow: "hidden",
