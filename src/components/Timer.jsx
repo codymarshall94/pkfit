@@ -105,7 +105,16 @@ function Timer() {
           className="btn-circle"
           onClick={() => startTimer()}
           sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             backgroundColor: "primary.main",
+            borderRadius: "50%",
+            width: "4rem",
+            height: "4rem",
+            margin: "0 1rem",
+            transition: "all 500ms",
+            userSelect: "none",
           }}
         >
           <PlayArrowIcon />
