@@ -20,7 +20,6 @@ function Workout({ workout, isVisible }) {
         container
         sx={{
           position: "relative",
-          margin: "auto",
           marginBottom: "3rem",
           display: "flex",
           justifyContent: "center",
