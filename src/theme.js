@@ -71,7 +71,6 @@ const theme = createTheme({
     },
     h6: {
       fontSize: "1rem",
-      fontWeight: 700,
       lineHeight: 1.6,
       letterSpacing: "0.0075em",
       color: "#434344",
