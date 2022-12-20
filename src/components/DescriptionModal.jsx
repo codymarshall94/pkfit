@@ -6,7 +6,7 @@ import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { openModal } from "../redux/modal";
+import { openModal } from "../redux/reducers/modalSlice";
 
 function DescriptionModal() {
   const { isOpen } = useSelector((state) => state.modal);
