@@ -32,10 +32,16 @@ function ExerciseList() {
             item
             key={exer.id}
             xs={11}
-            lg={7}
+            sm={10}
+            lg={8}
             className="workout-item"
             onClick={() => dispatch(handleSelectedItem({ exer }))}
-            sx={{ margin: ".25rem", backgroundColor: "listBackground.main" }}
+            sx={{
+              height: "3rem",
+              margin: ".25rem 0",
+              backgroundColor: "listBackground.main",
+              overflow: "hidden",
+            }}
           >
             <Grid
               item
