@@ -78,7 +78,6 @@ function SavedWorkouts() {
               margin: "1rem auto",
               borderBottom: ".15rem solid black",
             }}
-            onClick={() => handleSelectedWorkout(workout)}
           >
             <ListItemButton
               sx={{
@@ -88,6 +87,7 @@ function SavedWorkouts() {
                 alignItems: "flex-start",
                 justifyContent: "flex-start",
               }}
+              onClick={() => handleSelectedWorkout(workout)}
             >
               <ListItemText component="h1">
                 {workout.name.toUpperCase()}
@@ -96,19 +96,19 @@ function SavedWorkouts() {
                 {workout.createdAt.toDate().toDateString()}
               </ListItemText>
             </ListItemButton>
-            <Box
+
+            <Button
+              variant="contained"
               sx={{
                 position: "absolute",
-                right: "0",
+                right: "1rem",
                 top: "50%",
                 transform: "translateY(-50%)",
-                color: "red",
               }}
+              onClick={() => handleDelete(workout.id)}
             >
-              <Button onClick={() => handleDelete(workout.id)}>
-                <ClearIcon />
-              </Button>
-            </Box>
+              <ClearIcon />
+            </Button>
           </Box>
         ))}
       </Box>
