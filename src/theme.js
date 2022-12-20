@@ -69,10 +69,27 @@ const theme = createTheme({
       lineHeight: 1.2,
       color: "#434344",
     },
+    h4: {
+      fontSize: "1rem",
+      lineHeight: 1.2,
+      color: "#434344",
+    },
+    h5: {
+      fontSize: "1rem",
+      fontWeight: 700,
+      lineHeight: 1.2,
+      color: "#434344",
+    },
     h6: {
       fontSize: "1rem",
       lineHeight: 1.6,
       letterSpacing: "0.0075em",
+      color: "#434344",
+    },
+    subtitle1: {
+      fontSize: "1rem",
+      lineHeight: 1.6,
+      letterSpacing: "0.00938em",
       color: "#434344",
     },
   },
