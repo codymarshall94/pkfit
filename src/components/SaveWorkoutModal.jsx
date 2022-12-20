@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { addDoc, serverTimestamp } from "firebase/firestore";
+import { addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
 import { colRef } from "../firebase-config";
 import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
@@ -17,22 +17,38 @@ function SaveWorkoutModal({
   goal,
 }) {
   const [workoutName, setWorkoutName] = useState("");
+  const [workoutSaved, setWorkoutSaved] = useState(false);
   const { user } = useSelector((state) => state.user);
 
-  const handleSave = () => {
-    addDoc(colRef, {
-      user: user.uid,
-      name: workoutName,
-      exercises: workout,
-      createdAt: serverTimestamp(),
-    }).then(() => {
-      setWorkoutName("");
-      setIsOpen(false);
-    });
+  const handleSave = async () => {
+    try {
+      const docRef = doc(colRef, user.uid + workoutName + workout);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Workout already saved!");
+      } else {
+        addDoc(colRef, {
+          user: user.uid,
+          name: workoutName,
+          exercises: workout,
+          createdAt: serverTimestamp(),
+        }).then(() => {
+          setWorkoutName("");
+          setWorkoutSaved(true);
+        });
+      }
+    } catch (e) {
+      console.log("Error getting document:", e);
+    }
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setWorkoutSaved(false);
   };
 
   return (
-    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+    <Modal open={isOpen} onClose={() => handleClose()}>
       <Box
         sx={{
           position: "absolute",
@@ -56,49 +72,74 @@ function SaveWorkoutModal({
             display: "flex",
             justifyContent: "center",
             flexDirection: "column",
+            padding: "0 1rem",
           }}
         >
-          <Typography
-            variant="h1"
-            sx={{
-              textAlign: "center",
-              fontSize: "1.5rem",
-              marginBottom: "1rem",
-            }}
-          >
-            Workout Name
-          </Typography>
-          <TextField
-            value={workoutName}
-            sx={{ width: "75%", margin: "auto" }}
-            onChange={(e) => setWorkoutName(e.target.value)}
-            type="text"
-            placeholder={`${exerciseTime}s ${workoutType} for ${goal}`}
-            inputProps={{ maxLength: 30 }}
-            required
-          />
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "1rem",
-            }}
-          >
-            <Button
-              sx={{ marginX: ".5rem" }}
-              variant="contained"
-              onClick={() => handleSave()}
-            >
-              Save
-            </Button>
-            <Button
-              sx={{ marginX: ".5rem" }}
-              variant="outlined"
-              onClick={() => setIsOpen(false)}
-            >
-              Cancel
-            </Button>
-          </Box>
+          {workoutSaved ? (
+            <>
+              <Typography
+                variant="h1"
+                sx={{
+                  textAlign: "center",
+                  fontSize: "1.5rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                Workout Saved Successfully!
+              </Typography>
+              <Button
+                sx={{ marginX: ".5rem", width: "50%", margin: "auto" }}
+                variant="contained"
+                onClick={() => handleClose()}
+              >
+                Close
+              </Button>
+            </>
+          ) : (
+            <>
+              <Typography
+                variant="h1"
+                sx={{
+                  textAlign: "center",
+                  fontSize: "1.5rem",
+                  marginBottom: "1rem",
+                }}
+              >
+                Workout Name
+              </Typography>
+              <TextField
+                value={workoutName}
+                sx={{ width: "75%", margin: "auto" }}
+                onChange={(e) => setWorkoutName(e.target.value)}
+                type="text"
+                placeholder={`${exerciseTime}s ${workoutType} for ${goal}`}
+                inputProps={{ maxLength: 30 }}
+                required
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "1rem",
+                }}
+              >
+                <Button
+                  sx={{ marginX: ".5rem" }}
+                  variant="contained"
+                  onClick={() => handleSave()}
+                >
+                  Save
+                </Button>
+                <Button
+                  sx={{ marginX: ".5rem" }}
+                  variant="outlined"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </Button>
+              </Box>
+            </>
+          )}
         </Box>
       </Box>
     </Modal>
