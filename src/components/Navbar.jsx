@@ -218,7 +218,7 @@ function Navbar() {
           >
             {pages.map((page) => (
               <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                <Link to={page.link} style={{ textDecoration: "none" }}>
+                <Link to={page.link} style={{ textDecoration: "none", color: "#434344" }}>
                   {page.name}
                 </Link>
               </MenuItem>
