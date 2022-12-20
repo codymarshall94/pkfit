@@ -7,6 +7,7 @@ import { addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
 import { colRef } from "../firebase-config";
 import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from "react-router-dom";
 
 function SaveWorkoutModal({
   isOpen,
@@ -19,6 +20,7 @@ function SaveWorkoutModal({
   const [workoutName, setWorkoutName] = useState("");
   const [workoutSaved, setWorkoutSaved] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const handleSave = async () => {
     try {
@@ -41,6 +43,12 @@ function SaveWorkoutModal({
       console.log("Error getting document:", e);
     }
   };
+
+  const handleSavedRedirect = () => {
+    navigate("/saved-workouts");
+    handleClose();
+  };
+
 
   const handleClose = () => {
     setIsOpen(false);
@@ -87,13 +95,21 @@ function SaveWorkoutModal({
               >
                 Workout Saved Successfully!
               </Typography>
-              <Button
-                sx={{ marginX: ".5rem", width: "50%", margin: "auto" }}
-                variant="contained"
-                onClick={() => handleClose()}
-              >
-                Close
-              </Button>
+              <Box sx={{display: "flex", justifyContent: "center"}}>
+                <Button
+                  variant="contained"
+                  sx={{marginRight: ".5rem"}}
+                  onClick={() => handleSavedRedirect()}
+                >
+                  Saved Workouts
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => handleClose()}
+                >
+                  Close
+                </Button>
+              </Box>
             </>
           ) : (
             <>
@@ -105,7 +121,7 @@ function SaveWorkoutModal({
                   marginBottom: "1rem",
                 }}
               >
-                Workout Name
+                Name this workout
               </Typography>
               <TextField
                 value={workoutName}
