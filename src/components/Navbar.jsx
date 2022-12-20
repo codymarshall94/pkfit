@@ -76,40 +76,46 @@ function Navbar() {
     <AppBar position="fixed" sx={{ minHeight: "3rem" }} color="secondary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
+          <Box
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "none",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-           <Link to="/" className="nav-link" onClick={() => setActivePage("Home")}>
-                pkFit
-              </Link>
-          </Typography>
+            <Link
+              to="/"
+              className="nav-link"
+              onClick={() => setActivePage("Home")}
+            >
+              <img
+                src={require("../images/logo/logo-no-background-white.png")}
+                alt="logo"
+                className="nav-bar-logo"
+              />
+            </Link>
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <Typography
-              variant="h5"
-              noWrap
+            <Box
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                alignSelf: "center",
-                fontWeight: 700,
-                color: "inherit",
-                textDecoration: "none",
               }}
             >
-              <Link to="/" className="nav-link" onClick={() => setActivePage("Home")}>
-                pkFit
+              <Link
+                to="/"
+                className="nav-link"
+                onClick={() => setActivePage("Home")}
+              >
+                <img
+                  src={require("../images/logo/logo-no-background-white.png")}
+                  alt="logo"
+                  className="nav-bar-logo"
+                />
               </Link>
-            </Typography>
+            </Box>
           </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
