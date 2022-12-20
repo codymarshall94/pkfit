@@ -5,7 +5,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../css/skills.css";
 import { useDispatch } from "react-redux";
-import { changeSkill } from "../../redux/skills";
+import  { changeSkill } from "../../redux/reducers/skillsSlice";
 
 const skills = [
   { name: "Vault", image: require("../../images/vault.jpg") },
@@ -50,7 +50,7 @@ function Skills() {
         >
           {skills.map((skill, index) => (
             <Grid item xs={6} md={4} lg={2} key={index}>
-              <Link to={`/exercises`}>
+              <Link to={`/skills/${skill.name}`}>
                 <Box
                   className="skill-card"
                   onClick={() => dispatch(changeSkill(skill.name))}
