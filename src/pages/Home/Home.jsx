@@ -53,13 +53,38 @@ function Home() {
           padding: "1rem",
         }}
       >
-        <Typography
-          variant="h1"
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "auto",
+            width: { xs: "80%", sm: "60%", md: "40%" },
+          }}
         >
-          Parkour Workout Generator
-        </Typography>
-        <Box sx={{ display: "flex", margin: "1rem", flexDirection: {xs: "column", sm: "row"} }}>
-          <Typography variant="h2">Quick workouts to help</Typography>
+          <img
+            src={require("../../images/logo/logo-no-background.png")}
+            alt=""
+            className="home-logo"
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            margin: "auto",
+            flexDirection: { xs: "column", sm: "row" },
+          }}
+        >
+          <Typography variant="h2">Generate workouts to</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            margin: "auto",
+            flexDirection: { xs: "column", sm: "row" },
+          }}
+        >
           <Typography
             variant="h2"
             className={animationCurrent}
