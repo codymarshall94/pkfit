@@ -56,6 +56,16 @@ function Login() {
         justifyContent: "center",
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          width: { xs: "50%", sm: "35%", md: "20%", xl: "15%" },
+          marginBottom: "1rem",
+        }}
+      >
+        <img className="home-logo" src={require("../../images/logo/logo-no-background.png")} />
+      </Box>
         <Typography variant="h1">Welcome Back</Typography>
         <Box
           component="form"

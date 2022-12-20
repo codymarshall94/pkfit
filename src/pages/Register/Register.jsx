@@ -54,13 +54,23 @@ function Register() {
         justifyContent: "center",
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          width: { xs: "50%", sm: "35%", md: "20%", xl: "15%" },
+          marginBottom: "1rem",
+        }}
+      >
+        <img className="home-logo" src={require("../../images/logo/logo-no-background.png")} />
+      </Box>
       <Typography variant="h1">Create an account</Typography>
       <Box
         component="form"
         className="register-container"
         onSubmit={(e) => register(e)}
         sx={{
-          width: { xs: "90%", sm: "50%", md: "40%", xl: "30%" },
+          width: { xs: "90%", sm: "50%", md: "40%", lg: "30%", xl: "20%" },
         }}
       >
         <Box className="auth-input-group">
@@ -104,12 +114,12 @@ function Register() {
       </Box>
       <span className="auth-help-link">
         Already have an account?{" "}
-        <Link to="/login" style={{ textDecoration: "none"}}>
+        <Link to="/login" style={{ textDecoration: "none" }}>
           Log in
         </Link>
       </span>
       <span style={{ color: "red", marginTop: "1rem" }}>{errorMessage}</span>
-      <RegisterSuccessModal open={isOpen} setIsOpen={setIsOpen}/>
+      <RegisterSuccessModal open={isOpen} setIsOpen={setIsOpen} />
     </Box>
   );
 }
