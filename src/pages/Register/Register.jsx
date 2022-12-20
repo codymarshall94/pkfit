@@ -5,11 +5,13 @@ import { Box, Button, InputLabel, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import "../../css/reglogin.css";
+import RegisterSuccessModal from "../../components/RegisterSuccessModal";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const register = async (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ function Register() {
         registerEmail,
         registerPassword
       );
+      setIsOpen(true);
       console.log(user);
     } catch (error) {
       switch (error.code) {
@@ -101,11 +104,12 @@ function Register() {
       </Box>
       <span className="auth-help-link">
         Already have an account?{" "}
-        <Link to="/login" style={{ textDecoration: "none" }}>
+        <Link to="/login" style={{ textDecoration: "none"}}>
           Log in
         </Link>
       </span>
       <span style={{ color: "red", marginTop: "1rem" }}>{errorMessage}</span>
+      <RegisterSuccessModal open={isOpen} setIsOpen={setIsOpen}/>
     </Box>
   );
 }
