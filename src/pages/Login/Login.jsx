@@ -64,7 +64,7 @@ function Login() {
           marginBottom: "1rem",
         }}
       >
-        <img className="home-logo" src={require("../../images/logo/logo-no-background.png")} />
+        <img className="home-logo" alt="logo" src={require("../../images/logo/logo-no-background.png")} />
       </Box>
         <Typography variant="h1">Welcome Back</Typography>
         <Box

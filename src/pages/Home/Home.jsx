@@ -63,7 +63,7 @@ function Home() {
         >
           <img
             src={require("../../images/logo/logo-no-background.png")}
-            alt=""
+            alt="logo"
             className="home-logo"
           />
         </Box>
