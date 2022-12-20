@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import skillReducer from "./skills";
-import modalReducer from "./modal";
+import skillReducer from "./reducers/skillsSlice";
+import modalReducer from './reducers/modalSlice';
 import userReducer from "./reducers/userSlice";
 import selectedWorkoutReducer from "./reducers/selectedWorkoutSlice";
 
