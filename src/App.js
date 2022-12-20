@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Header from "./components/Navbar";
 import Generator from "./pages/Generator/Generator";
-import Exercises from "./components/Exercises";
+import Skill from "./pages/Skill/Skill";
 import Skills from "./pages/Skills/Skills";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
@@ -33,7 +33,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/generator" element={<Generator />} />
         <Route path="/skills" element={<Skills />} />
-        <Route path="/exercises" element={<Exercises />} />
+        <Route path="/skills/:id" element={<Skill />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/saved-workouts" element={<SavedWorkouts />} />
