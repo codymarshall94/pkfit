@@ -15,7 +15,8 @@ function Login() {
   const [errorMesage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const login = async () => {
+  const login = async (e) => {
+    e.preventDefault();
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -105,7 +106,7 @@ function Login() {
             sx={{ width: "100%", marginTop: "1rem" }}
             color="primary"
             variant="contained"
-            onClick={() => login()}
+            type="submit"
           >
             Login
           </Button>
@@ -113,7 +114,7 @@ function Login() {
         <span className="auth-help-link">Forgot your password?</span>
         <span className="auth-help-link">
           Dont have an account yet?{" "}
-          <Link to="/register" style={{ textDecoration: "none" }}>
+          <Link to="/register" style={{ color: "#434344" }}>
             Sign up
           </Link>
         </span>

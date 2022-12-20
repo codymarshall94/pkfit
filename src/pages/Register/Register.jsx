@@ -114,7 +114,7 @@ function Register() {
       </Box>
       <span className="auth-help-link">
         Already have an account?{" "}
-        <Link to="/login" style={{ textDecoration: "none" }}>
+        <Link to="/login" style={{ color: "#434344" }}>
           Log in
         </Link>
       </span>
