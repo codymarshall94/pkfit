@@ -4,7 +4,7 @@ import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOu
 import { animated, useTransition } from "react-spring";
 import "../css/workout.css";
 import { useDispatch } from "react-redux";
-import { handleSelectedItem } from "../redux/modal";
+import { handleSelectedItem } from "../redux/reducers/modalSlice";
 
 function Workout({ workout, isVisible }) {
   const AnimatedGridItem = animated(Grid);
@@ -38,7 +38,8 @@ function Workout({ workout, isVisible }) {
                 <AnimatedGridItem
                   item
                   xs={11}
-                  lg={12}
+                  sm={10}
+                  lg={8}
                   className="workout-item"
                   style={style}
                   onClick={() => dispatch(handleSelectedItem({ exer }))}
@@ -46,6 +47,7 @@ function Workout({ workout, isVisible }) {
                     height: "3rem",
                     margin: ".25rem 0",
                     backgroundColor: "listBackground.main",
+                    overflow: "hidden",
                   }}
                 >
                   <Grid
@@ -53,20 +55,24 @@ function Workout({ workout, isVisible }) {
                     xs={3}
                     lg={2}
                     className="workout-image-container"
-                    sx={{ display: "flex", alignItems: "center" }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
                   >
                     {exer.image !== null ? (
                       <img
                         src={exer.image}
                         className="workout-image"
-                        alt=""
-                        height="80px"
+                        alt="a person doing the exercise"
                       />
                     ) : (
                       <img
                         src={require("../images/placeholderthumb.png")}
                         className="workout-image"
-                        alt=""
+                        alt="placeholder"
                       />
                     )}
                   </Grid>

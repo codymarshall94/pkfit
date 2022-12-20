@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
 import { EXERCISES } from "../../exercises";
-import ExerciseSelector from "../../components/ExerciseSelector";
+import WorkoutSelector from "../../components/WorkoutSelector";
 import GenerateBtn from "../../components/GenerateBtn";
 import Workout from "../../components/Workout";
 import DescriptionModal from "../../components/DescriptionModal";
@@ -140,8 +140,8 @@ function Generator() {
         marginTop: "5rem",
       }}
     >
-      <Box sx={{marginBottom: "4rem"}}>
-        <ExerciseSelector
+      <Box sx={{ marginBottom: "4rem" }}>
+        <WorkoutSelector
           handleTypeClick={handleTypeClick}
           handleTimeClick={handleTimeClick}
           handleGoalClick={handleGoalClick}

@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import DescriptionModal from "../../components/DescriptionModal";
 import Timer from "../../components/Timer";
 import Typography from "@mui/material/Typography";
+import BackButton from "../../components/BackButton";
 
 function SavedWorkout() {
   const workout = useSelector((state) => state.selectedWorkout.selectedWorkout);
@@ -20,6 +21,7 @@ function SavedWorkout() {
         height: "100vh",
       }}
     >
+      <BackButton page="saved-workouts"/>
       <Typography variant="h1" sx={{margin: {xs: "1rem", sm: "2rem 0"}}}>{workout.name}</Typography>
       <Box sx={{
         width: {xs: "100%", md: "50%"},

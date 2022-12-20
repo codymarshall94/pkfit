@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { setSelectedWorkout } from "../../redux/reducers/selectedWorkoutSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore";
+import { colRef } from "../../firebase-config";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
-import { setSelectedWorkout } from "../../redux/reducers/selectedWorkoutSlice";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore";
-import { colRef } from "../../firebase-config";
+import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
 
 function SavedWorkouts() {
   const [workouts, setWorkouts] = useState();
@@ -53,8 +53,8 @@ function SavedWorkouts() {
     return <div>Loading...</div>;
   } else {
     return (
-      <Box sx={{ width: "100%", padding: "1rem" }}>
-        <h1>Saved Workouts</h1>
+      <Box sx={{ width: "100%", padding: "1rem", marginTop: "5rem" }}>
+        <Typography variant="h1">Saved Workouts</Typography>
         {workouts.length === 0 && (
           <Box sx={{ margin: "1rem 0" }}>
             <p>You have no saved workouts</p>
@@ -105,7 +105,9 @@ function SavedWorkouts() {
                 color: "red",
               }}
             >
-              <ClearIcon onClick={() => handleDelete(workout.id)} />
+              <Button onClick={() => handleDelete(workout.id)}>
+                <ClearIcon />
+              </Button>
             </Box>
           </Box>
         ))}
