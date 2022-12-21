@@ -141,7 +141,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 1, display: "flex", alignItems: "flex-end" }}>
             <Menu
               sx={{ mt: "45px" }}
-              id="menu-appbar"
+              id="menu-appbar-mobile"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
