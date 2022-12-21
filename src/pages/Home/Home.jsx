@@ -101,6 +101,8 @@ function Home() {
           className="home-image"
           src={require("../../images/homePageImage.jpg")}
           alt=""
+          height={400}
+          width={400}
         />
       </Box>
       <Button color="primary" variant="contained">
