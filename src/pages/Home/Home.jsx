@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import "../../App.css";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 
 const actionWords = ["Jump", "Vault", "Run", "Swing", "Climb", "Balance"];
@@ -65,6 +65,8 @@ function Home() {
             src={require("../../images/logo/logo-no-background.png")}
             alt="logo"
             className="home-logo"
+            height={100}
+            width={100}
           />
         </Box>
         <Box
