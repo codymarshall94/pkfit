@@ -21,7 +21,7 @@ function ExerciseList() {
         container
         className="workout-item-container"
         sx={{
-          width: { sm: "60%", lg: "60%" },
+          width: { sm: "60%", lg: "40%" },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
