@@ -11,6 +11,8 @@ function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const register = async (e) => {
@@ -26,13 +28,13 @@ function Register() {
     } catch (error) {
       switch (error.code) {
         case "auth/email-already-in-use":
-          setErrorMessage("Email already in use");
+          setEmailErrorMessage("Email already in use");
           break;
         case "auth/invalid-email":
-          setErrorMessage("Invalid email");
+          setEmailErrorMessage("Invalid email");
           break;
         case "auth/weak-password":
-          setErrorMessage("Weak password");
+          setPasswordErrorMessage("Weak password. Must be at least 6 characters");
           break;
         default:
           setErrorMessage("Something went wrong");
@@ -62,7 +64,11 @@ function Register() {
           marginBottom: "1rem",
         }}
       >
-        <img className="home-logo" alt="logo" src={require("../../images/logo/logo-no-background.png")} />
+        <img
+          className="home-logo"
+          alt="logo"
+          src={require("../../images/logo/logo-no-background.png")}
+        />
       </Box>
       <Typography variant="h1">Create an account</Typography>
       <Box
@@ -76,6 +82,8 @@ function Register() {
         <Box className="auth-input-group">
           <InputLabel htmlFor="email">E-mail</InputLabel>
           <TextField
+            error={emailErrorMessage !== "" ? true : false}
+            helperText={emailErrorMessage}
             sx={{ width: "100%" }}
             size="small"
             id="email"
@@ -91,6 +99,8 @@ function Register() {
         <Box className="auth-input-group">
           <InputLabel htmlFor="password">Password</InputLabel>
           <TextField
+            error={passwordErrorMessage !== "" ? true : false}
+            helperText={passwordErrorMessage}
             sx={{ width: "100%" }}
             size="small"
             id="password"

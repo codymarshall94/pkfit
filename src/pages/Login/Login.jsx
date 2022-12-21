@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [errorMesage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -28,16 +30,16 @@ function Login() {
     } catch (error) {
       switch (error.code) {
         case "auth/invalid-email":
-          setErrorMessage("Invalid email");
+          setEmailErrorMessage("Invalid email");
           break;
         case "auth/user-disabled":
-          setErrorMessage("User disabled");
+          setEmailErrorMessage("User disabled");
           break;
         case "auth/user-not-found":
-          setErrorMessage("User not found");
+          setEmailErrorMessage("User not found");
           break;
         case "auth/wrong-password":
-          setErrorMessage("Wrong password");
+          setPasswordErrorMessage("Wrong password");
           break;
         default:
           setErrorMessage("Something went wrong");
@@ -65,61 +67,69 @@ function Login() {
           marginBottom: "1rem",
         }}
       >
-        <img className="home-logo" alt="logo" src={require("../../images/logo/logo-no-background.png")} />
+        <img
+          className="home-logo"
+          alt="logo"
+          src={require("../../images/logo/logo-no-background.png")}
+        />
       </Box>
-        <Typography variant="h1">Welcome Back</Typography>
-        <Box
-          component="form"
-          className="register-container"
-          onSubmit={(e) => login(e)}
-          sx={{
-            width: { xs: "90%", sm: "50%", md: "40%", xl: "30%" },
-          }}
-        >
-          <Box className="auth-input-group">
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <TextField
-              sx={{ width: "100%" }}
-              size="small"
-              margin="normal"
-              id="email"
-              type="email"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
-              required
-            />
-          </Box>
-          <Box className="auth-input-group">
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <TextField
-              sx={{ width: "100%" }}
-              size="small"
-              margin="normal"
-              id="password"
-              type="password"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              required
-            />
-          </Box>
-          <Button
-            sx={{ width: "100%", marginTop: "1rem" }}
-            color="primary"
-            variant="contained"
-            type="submit"
-          >
-            Login
-          </Button>
+      <Typography variant="h1">Welcome Back</Typography>
+      <Box
+        component="form"
+        className="register-container"
+        onSubmit={(e) => login(e)}
+        sx={{
+          width: { xs: "90%", sm: "50%", md: "40%", lg: "30%", xl: "20%" },
+        }}
+      >
+        <Box className="auth-input-group">
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <TextField
+            error={emailErrorMessage ? true : false}
+            helperText={emailErrorMessage}
+            sx={{ width: "100%" }}
+            size="small"
+            margin="normal"
+            id="email"
+            type="email"
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
+            required
+          />
         </Box>
-        <span className="auth-help-link">Forgot your password?</span>
-        <span className="auth-help-link">
-          Dont have an account yet?{" "}
-          <Link to="/register" style={{ color: "#434344" }}>
-            Sign up
-          </Link>
-        </span>
-        <span style={{ color: "red", marginTop: "1rem" }}>{errorMesage}</span>
+        <Box className="auth-input-group">
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <TextField
+            error={passwordErrorMessage ? true : false}
+            helperText={passwordErrorMessage}
+            sx={{ width: "100%" }}
+            size="small"
+            margin="normal"
+            id="password"
+            type="password"
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
+            required
+          />
+        </Box>
+        <Button
+          sx={{ width: "100%", marginTop: "1rem" }}
+          color="primary"
+          variant="contained"
+          type="submit"
+        >
+          Login
+        </Button>
       </Box>
+      <span className="auth-help-link">Forgot your password?</span>
+      <span className="auth-help-link">
+        Dont have an account yet?{" "}
+        <Link to="/register" style={{ color: "#434344" }}>
+          Sign up
+        </Link>
+      </span>
+      <span style={{ color: "red", marginTop: "1rem" }}>{errorMesage}</span>
+    </Box>
   );
 }
 
