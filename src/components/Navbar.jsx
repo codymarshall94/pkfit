@@ -73,7 +73,12 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ minHeight: "3rem" }} color="secondary">
+    <AppBar
+      role="navigation"
+      position="fixed"
+      sx={{ minHeight: "3rem" }}
+      color="secondary"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
@@ -218,7 +223,10 @@ function Navbar() {
           >
             {pages.map((page) => (
               <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                <Link to={page.link} style={{ textDecoration: "none", color: "#434344" }}>
+                <Link
+                  to={page.link}
+                  style={{ textDecoration: "none", color: "#434344" }}
+                >
                   {page.name}
                 </Link>
               </MenuItem>
