@@ -7,8 +7,8 @@
 }
 
 .timer svg {
-  width: 7rem;
-  height: 7rem;
+  width: 10rem;
+  height: 10rem;
   transform: rotateY(349deg) rotate(-117deg);
 }
 
@@ -26,10 +26,10 @@
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  border: .75rem solid #e9e9ff;
+  border: 1rem solid #e9e9ff;
   transform: translate(-50%, -50%);
-  height: 7rem;
-  width: 7rem;
+  height: 10rem;
+  width: 10rem;
 }
 
 .main-circle-30 {
