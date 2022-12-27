@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Workout from "../../components/Workout";
 import { useSelector } from "react-redux";
 import DescriptionModal from "../../components/DescriptionModal";
-import Timer from "../../components/Timer";
 import Typography from "@mui/material/Typography";
 import BackButton from "../../components/BackButton";
+import TimerModal from "../../components/TimerModal";
+import TimerIcon from '@mui/icons-material/Timer';
 
 function SavedWorkout() {
+  const [open, setOpen] = useState(false);
   const workout = useSelector((state) => state.selectedWorkout.selectedWorkout);
 
   return (
@@ -28,9 +31,10 @@ function SavedWorkout() {
       }}>
         <Workout workout={workout.exercises} isVisible={true} />
       </Box>
+      <Button sx={{position: "absolute", top: "5rem", right: ".5rem"}} variant="contained" onClick={() => setOpen(true)}><TimerIcon /></Button>
 
       <DescriptionModal />
-      <Timer />
+      <TimerModal open={open} setOpen={setOpen}/>
     </Box>
   );
 }
