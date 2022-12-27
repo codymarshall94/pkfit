@@ -80,10 +80,11 @@ function Login() {
         onSubmit={(e) => login(e)}
         sx={{
           width: { xs: "90%", sm: "50%", md: "40%", lg: "30%", xl: "20%" },
+          margin: "2rem 0"
         }}
       >
-        <Box className="auth-input-group">
-          <InputLabel htmlFor="email">Email</InputLabel>
+        <Box>
+          <InputLabel sx={{display:"flex", justifyContent: "flex-start"}}  htmlFor="email">Email</InputLabel>
           <TextField
             error={emailErrorMessage ? true : false}
             helperText={emailErrorMessage}
@@ -97,8 +98,8 @@ function Login() {
             required
           />
         </Box>
-        <Box className="auth-input-group">
-          <InputLabel htmlFor="password">Password</InputLabel>
+        <Box>
+          <InputLabel sx={{display:"flex", justifyContent: "flex-start"}}  htmlFor="password">Password</InputLabel>
           <TextField
             error={passwordErrorMessage ? true : false}
             helperText={passwordErrorMessage}
@@ -121,7 +122,7 @@ function Login() {
           Login
         </Button>
       </Box>
-      <span className="auth-help-link">Forgot your password?</span>
+      <span style={{marginBottom: "1rem"}} className="auth-help-link">Forgot your password?</span>
       <span className="auth-help-link">
         Dont have an account yet?{" "}
         <Link to="/register" style={{ color: "#434344" }}>

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
-import { Box, Button, InputLabel, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import "../../css/reglogin.css";
 import RegisterSuccessModal from "../../components/RegisterSuccessModal";
 
 function Register() {
@@ -34,7 +36,9 @@ function Register() {
           setEmailErrorMessage("Invalid email");
           break;
         case "auth/weak-password":
-          setPasswordErrorMessage("Weak password. Must be at least 6 characters");
+          setPasswordErrorMessage(
+            "Weak password. Must be at least 6 characters"
+          );
           break;
         default:
           setErrorMessage("Something went wrong");
@@ -77,10 +81,16 @@ function Register() {
         onSubmit={(e) => register(e)}
         sx={{
           width: { xs: "90%", sm: "50%", md: "40%", lg: "30%", xl: "20%" },
+          margin: "2rem 0"
         }}
       >
-        <Box className="auth-input-group">
-          <InputLabel htmlFor="email">E-mail</InputLabel>
+        <Box>
+          <InputLabel
+            sx={{ display: "flex", justifyContent: "flex-start" }}
+            htmlFor="email"
+          >
+            E-mail
+          </InputLabel>
           <TextField
             error={emailErrorMessage !== "" ? true : false}
             helperText={emailErrorMessage}
@@ -96,8 +106,13 @@ function Register() {
             required
           />
         </Box>
-        <Box className="auth-input-group">
-          <InputLabel htmlFor="password">Password</InputLabel>
+        <Box>
+          <InputLabel
+            sx={{ display: "flex", justifyContent: "flex-start" }}
+            htmlFor="password"
+          >
+            Password
+          </InputLabel>
           <TextField
             error={passwordErrorMessage !== "" ? true : false}
             helperText={passwordErrorMessage}
