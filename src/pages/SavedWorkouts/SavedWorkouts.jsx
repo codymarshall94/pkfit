@@ -10,11 +10,14 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
+import DeleteExerciseModal from "../../components/DeleteExerciseModal";
 
 function SavedWorkouts() {
   const [workouts, setWorkouts] = useState();
+  const [selectedDelete, setSelectedDelete] = useState();
   const { user } = useSelector((state) => state.user);
   const userWorkouts = query(colRef, where("user", "==", user.uid));
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,10 +32,14 @@ function SavedWorkouts() {
     return unsubscribe;
   }, []);
 
-  //delete workout
-  const handleDelete = (id) => {
-    deleteDoc(doc(colRef, id));
-    console.log("deleted");
+  const handleDelete = () => {
+    deleteDoc(doc(colRef, selectedDelete));
+    setOpen(false);
+  };
+
+  const handleDeleteClick = (id) => {
+    setSelectedDelete(id);
+    setOpen(true);
   };
 
   const handleSelectedWorkout = (selected) => {
@@ -104,13 +111,19 @@ function SavedWorkouts() {
                 right: "1rem",
                 top: "50%",
                 transform: "translateY(-50%)",
+                backgroundColor: "red",
               }}
-              onClick={() => handleDelete(workout.id)}
+              onClick={() => handleDeleteClick(workout.id)}
             >
               <ClearIcon />
             </Button>
           </Box>
         ))}
+        <DeleteExerciseModal
+          open={open}
+          setOpen={setOpen}
+          handleDelete={handleDelete}
+        />
       </Box>
     );
   }
