@@ -187,7 +187,7 @@ function Navbar() {
             </>
           ) : (
             <Tooltip title="Open settings">
-              <Avatar sx={{backgroundColor: "primary.main"}} alt={user} onClick={handleOpenUserMenu}>
+              <Avatar sx={{backgroundColor: "primary.main", cursor: "pointer"}} alt={user} onClick={handleOpenUserMenu}>
                 <Person2Icon />
               </Avatar>
             </Tooltip>
