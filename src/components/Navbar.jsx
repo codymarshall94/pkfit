@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import Person2Icon from "@mui/icons-material/Person2";
 import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
@@ -186,9 +187,9 @@ function Navbar() {
             </>
           ) : (
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={user} />
-              </IconButton>
+              <Avatar sx={{backgroundColor: "primary.main"}} alt={user} onClick={handleOpenUserMenu}>
+                <Person2Icon />
+              </Avatar>
             </Tooltip>
           )}
 
