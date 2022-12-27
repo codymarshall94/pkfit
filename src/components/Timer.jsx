@@ -13,7 +13,6 @@ function Timer() {
   const [time, setTime] = useState(30);
   const [length, setLength] = useState(30);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     if (time <= 0) {
@@ -25,10 +24,6 @@ function Timer() {
 
   const startTimer = () => {
     clearInterval(interval);
-    if (isPaused) {
-      setIsPaused(false);
-      setTime(time);
-    }
     setIsPlaying(true);
     setTime(length);
     interval = setInterval(() => {
@@ -103,7 +98,6 @@ function Timer() {
         <Button
           variant="contained"
           className="btn-circle"
-          onClick={() => startTimer()}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -117,7 +111,7 @@ function Timer() {
             userSelect: "none",
           }}
         >
-          <PlayArrowIcon />
+          <PlayArrowIcon onClick={() => startTimer()} />
         </Button>
         <Button
           variant="contained"
