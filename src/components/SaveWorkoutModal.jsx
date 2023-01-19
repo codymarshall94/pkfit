@@ -9,14 +9,7 @@ import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 
-function SaveWorkoutModal({
-  isOpen,
-  setIsOpen,
-  workout,
-  workoutType,
-  exerciseTime,
-  goal,
-}) {
+function SaveWorkoutModal({ openSaveModal, setOpenSaveModal, workout }) {
   const [workoutName, setWorkoutName] = useState("");
   const [workoutSaved, setWorkoutSaved] = useState(false);
   const { user } = useSelector((state) => state.user);
@@ -49,14 +42,13 @@ function SaveWorkoutModal({
     handleClose();
   };
 
-
   const handleClose = () => {
-    setIsOpen(false);
+    setOpenSaveModal(false);
     setWorkoutSaved(false);
   };
 
   return (
-    <Modal open={isOpen} onClose={() => handleClose()}>
+    <Modal open={openSaveModal} onClose={() => handleClose()}>
       <Box
         sx={{
           position: "absolute",
@@ -95,18 +87,15 @@ function SaveWorkoutModal({
               >
                 Workout Saved Successfully!
               </Typography>
-              <Box sx={{display: "flex", justifyContent: "center"}}>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button
                   variant="contained"
-                  sx={{marginRight: ".5rem"}}
+                  sx={{ marginRight: ".5rem" }}
                   onClick={() => handleSavedRedirect()}
                 >
                   Saved Workouts
                 </Button>
-                <Button
-                  variant="outlined"
-                  onClick={() => handleClose()}
-                >
+                <Button variant="outlined" onClick={() => handleClose()}>
                   Close
                 </Button>
               </Box>
@@ -128,7 +117,7 @@ function SaveWorkoutModal({
                 sx={{ width: "75%", margin: "auto" }}
                 onChange={(e) => setWorkoutName(e.target.value)}
                 type="text"
-                placeholder={`${exerciseTime}s ${workoutType} for ${goal}`}
+                placeholder="What would you like to name this workout?"
                 inputProps={{ maxLength: 30 }}
                 required
               />
@@ -149,7 +138,7 @@ function SaveWorkoutModal({
                 <Button
                   sx={{ marginX: ".5rem" }}
                   variant="outlined"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setOpenSaveModal(false)}
                 >
                   Cancel
                 </Button>

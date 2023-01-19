@@ -46,8 +46,8 @@ function DescriptionModal() {
               height: {xs: "8rem", lg: "16rem"},
             }}
           >
-            {selectedItem && selectedItem.exer.image !== null ? (
-              <img src={selectedItem.exer.image} alt="" className="modal-image" />
+            {selectedItem && selectedItem.image !== null ? (
+              <img src={selectedItem.image} alt="" className="modal-image" />
             ) : (
               <img
                 src={require("../images/placeholderthumb.png")}
@@ -68,7 +68,7 @@ function DescriptionModal() {
                     fontWeight: "bold",
                   }}
                 >
-                  {selectedItem.exer.name}
+                  {selectedItem.name}
                 </Typography>
                 <Typography
                   id="modal-modal-description"
@@ -79,7 +79,7 @@ function DescriptionModal() {
                   Instructions
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {selectedItem.exer.description}
+                  {selectedItem.description}
                 </Typography>
                 <Box>
                   <Typography
@@ -90,7 +90,7 @@ function DescriptionModal() {
                   >
                     Great For
                   </Typography>
-                  {selectedItem.exer.usedFor.map((use) => (
+                  {selectedItem.usedFor.map((use) => (
                     <Chip label={use} key={use} />
                   ))}
                 </Box>

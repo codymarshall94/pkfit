@@ -3,130 +3,193 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
 import { EXERCISES } from "../../exercises";
+import { WARMUPS } from "../../warmups";
+import { COOLDOWNS } from "../../cooldowns";
+import { CORE } from "../../core";
 import WorkoutSelector from "../../components/WorkoutSelector";
 import GenerateBtn from "../../components/GenerateBtn";
 import Workout from "../../components/Workout";
 import DescriptionModal from "../../components/DescriptionModal";
 import SaveWorkoutModal from "../../components/SaveWorkoutModal";
-import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const filteredUpper = EXERCISES.filter((exer) =>
-  exer.exerciseType.includes("Upperbody")
-);
-const filteredLower = EXERCISES.filter((exer) =>
-  exer.exerciseType.includes("Lowerbody")
-);
+const filteredExercises = (type) =>
+  EXERCISES.filter((exer) => exer.exerciseType.includes(type));
 
 const powerReps = [1, 3, 5];
 const strengthReps = [5, 6, 8, 10];
 const conditioningReps = [8, 10, 12, 15];
+const warmupReps = [10, 20, "30s", "60s"];
+const cooldownReps = ["30s", "60s", "120s"];
+const coreReps = ["30s", "60s"];
+const repsLookup = {
+  Power: powerReps,
+  Strength: strengthReps,
+  Conditioning: conditioningReps,
+};
+const setsLookup = { 5: 2, 10: 3, 20: 5 };
+const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
+
+const createWorkoutExercise = (exer, sets, reps) => {
+  const randomReps = reps[Math.floor(Math.random() * reps.length)];
+  return {
+    id: exer.id,
+    name: exer.name,
+    reps: exer.isStatic ? "30-60s" : randomReps,
+    sets: sets,
+    description: exer.description,
+    image: exer.image,
+    usedFor: exer.usedFor,
+  };
+};
 
 function Generator() {
   const user = useSelector((state) => state.user.user);
-  const [workoutType, setWorkoutType] = useState(null);
-  const [exerciseTime, setExerciseTime] = useState(null);
-  const [goal, setGoal] = useState(null);
-  const [reps, setReps] = useState(null);
-  const [exerciseAmount, setExerciseAmount] = useState(null);
+  const [openDescriptionModal, setOpenDescriptionModal] = useState(false);
   const [workout, setWorkout] = useState(null);
-  const [open, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [openSaveModal, isOpenSaveModal] = useState(false);
+  const [openSaveModal, setOpenSaveModal] = useState(false);
+  const [additional, setAdditional] = useState([]);
+  const includeWarmup = additional.includes("Warmup");
+  const includeCooldown = additional.includes("Cooldown");
+  const includeCore = additional.includes("Core");
+
+  const handleAdditionalClick = (option) => {
+    if (additional.includes(option)) {
+      setAdditional(additional.filter((item) => item !== option));
+    } else {
+      setAdditional([...additional, option]);
+    }
+  };
+
+  const [workoutInfo, setWorkoutInfo] = useState({
+    workoutType: null,
+    exerciseTime: null,
+    goal: null,
+    exerciseAmount: null,
+    reps: null,
+    sets: null,
+  });
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 150);
   }, [workout]);
 
-  const generateWorkout = () => {
-    let workoutArary = [];
-    let newArr = [];
-    let sets;
-    setIsVisible(false);
-
-    switch (exerciseAmount) {
-      case 2:
-        sets = 2;
-        break;
-      case 3:
-        sets = 3;
-        break;
-      case 5:
-        sets = 4;
-        break;
-      default:
-        break;
+  useEffect(() => {
+    const { workoutType, exerciseTime, goal } = workoutInfo;
+    if (workoutType && exerciseTime && goal) {
+      setWorkoutInfo({
+        ...workoutInfo,
+        exerciseAmount: setsLookup[exerciseTime],
+        reps: repsLookup[goal],
+        sets: setsLookup[exerciseTime],
+      });
     }
+  }, [workoutInfo.workoutType, workoutInfo.exerciseTime, workoutInfo.goal]);
 
-    switch (workoutType) {
-      case "Full":
-        let shuffledFull = EXERCISES.sort(() => Math.random() - 0.5);
-        newArr = shuffledFull.slice(0, exerciseAmount);
-        break;
-      case "Upper":
-        let shuffledUpper = filteredUpper.sort(() => Math.random() - 0.5);
-        newArr = shuffledUpper.slice(0, exerciseAmount);
-        break;
-      case "Lower":
-        let shuffledLower = filteredLower.sort(() => Math.random() - 0.5);
-        newArr = shuffledLower.slice(0, exerciseAmount);
-        break;
-      default:
-        break;
-    }
-
-    newArr.forEach((exer) => {
-      let exercise = {
-        id: exer.id,
-        name: exer.name,
-        reps: exer.isStatic
-          ? "30-60s"
-          : reps[Math.floor(Math.random() * reps.length)],
-        sets: sets,
-        description: exer.description,
-        image: exer.image,
-        usedFor: exer.usedFor,
-      };
-      workoutArary.push(exercise);
-    });
-    setWorkout(workoutArary);
+  const handleTypeClick = (workoutType) => {
+    setWorkoutInfo({ ...workoutInfo, workoutType });
   };
 
-  const handleTypeClick = (type) => {
-    setWorkoutType(type);
-  };
-
-  const handleTimeClick = (amount) => {
-    setExerciseTime(amount);
-    switch (amount) {
-      case 5:
-        setExerciseAmount(2);
-        break;
-      case 10:
-        setExerciseAmount(3);
-        break;
-      case 20:
-        setExerciseAmount(5);
-        break;
-      default:
-        break;
-    }
+  const handleTimeClick = (exerciseTime) => {
+    setWorkoutInfo({ ...workoutInfo, exerciseTime });
   };
 
   const handleGoalClick = (goal) => {
-    setGoal(goal);
-    switch (goal) {
-      case "Power":
-        setReps(powerReps);
+    setWorkoutInfo({ ...workoutInfo, goal });
+  };
+
+  const generateWorkout = () => {
+    setIsVisible(false);
+    let workoutArary = [];
+    let newArr = [];
+    let { workoutType, exerciseAmount } = workoutInfo;
+
+    switch (workoutType) {
+      case "Full":
+        newArr = shuffleArray(EXERCISES).slice(0, exerciseAmount);
         break;
-      case "Strength":
-        setReps(strengthReps);
+      case "Upper":
+        newArr = shuffleArray(filteredExercises("Upperbody")).slice(
+          0,
+          exerciseAmount
+        );
         break;
-      case "Conditioning":
-        setReps(conditioningReps);
+      case "Lower":
+        newArr = shuffleArray(filteredExercises("Lowerbody")).slice(
+          0,
+          exerciseAmount
+        );
         break;
       default:
+        newArr = [];
         break;
+    }
+    if (newArr.length > 0) {
+      workoutArary = newArr.map((exer) =>
+        createWorkoutExercise(
+          exer,
+          workoutInfo.sets,
+          repsLookup[workoutInfo.goal]
+        )
+      );
+      if (includeWarmup) {
+        const warmupCategory =
+          workoutType === "Full"
+            ? "Full"
+            : workoutType === "Upper"
+            ? "Upperbody"
+            : "Lowerbody";
+        const filteredWarmups = WARMUPS.filter((warmup) =>
+          warmup.category.includes(warmupCategory)
+        );
+        const randomWarmup = shuffleArray(filteredWarmups)[0];
+        workoutArary.unshift({
+          id: randomWarmup.id,
+          name: randomWarmup.name,
+          reps: warmupReps[Math.floor(Math.random() * warmupReps.length)],
+          sets: 1,
+          description: randomWarmup.description,
+          image: randomWarmup.image,
+          usedFor: randomWarmup.usedFor,
+        });
+      }
+      if (includeCore) {
+        const randomCore = shuffleArray(CORE)[0];
+        workoutArary.push({
+          id: randomCore.id,
+          name: randomCore.name,
+          reps: coreReps[Math.floor(Math.random() * coreReps.length)],
+          sets: 1,
+          description: randomCore.description,
+          image: randomCore.image,
+          usedFor: randomCore.usedFor,
+        });
+      }
+      if (includeCooldown) {
+        const cooldownCategory =
+          workoutType === "Full"
+            ? "Full"
+            : workoutType === "Upper"
+            ? "Upperbody"
+            : "Lowerbody";
+        const filteredCooldowns = COOLDOWNS.filter((cooldown) =>
+          cooldown.category.includes(cooldownCategory)
+        );
+        const randomCooldown = shuffleArray(filteredCooldowns)[0];
+        workoutArary.push({
+          id: randomCooldown.id,
+          name: randomCooldown.name,
+          reps: cooldownReps[Math.floor(Math.random() * cooldownReps.length)],
+          sets: 1,
+          description: randomCooldown.description,
+          image: randomCooldown.image,
+          usedFor: randomCooldown.usedFor,
+        });
+      }
+
+      setWorkout(workoutArary);
     }
   };
 
@@ -145,52 +208,60 @@ function Generator() {
           handleTypeClick={handleTypeClick}
           handleTimeClick={handleTimeClick}
           handleGoalClick={handleGoalClick}
-          workoutType={workoutType}
-          exerciseTime={exerciseTime}
-          goal={goal}
+          workoutType={workoutInfo.workoutType}
+          exerciseTime={workoutInfo.exerciseTime}
+          goal={workoutInfo.goal}
+          additional={additional}
+          handleAdditionalClick={handleAdditionalClick}
         />
         <GenerateBtn
           generateWorkout={generateWorkout}
-          workoutType={workoutType}
-          exerciseAmount={exerciseTime}
-          goal={goal}
+          workoutInfo={workoutInfo}
         />
       </Box>
-      <Box
-        sx={{
-          width: { xs: "100%", md: "70%", lg: "50%", xl: "30%" },
-        }}
-      >
-        <Workout
-          workout={workout}
-          isVisible={isVisible}
-          setIsVisible={setIsVisible}
-        />
-        {user && workout && (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => isOpenSaveModal(true)}
-          >
-            Save Workout
-          </Button>
-        )}
-        {!user && workout && (
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Typography variant="h6">Log in to save this workout</Typography>
-          </Link>
-        )}
-      </Box>
-
-      <DescriptionModal open={open} setOpen={setOpen} />
-      <SaveWorkoutModal
-        isOpen={openSaveModal}
-        setIsOpen={isOpenSaveModal}
+      <Workout
         workout={workout}
-        workoutType={workoutType}
-        exerciseTime={exerciseTime}
-        goal={goal}
+        openSaveModal={openSaveModal}
+        isVisible={isVisible}
       />
+      <DescriptionModal
+        open={openDescriptionModal}
+        setOpen={setOpenDescriptionModal}
+        workout={workout}
+      />
+      <SaveWorkoutModal
+        openSaveModal={openSaveModal}
+        setOpenSaveModal={setOpenSaveModal}
+        workout={workout}
+        user={user}
+      />
+      {workout ? (
+        <Box sx={{ marginTop: "4rem" }}>
+          {user ? (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setOpenSaveModal(true)}
+            >
+              Save Workout
+            </Button>
+          ) : (
+            <>
+              <Link to="/login">
+                <Typography variant="subtitle1">
+                  Login to save your workout
+                </Typography>
+              </Link>
+            </>
+          )}
+        </Box>
+      ) : (
+        <Box sx={{ marginTop: "4rem" }}>
+          <Typography variant="subtitle1">
+            Choose your workout type, time, and goal to generate a workout
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 }

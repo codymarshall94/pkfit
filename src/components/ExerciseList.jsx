@@ -35,7 +35,7 @@ function ExerciseList() {
             sm={10}
             lg={8}
             className="workout-item"
-            onClick={() => dispatch(handleSelectedItem({ exer }))}
+            onClick={() => dispatch(handleSelectedItem(exer))}
             sx={{
               height: "3rem",
               margin: ".25rem 0",

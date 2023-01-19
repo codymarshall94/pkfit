@@ -24,9 +24,6 @@ function Workout({ workout, isVisible }) {
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-start",
-          width: "100%",
-          height: "auto",
-          maxHeight: "20rem",
           overflowY: "auto",
           overflowX: "hidden",
         }}
@@ -35,74 +32,74 @@ function Workout({ workout, isVisible }) {
           <Fragment key={exer.id}>
             {transition((style, item) =>
               item ? (
-                <AnimatedGridItem
-                  item
-                  xs={11}
-                  sm={10}
-                  lg={8}
-                  className="workout-item"
-                  style={style}
-                  onClick={() => dispatch(handleSelectedItem({ exer }))}
-                  sx={{
-                    height: "3rem",
-                    margin: ".25rem 0",
-                    backgroundColor: "listBackground.main",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Grid
+                  <AnimatedGridItem
                     item
-                    xs={3}
-                    lg={2}
-                    className="workout-image-container"
+                    xs={11}
+                    sm={10}
+                    lg={8}
+                    className="workout-item"
+                    style={style}
+                    onClick={() => dispatch(handleSelectedItem(exer))}
                     sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "100%",
+                      height: "3rem",
+                      margin: ".25rem 0",
+                      backgroundColor: "listBackground.main",
+                      overflow: "hidden",
                     }}
                   >
-                    {exer.image !== null ? (
-                      <img
-                        src={exer.image}
-                        className="workout-image"
-                        alt="a person doing the exercise"
-                      />
-                    ) : (
-                      <img
-                        src={require("../images/placeholderthumb.png")}
-                        className="workout-image"
-                        alt="placeholder"
-                      />
-                    )}
-                  </Grid>
-                  <Grid
-                    item
-                    xs={8}
-                    lg={9}
-                    sx={{
-                      display: "flex",
-                      width: "1rem",
-                      justifyContent: "flex-start",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      paddingLeft: ".25rem",
-                    }}
-                  >
-                    <span className="workout-name-text">{exer.name}</span>
-                    <span className="workout-reps-text">
-                      {exer.sets} x {exer.reps}
-                    </span>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={1}
-                    lg={1}
-                    sx={{ display: "flex", alignItems: "center" }}
-                  >
-                    <ArrowCircleRightOutlinedIcon />
-                  </Grid>
-                </AnimatedGridItem>
+                    <Grid
+                      item
+                      xs={3}
+                      lg={2}
+                      className="workout-image-container"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
+                    >
+                      {exer.image !== null ? (
+                        <img
+                          src={exer.image}
+                          className="workout-image"
+                          alt="a person doing the exercise"
+                        />
+                      ) : (
+                        <img
+                          src={require("../images/placeholderthumb.png")}
+                          className="workout-image"
+                          alt="placeholder"
+                        />
+                      )}
+                    </Grid>
+                    <Grid
+                      item
+                      xs={8}
+                      lg={9}
+                      sx={{
+                        display: "flex",
+                        width: "1rem",
+                        justifyContent: "flex-start",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        paddingLeft: ".25rem",
+                      }}
+                    >
+                      <span className="workout-name-text">{exer.name}</span>
+                      <span className="workout-reps-text">
+                        {exer.sets} x {exer.reps}
+                      </span>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={1}
+                      lg={1}
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
+                      <ArrowCircleRightOutlinedIcon />
+                    </Grid>
+                  </AnimatedGridItem>
               ) : null
             )}
           </Fragment>

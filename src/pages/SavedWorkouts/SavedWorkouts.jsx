@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { setSelectedWorkout } from "../../redux/reducers/selectedWorkoutSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore";
 import { colRef } from "../../firebase-config";
@@ -11,15 +11,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import DeleteExerciseModal from "../../components/DeleteExerciseModal";
+import { getAuth } from "firebase/auth";
 
 function SavedWorkouts() {
-  const [workouts, setWorkouts] = useState();
-  const [selectedDelete, setSelectedDelete] = useState();
-  const { user } = useSelector((state) => state.user);
-  const userWorkouts = query(colRef, where("user", "==", user.uid));
-  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [workouts, setWorkouts] = useState();
+  const [selectedDelete, setSelectedDelete] = useState();
+  const user = getAuth().currentUser;
+
+  const userWorkouts = query(colRef, where("user", "==", user.uid));
 
   useEffect(() => {
     const unsubscribe = onSnapshot(userWorkouts, (querySnapshot) => {

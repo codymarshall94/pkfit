@@ -4,6 +4,7 @@ import React from "react";
 const typeOptions = ["Full", "Upper", "Lower"];
 const timeOptions = [5, 10, 20];
 const goalOptions = ["Power", "Strength", "Conditioning"];
+const additonalOptions = ["Warmup", "Core", "Cooldown"];
 
 function WorkoutSelector({
   handleTypeClick,
@@ -12,7 +13,10 @@ function WorkoutSelector({
   workoutType,
   exerciseTime,
   goal,
+  additional,
+  handleAdditionalClick,
 }) {
+
   return (
     <Box>
       <Box>
@@ -62,6 +66,23 @@ function WorkoutSelector({
               onClick={() => handleGoalClick(goalType)}
             >
               {goalType}
+            </Button>
+          ))}
+        </ButtonGroup>
+      </Box>
+      <Box>
+        <Typography variant="h3" sx={{ margin: ".5rem 0" }}>
+          Add Ons
+        </Typography>
+        <ButtonGroup>
+          {additonalOptions.map((option) => (
+            <Button
+              key={option}
+              color="secondary"
+              variant={additional.includes(option) ? "contained" : "outlined"}
+              onClick={() => handleAdditionalClick(option)}
+            >
+              {option}
             </Button>
           ))}
         </ButtonGroup>
