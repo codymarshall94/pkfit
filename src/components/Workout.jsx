@@ -36,7 +36,8 @@ function Workout({ workout, isVisible }) {
                     item
                     xs={11}
                     sm={10}
-                    lg={8}
+                    md={7}
+                    lg={7}
                     className="workout-item"
                     style={style}
                     onClick={() => dispatch(handleSelectedItem(exer))}

@@ -28,7 +28,7 @@ const repsLookup = {
   Strength: strengthReps,
   Conditioning: conditioningReps,
 };
-const setsLookup = { 5: 2, 10: 3, 20: 5 };
+const setsLookup = { 10: 2, 20: 3, 30: 4, 60: 5};
 const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const createWorkoutExercise = (exer, sets, reps) => {

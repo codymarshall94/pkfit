@@ -443,7 +443,7 @@ export const EXERCISES = [
     isPower: false,
     isStrength: true,
     isConditioning: true,
-    isStatic: false,
+    isStatic: true,
     isWarmup: false,
     isCore: false,
   },

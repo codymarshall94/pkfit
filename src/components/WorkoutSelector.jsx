@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Box, Typography } from "@mui/material";
 import React from "react";
 
 const typeOptions = ["Full", "Upper", "Lower"];
-const timeOptions = [5, 10, 20];
+const timeOptions = [10, 20, 30, 60];
 const goalOptions = ["Power", "Strength", "Conditioning"];
 const additonalOptions = ["Warmup", "Core", "Cooldown"];
 
