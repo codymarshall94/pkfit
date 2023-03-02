@@ -15,9 +15,10 @@ import Person2Icon from "@mui/icons-material/Person2";
 import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
-import "../css/header.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import { tokens } from "../theme";
 
 const pages = [
   { name: "Home", link: "/" },
@@ -32,6 +33,8 @@ function Navbar() {
   const [activePage, setActivePage] = useState("");
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -77,8 +80,16 @@ function Navbar() {
     <AppBar
       role="navigation"
       position="fixed"
-      sx={{ minHeight: "3rem" }}
-      color="secondary"
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "3rem",
+        maxHeight: "3rem",
+        backgroundColor: colors.backgroundWhite[500],
+        boxShadow: "none",
+        padding: "2rem 0",
+      }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -92,13 +103,13 @@ function Navbar() {
           >
             <Link
               to="/"
-              className="nav-link"
+              style={{ textDecoration: "none" }}
               onClick={() => setActivePage("Home")}
             >
               <img
-                src={require("../images/logo/logo-no-background-white.png")}
+                src={require("../images/logo/logo-no-background-color.png")}
                 alt="logo"
-                className="nav-bar-logo"
+                style={{ width: "6rem" }}
               />
             </Link>
           </Box>
@@ -112,13 +123,13 @@ function Navbar() {
             >
               <Link
                 to="/"
-                className="nav-link"
+                style={{ textDecoration: "none" }}
                 onClick={() => setActivePage("Home")}
               >
                 <img
-                  src={require("../images/logo/logo-no-background-white.png")}
+                  src={require("../images/logo/logo-no-background-color.png")}
                   alt="logo"
-                  className="nav-bar-logo"
+                  style={{ width: "6rem" }}
                 />
               </Link>
             </Box>
@@ -133,6 +144,7 @@ function Navbar() {
                   className={
                     activePage === page.name ? "active-link" : "nav-link"
                   }
+                  style={{ textDecoration: "none", color: colors.primary[300], fontWeight: "600"}}
                 >
                   {page.name}
                 </Link>
@@ -187,7 +199,11 @@ function Navbar() {
             </>
           ) : (
             <Tooltip title="Open settings">
-              <Avatar sx={{backgroundColor: "primary.main", cursor: "pointer"}} alt={user.email} onClick={handleOpenUserMenu}>
+              <Avatar
+                sx={{ backgroundColor: "primary.main", cursor: "pointer" }}
+                alt={user.email}
+                onClick={handleOpenUserMenu}
+              >
                 <Person2Icon />
               </Avatar>
             </Tooltip>
@@ -200,7 +216,8 @@ function Navbar() {
             aria-controls="menu-appbar"
             aria-haspopup="true"
             onClick={handleOpenNavMenu}
-            color="inherit"
+            color="primary"
+            backgroundColor="#000"
           >
             <MenuIcon />
           </IconButton>
@@ -226,7 +243,7 @@ function Navbar() {
               <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                 <Link
                   to={page.link}
-                  style={{ textDecoration: "none", color: "#434344" }}
+                  style={{ textDecoration: "none", color: colors.primary[100], fontWeight: "600" }}
                 >
                   {page.name}
                 </Link>
