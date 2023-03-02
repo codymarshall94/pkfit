@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import Home from "./pages/Home/Home";
 import Header from "./components/Navbar";
 import Generator from "./pages/Generator/Generator";
@@ -14,9 +13,12 @@ import { auth } from "./firebase-config";
 import { setUser } from "./redux/reducers/userSlice";
 import SavedWorkouts from "./pages/SavedWorkouts/SavedWorkouts";
 import SavedWorkout from "./pages/SavedWorkout/SavedWorkout";
-import PlanDetails from "./components/PlanDetails";
+import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+
 
 function App() {
+  const [theme, colorMode] = useMode();
   const dispatch = useDispatch();
 
   onAuthStateChanged(auth, (currentUser) => {
@@ -28,21 +30,27 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/generator" element={<Generator />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/skills/:id" element={<Skill />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/saved-workouts" element={<SavedWorkouts />} />
-        <Route path="/saved-workouts/:id" element={<SavedWorkout />} />
-        <Route path="/plans" element={<PlanDetails />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="App">
+          <Header />
+          <div className="content" style={{ marginTop: "3rem" }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/generator" element={<Generator />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/skills/:id" element={<Skill />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/saved-workouts" element={<SavedWorkouts />} />
+            <Route path="/saved-workouts/:id" element={<SavedWorkout />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+          </div>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
