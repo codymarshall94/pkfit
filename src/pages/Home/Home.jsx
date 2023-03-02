@@ -1,118 +1,158 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import "../../App.css";
-import Typography from "@mui/material/Typography";
-import { useEffect } from "react";
+import React from "react";
+import { Box, Button, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { tokens } from "../../theme";
 
-const actionWords = ["Jump", "Vault", "Run", "Swing", "Climb", "Balance"];
+const cards = [
+  {
+    title: "Ready Plans",
+    description: "Don't have time to create a workout? We've got you covered.",
+    backgroundColor: "#F3B634",
+  },
+  {
+    title: "Generate Fast",
+    description: "With our generator, you can create a workout in seconds.",
+    backgroundColor: "#C6ABFF",
+  },
+  {
+    title: "Save Workouts",
+    description: "Once you've generated a workout, you can save it for later.",
+    backgroundColor: "#F7A082",
+  },
+];
 
 function Home() {
-  const [actionWord, setActionWord] = useState("Jump");
-  const [animationCurrent, setAnimationCurrent] = useState("home-word-in");
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (actionWords.indexOf(actionWord) === actionWords.length - 1) {
-        setActionWord(actionWords[0]);
-      } else {
-        setActionWord(actionWords[actionWords.indexOf(actionWord) + 1]);
-      }
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [actionWord]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (animationCurrent === "home-word-in") {
-        setAnimationCurrent("home-word-out");
-      } else {
-        setAnimationCurrent("home-word-in");
-      }
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [animationCurrent]);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   return (
     <Box
-      className="home-container"
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        justifyContent: "center",
+        marginTop: "3rem",
       }}
     >
+      {/** Hero Section================================== */}
       <Box
+        component="section"
         sx={{
+          minHeight: "100vh",
           display: "flex",
           justifyContent: "center",
+          alignItems: "center",
           flexDirection: "column",
-          padding: "1rem",
+          backgroundColor: colors.backgroundWhite[500],
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            margin: "auto",
-            width: { xs: "80%", sm: "60%", md: "40%" },
-          }}
-        >
-          <img
-            src={require("../../images/logo/logo-no-background.png")}
-            alt="logo"
-            className="home-logo"
-            height={100}
-            width={100}
-          />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            margin: "auto",
-            flexDirection: { xs: "column", sm: "row" },
-          }}
-        >
-          <Typography variant="h2">Generate workouts to</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            margin: "auto",
-            flexDirection: { xs: "column", sm: "row" },
-          }}
-        >
+        <Box>
           <Typography
-            variant="h2"
-            className={animationCurrent}
-            sx={{ marginLeft: ".5rem", color: "primary.main" }}
+            variant="h1"
+            sx={{
+              color: colors.primary[500],
+              fontWeight: "bold",
+              textAlign: "center",
+              marginBottom: "1rem",
+              fontSize: { xs: "2rem", sm: "3rem", lg: "3rem" },
+            }}
           >
-            {actionWord}
+            Build A Body That Moves
+          </Typography>
+          <Typography
+            variant="h4"
+            sx={{
+              color: colors.primary[400],
+              textAlign: "center", //wrap text
+              whiteSpace: "normal",
+              fontSize: { sm: "1rem", md: "1.25rem", lg: "1.5rem" },
+              padding: "0 1rem",
+            }}
+          >
+            Whether you're a beginner or a pro, we have the right workout for
+            you.
           </Typography>
         </Box>
-      </Box>
-      <Box className="home-image-container">
-        <img
-          className="home-image"
-          src={require("../../images/homePageImage.jpg")}
-          alt=""
-          height={400}
-          width={400}
-        />
-      </Box>
-      <Button color="primary" variant="contained">
-        <Link
-          to="/generator"
-          style={{ textDecoration: "none", color: "white" }}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: { xs: "100%", sm: "60%", md: "50%", lg: "40%" },
+          }}
+        >
+          <Box
+            component="img"
+            src={require("../../images/homepage.png")}
+            alt="homepage"
+            sx={{
+              width: "100%",
+            }}
+          />
+        </Box>
+        <Button
+          variant="contained"
+          sx={{
+            marginTop: "2rem",
+            width: "fit-content",
+            backgroundColor: "#F7A082",
+            fontWeight: "bold",
+          }}
         >
           Generate Now
-        </Link>
-      </Button>
+        </Button>
+      </Box>
+      {/** Custom Plans Section================================== */}
+      <Box
+        component="section"
+        sx={{
+          backgroundColor: colors.backgroundWhite[100],
+          minHeight: "25vh",
+          width: "100%",
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row", md: "row", lg: "row" },
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "2rem 0",
+        }}
+      >
+        {cards.map((card) => (
+          <Box
+            sx={{
+              backgroundColor: card.backgroundColor,
+              // width with different screen sizes
+              width: {
+                xs: "calc(100% - 1rem)",
+                md: "calc(100% / 3 - 2rem)",
+                lg: "20rem",
+              },
+              minHeight: "15rem",
+              borderRadius: "1rem",
+              padding: "2rem",
+              margin: { xs: "0.5rem", md: "0 .5rem" },
+            }}
+          >
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: "bold",
+                marginBottom: "1rem",
+              }}
+            >
+              {card.title}
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "600",
+              }}
+            >
+              {card.description}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }
