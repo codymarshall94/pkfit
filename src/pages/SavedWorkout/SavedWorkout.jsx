@@ -5,7 +5,6 @@ import Workout from "../../components/Workout";
 import { useSelector } from "react-redux";
 import DescriptionModal from "../../components/DescriptionModal";
 import Typography from "@mui/material/Typography";
-import BackButton from "../../components/BackButton";
 import TimerModal from "../../components/TimerModal";
 import TimerIcon from '@mui/icons-material/Timer';
 
@@ -24,7 +23,6 @@ function SavedWorkout() {
         height: "100vh",
       }}
     >
-      <BackButton page="saved-workouts"/>
       <Typography variant="h1" sx={{margin: {xs: "1rem", sm: "2rem 0"}}}>{workout.name}</Typography>
       <Box sx={{
         width: {xs: "100%", md: "50%"},
