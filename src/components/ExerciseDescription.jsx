@@ -1,0 +1,85 @@
+import React from "react";
+import { Box, Typography, Chip } from "@mui/material";
+
+const ChipItem = ({ item }) => {
+  return (
+    <Chip
+      label={item}
+      key={item}
+      sx={{
+        margin: ".25rem",
+        padding: ".25rem",
+        backgroundColor: "orange",
+        color: "black",
+      }}
+    />
+  );
+};
+
+const ExerciseDescription = ({ exercise }) => {
+  if (!exercise) {
+    return <div></div>;
+  }
+
+  return (
+    <Box
+      sx={{
+        color: "black",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "1rem",
+          height: { xs: "8rem", lg: "16rem" },
+        }}
+      >
+        {exercise && exercise.image !== null ? (
+          <img src={exercise.image} alt=""/>
+        ) : (
+          <img
+            src={require("../images/placeholderthumb.png")}
+            alt=""
+          />
+        )}
+      </Box>
+      <Box>
+        <Typography
+          variant="2"
+          component="h2"
+          sx={{
+            display: "flex",
+            fontWeight: "bold",
+          }}
+        >
+          {exercise.name}
+        </Typography>
+        <Typography
+          variant="h6"
+          component="h2"
+          sx={{ mt: 2, fontWeight: "bold" }}
+        >
+          Instructions
+        </Typography>
+        <Typography sx={{ mt: 2 }}>
+          {exercise.description}
+        </Typography>
+        <Box>
+          <Typography
+            variant="h6"
+            component="h2"
+            sx={{ mt: 2, fontWeight: "bold" }}
+          >
+            Great For
+          </Typography>
+          {exercise.usedFor.map((use) => (
+            <ChipItem item={use} key={use} />
+          ))}
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default ExerciseDescription;
