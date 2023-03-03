@@ -1,22 +1,18 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import Chip from "@mui/material/Chip";
-import Button from "@mui/material/Button";
+import { Box, Typography, Modal, Chip, Button, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { openModal } from "../redux/reducers/modalSlice";
+import { tokens } from "../theme";
 
 function DescriptionModal() {
-  const { isOpen } = useSelector((state) => state.modal);
   const { selectedItem } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   return (
       <Modal
         open={isOpen}
-        onClose={() => dispatch(openModal())}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -36,6 +32,7 @@ function DescriptionModal() {
             borderRadius: ".25rem",
             boxShadow: 24,
             padding: "1rem",
+            color: colors.primary[900],
           }}
         >
           <Box
