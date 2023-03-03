@@ -86,7 +86,7 @@ export const EXERCISES = [
     name: "Wall sit",
     description:
       "Place back against wall and lower down untill knees form a 90degree angle",
-    image: require("./images/wallsit.jpg"),
+    image: require("../images/wallsit.jpg"),
     usedFor: ["Tendon"],
     category: ["Jump"],
     exerciseType: "Lowerbody",
@@ -102,7 +102,7 @@ export const EXERCISES = [
     name: "Lunge",
     description:
       "Step forward and place foot on ground, lowering back knee to floor. Push back up to initial position",
-    image: require("./images/lunge.jpg"),
+    image: require("../images/lunge.jpg"),
     usedFor: ["Mobility", "Stride"],
     category: ["Jump"],
     exerciseType: "Lowerbody",
