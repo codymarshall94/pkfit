@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useSelector } from "react-redux";
-import { EXERCISES } from "../../exercises";
-import { WARMUPS } from "../../warmups";
-import { COOLDOWNS } from "../../cooldowns";
-import { CORE } from "../../core";
+import { EXERCISES } from "../../exercises/exercises";
+import { WARMUPS } from "../../exercises/warmups";
+import { COOLDOWNS } from "../../exercises/cooldowns";
+import { CORE } from "../../exercises/core";
 import WorkoutSelector from "../../components/WorkoutSelector";
 import GenerateBtn from "../../components/GenerateBtn";
-import Workout from "../../components/Workout";
-import DescriptionModal from "../../components/DescriptionModal";
-import SaveWorkoutModal from "../../components/SaveWorkoutModal";
+import Workout from "../../components/WorkoutDisplay";
+import SaveWorkout from "../../components/SaveWorkout";
 import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
+import { tokens } from "../../theme";
+import ExerciseDescription from "../../components/ExerciseDescription";
+import { useAuth } from "../../context/AuthContext";
+import DialogModal from "../../components/DialogModal";
 
 const filteredExercises = (type) =>
   EXERCISES.filter((exer) => exer.exerciseType.includes(type));
@@ -28,7 +31,7 @@ const repsLookup = {
   Strength: strengthReps,
   Conditioning: conditioningReps,
 };
-const setsLookup = { 10: 2, 20: 3, 30: 4, 60: 5};
+const setsLookup = { 10: 2, 20: 3, 30: 4, 60: 5 };
 const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const createWorkoutExercise = (exer, sets, reps) => {
@@ -45,24 +48,14 @@ const createWorkoutExercise = (exer, sets, reps) => {
 };
 
 function Generator() {
-  const user = useSelector((state) => state.user.user);
-  const [openDescriptionModal, setOpenDescriptionModal] = useState(false);
   const [workout, setWorkout] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [openSaveModal, setOpenSaveModal] = useState(false);
   const [additional, setAdditional] = useState([]);
   const includeWarmup = additional.includes("Warmup");
   const includeCooldown = additional.includes("Cooldown");
   const includeCore = additional.includes("Core");
-
-  const handleAdditionalClick = (option) => {
-    if (additional.includes(option)) {
-      setAdditional(additional.filter((item) => item !== option));
-    } else {
-      setAdditional([...additional, option]);
-    }
-  };
-
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [selectedExercise, setSelectedExercise] = useState(null);
   const [workoutInfo, setWorkoutInfo] = useState({
     workoutType: null,
     exerciseTime: null,
@@ -71,22 +64,16 @@ function Generator() {
     reps: null,
     sets: null,
   });
+  const { currentUser } = useAuth();
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => setIsVisible(true), 150);
-  }, [workout]);
-
-  useEffect(() => {
-    const { workoutType, exerciseTime, goal } = workoutInfo;
-    if (workoutType && exerciseTime && goal) {
-      setWorkoutInfo({
-        ...workoutInfo,
-        exerciseAmount: setsLookup[exerciseTime],
-        reps: repsLookup[goal],
-        sets: setsLookup[exerciseTime],
-      });
+  const handleAdditionalClick = (option) => {
+    if (additional.includes(option)) {
+      setAdditional(additional.filter((item) => item !== option));
+    } else {
+      setAdditional([...additional, option]);
     }
-  }, [workoutInfo.workoutType, workoutInfo.exerciseTime, workoutInfo.goal]);
+  };
 
   const handleTypeClick = (workoutType) => {
     setWorkoutInfo({ ...workoutInfo, workoutType });
@@ -100,8 +87,19 @@ function Generator() {
     setWorkoutInfo({ ...workoutInfo, goal });
   };
 
+  useEffect(() => {
+    const { workoutType, exerciseTime, goal } = workoutInfo;
+    if (workoutType && exerciseTime && goal) {
+      setWorkoutInfo({
+        ...workoutInfo,
+        exerciseAmount: setsLookup[exerciseTime],
+        reps: repsLookup[goal],
+        sets: setsLookup[exerciseTime],
+      });
+    }
+  }, [workoutInfo.workoutType, workoutInfo.exerciseTime, workoutInfo.goal]);
+
   const generateWorkout = () => {
-    setIsVisible(false);
     let workoutArary = [];
     let newArr = [];
     let { workoutType, exerciseAmount } = workoutInfo;
@@ -188,7 +186,6 @@ function Generator() {
           usedFor: randomCooldown.usedFor,
         });
       }
-
       setWorkout(workoutArary);
     }
   };
@@ -196,14 +193,35 @@ function Generator() {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        marginTop: "5rem",
+        display: "grid",
+        gridAutoColumns: "1fr",
+        gridTemplateColumns: { xs: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr" },
+        gridTemplateRows: { xs: "1fr 1fr 1fr", md: "1fr 1fr", lg: "1fr" },
+        gap: "1rem",
+        gridTemplateAreas: {
+          xs: '"Selector" "Exercise-List" "Description"',
+          md: '"Selector Exercise-List" "Selector Description"',
+          lg: "'Selector Exercise-List Description'",
+        },
+        height: "50%",
+        padding: "2rem",
       }}
     >
-      <Box sx={{ marginBottom: "4rem" }}>
+      <Box
+        sx={{
+          gridArea: "Selector",
+          margin: "0 auto",
+          backgroundColor: colors.backgroundWhite[100],
+          padding: "2rem",
+          minWidth: "100%",
+          boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+          borderRadius: "1rem",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
         <WorkoutSelector
           handleTypeClick={handleTypeClick}
           handleTimeClick={handleTimeClick}
@@ -218,50 +236,68 @@ function Generator() {
           generateWorkout={generateWorkout}
           workoutInfo={workoutInfo}
         />
+        {workout ? (
+          <Box sx={{ marginTop: "4rem" }}>
+            {currentUser ? (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setOpen(true)}
+              >
+                Save Workout
+              </Button>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Typography variant="subtitle1">
+                    Login to save your workout
+                  </Typography>
+                </Link>
+              </>
+            )}
+          </Box>
+        ) : (
+          <Box sx={{ marginTop: "4rem" }}>
+            <Typography variant="subtitle1">
+              Choose your workout type, time, and goal to generate a workout
+            </Typography>
+          </Box>
+        )}
       </Box>
-      <Workout
-        workout={workout}
-        openSaveModal={openSaveModal}
-        isVisible={isVisible}
+      <Box
+        sx={{
+          gridArea: "Exercise-List",
+          margin: "0 auto",
+          backgroundColor: colors.backgroundWhite[100],
+          padding: "2rem",
+          minWidth: "100%",
+          boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+          borderRadius: "1rem",
+        }}
+      >
+        <Workout
+          workout={workout}
+          setSelectedExercise={setSelectedExercise}
+        />
+      </Box>
+      <Box
+        sx={{
+          gridArea: "Description",
+          margin: "0 auto",
+          backgroundColor: colors.backgroundWhite[100],
+          padding: "2rem",
+          minWidth: "100%",
+          boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+          borderRadius: "1rem",
+        }}
+      >
+        <ExerciseDescription exercise={selectedExercise} />
+      </Box>
+      <DialogModal
+        open={open}
+        setOpen={setOpen}
+        children={<SaveWorkout setOpen={setOpen} workout={workout} />}
       />
-      <DescriptionModal
-        open={openDescriptionModal}
-        setOpen={setOpenDescriptionModal}
-        workout={workout}
-      />
-      <SaveWorkoutModal
-        openSaveModal={openSaveModal}
-        setOpenSaveModal={setOpenSaveModal}
-        workout={workout}
-        user={user}
-      />
-      {workout ? (
-        <Box sx={{ marginTop: "4rem" }}>
-          {user ? (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setOpenSaveModal(true)}
-            >
-              Save Workout
-            </Button>
-          ) : (
-            <>
-              <Link to="/login">
-                <Typography variant="subtitle1">
-                  Login to save your workout
-                </Typography>
-              </Link>
-            </>
-          )}
-        </Box>
-      ) : (
-        <Box sx={{ marginTop: "4rem" }}>
-          <Typography variant="subtitle1">
-            Choose your workout type, time, and goal to generate a workout
-          </Typography>
-        </Box>
-      )}
     </Box>
   );
 }
