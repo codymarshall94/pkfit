@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { tokens } from "../../theme";
+import { Link } from "react-router-dom";
 
 const cards = [
   {
@@ -91,17 +92,30 @@ function Home() {
             }}
           />
         </Box>
-        <Button
-          variant="contained"
-          sx={{
-            marginTop: "2rem",
-            width: "fit-content",
-            backgroundColor: "#F7A082",
+        <Link
+          to="/generator"
+          style={{
+            textDecoration: "none",
+            color: colors.backgroundWhite[100],
+            minWidth: "25%",
+            maxWidth: "100%",
+            lineHeight: "1.5rem",
+            padding: "1rem",
+            borderRadius: "1rem",
+            textAlign: "center",
+            textTransform: "uppercase",
             fontWeight: "bold",
+            fontSize: "1.25rem",
+            userSelect: "none",
+            border: "none",
+            backgroundColor: colors.primaryOrange[500],
+            "&:hover": {
+              backgroundColor: colors.primaryOrange[600],
+            },
           }}
         >
           Generate Now
-        </Button>
+        </Link>
       </Box>
       {/** Custom Plans Section================================== */}
       <Box
@@ -117,8 +131,9 @@ function Home() {
           padding: "2rem 0",
         }}
       >
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <Box
+            key={index}
             sx={{
               backgroundColor: card.backgroundColor,
               // width with different screen sizes
