@@ -144,7 +144,7 @@ export const themeSettings = (mode) => {
               main: colors.primary[500],
             },
             secondary: {
-              main: colors.secondaryYellow[500],
+              main: colors.primaryOrange[500],
             },
             neutral: {
               dark: colors.grey[700],
