@@ -1,10 +1,52 @@
+import React, { useState, useEffect } from "react";
+import { useTheme } from "@mui/material/styles";
 import { Button, ButtonGroup, Box, Typography } from "@mui/material";
-import React from "react";
+import { tokens } from "../theme";
 
 const typeOptions = ["Full", "Upper", "Lower"];
 const timeOptions = [10, 20, 30, 60];
 const goalOptions = ["Power", "Strength", "Conditioning"];
 const additonalOptions = ["Warmup", "Core", "Cooldown"];
+
+const options = [
+  { label: "Workout Type", options: typeOptions },
+  { label: "Time (min)", options: timeOptions },
+  { label: "Goal", options: goalOptions },
+  { label: "Additional", options: additonalOptions },
+];
+
+const SelectorItem = ({ label, options, value, handleClick }) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [selected, setSelected] = useState(value);
+
+  useEffect(() => {
+    setSelected(value);
+  }, [value]);
+
+  return (
+    <Box>
+      <Typography
+        variant="h3"
+        sx={{ margin: ".5rem 0", color: colors.primary[500] }}
+      >
+        {label}
+      </Typography>
+      <ButtonGroup>
+        {options.map((option) => (
+          <Button
+            key={option}
+            color="primary"
+            variant={selected === option ? "contained" : "outlined"}
+            onClick={() => handleClick(option)}
+          >
+            {option}
+          </Button>
+        ))}
+      </ButtonGroup>
+    </Box>
+  );
+};
 
 function WorkoutSelector({
   handleTypeClick,
@@ -16,77 +58,33 @@ function WorkoutSelector({
   additional,
   handleAdditionalClick,
 }) {
-
   return (
     <Box>
-      <Box>
-        <Typography variant="h3" sx={{ margin: ".5rem 0" }}>
-          Target Area
-        </Typography>
-        <ButtonGroup>
-          {typeOptions.map((type) => (
-            <Button
-              key={type}
-              color="secondary"
-              variant={workoutType === type ? "contained" : "outlined"}
-              onClick={() => handleTypeClick(type)}
-            >
-              {type}
-            </Button>
-          ))}
-        </ButtonGroup>
-      </Box>
-      <Box>
-        <Typography variant="h3" sx={{ margin: ".5rem 0" }}>
-          Time (min)
-        </Typography>
-        <ButtonGroup>
-          {timeOptions.map((time) => (
-            <Button
-              key={time}
-              color="secondary"
-              variant={exerciseTime === time ? "contained" : "outlined"}
-              onClick={() => handleTimeClick(time)}
-            >
-              {time}
-            </Button>
-          ))}
-        </ButtonGroup>
-      </Box>
-      <Box>
-        <Typography variant="h3" sx={{ margin: ".5rem 0" }}>
-          Goal
-        </Typography>
-        <ButtonGroup>
-          {goalOptions.map((goalType) => (
-            <Button
-              key={goalType}
-              color="secondary"
-              variant={goal === goalType ? "contained" : "outlined"}
-              onClick={() => handleGoalClick(goalType)}
-            >
-              {goalType}
-            </Button>
-          ))}
-        </ButtonGroup>
-      </Box>
-      <Box>
-        <Typography variant="h3" sx={{ margin: ".5rem 0" }}>
-          Add Ons
-        </Typography>
-        <ButtonGroup>
-          {additonalOptions.map((option) => (
-            <Button
-              key={option}
-              color="secondary"
-              variant={additional.includes(option) ? "contained" : "outlined"}
-              onClick={() => handleAdditionalClick(option)}
-            >
-              {option}
-            </Button>
-          ))}
-        </ButtonGroup>
-      </Box>
+      {options.map((option) => (
+        <SelectorItem
+          key={option.label}
+          label={option.label}
+          options={option.options}
+          value={
+            option.label === "Workout Type"
+              ? workoutType
+              : option.label === "Time (min)"
+              ? exerciseTime
+              : option.label === "Goal"
+              ? goal
+              : additional
+          }
+          handleClick={
+            option.label === "Workout Type"
+              ? handleTypeClick
+              : option.label === "Time (min)"
+              ? handleTimeClick
+              : option.label === "Goal"
+              ? handleGoalClick
+              : handleAdditionalClick
+          }
+        />
+      ))}
     </Box>
   );
 }
