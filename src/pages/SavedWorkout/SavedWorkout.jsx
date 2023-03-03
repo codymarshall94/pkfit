@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Workout from "../../components/Workout";
+import React from "react";
+import Workout from "../../components/WorkoutDisplay";
 import { useSelector } from "react-redux";
-import DescriptionModal from "../../components/DescriptionModal";
-import Typography from "@mui/material/Typography";
-import TimerModal from "../../components/TimerModal";
-import TimerIcon from '@mui/icons-material/Timer';
+import { Box, Typography, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
 
 function SavedWorkout() {
-  const [open, setOpen] = useState(false);
   const workout = useSelector((state) => state.selectedWorkout.selectedWorkout);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   return (
     <Box
@@ -21,18 +18,19 @@ function SavedWorkout() {
         alignItems: "center",
         marginTop: "5rem",
         height: "100vh",
+        color: colors.primary[900],
       }}
     >
-      <Typography variant="h1" sx={{margin: {xs: "1rem", sm: "2rem 0"}}}>{workout.name}</Typography>
-      <Box sx={{
-        width: {xs: "100%", md: "50%"},
-      }}>
-        <Workout workout={workout.exercises} isVisible={true} />
+      <Typography variant="h1" sx={{ margin: { xs: "1rem", sm: "2rem 0" } }}>
+        {workout.name}
+      </Typography>
+      <Box
+        sx={{
+          width: { xs: "100%", md: "50%" },
+        }}
+      >
+        <Workout workout={workout.exercises} />
       </Box>
-      <Button sx={{position: "absolute", top: "5rem", right: ".5rem"}} variant="contained" onClick={() => setOpen(true)}><TimerIcon /></Button>
-
-      <DescriptionModal />
-      <TimerModal open={open} setOpen={setOpen}/>
     </Box>
   );
 }
