@@ -6,13 +6,11 @@ import { tokens } from "../theme";
 const typeOptions = ["Full", "Upper", "Lower"];
 const timeOptions = [10, 20, 30, 60];
 const goalOptions = ["Power", "Strength", "Conditioning"];
-const additonalOptions = ["Warmup", "Core", "Cooldown"];
 
 const options = [
   { label: "Workout Type", options: typeOptions },
   { label: "Time (min)", options: timeOptions },
   { label: "Goal", options: goalOptions },
-  { label: "Additional", options: additonalOptions },
 ];
 
 const SelectorItem = ({ label, options, value, handleClick }) => {
@@ -55,8 +53,6 @@ function WorkoutSelector({
   workoutType,
   exerciseTime,
   goal,
-  additional,
-  handleAdditionalClick,
 }) {
   return (
     <Box>
@@ -70,18 +66,14 @@ function WorkoutSelector({
               ? workoutType
               : option.label === "Time (min)"
               ? exerciseTime
-              : option.label === "Goal"
-              ? goal
-              : additional
+              : goal
           }
           handleClick={
             option.label === "Workout Type"
               ? handleTypeClick
               : option.label === "Time (min)"
               ? handleTimeClick
-              : option.label === "Goal"
-              ? handleGoalClick
-              : handleAdditionalClick
+              : handleGoalClick
           }
         />
       ))}
