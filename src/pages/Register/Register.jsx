@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase-config";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import InputLabel from "@mui/material/InputLabel";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  InputLabel,
+  useTheme,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import RegisterSuccessModal from "../../components/RegisterSuccessModal";
+import { useAuth } from "../../context/AuthContext";
+import { tokens } from "../../theme";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -16,17 +19,15 @@ function Register() {
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const { createUser } = useAuth();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
-  const register = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
+      await createUser(registerEmail, registerPassword);
       setIsOpen(true);
-      console.log(user);
     } catch (error) {
       switch (error.code) {
         case "auth/email-already-in-use":
@@ -58,6 +59,7 @@ function Register() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        color: colors.primary[900],
       }}
     >
       <Box
@@ -68,25 +70,34 @@ function Register() {
           marginBottom: "1rem",
         }}
       >
-        <img
-          className="home-logo"
+        <Box
+          component="img"
+          src={require("../../images/logo/logo-no-background-color.png")}
           alt="logo"
-          src={require("../../images/logo/logo-no-background.png")}
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+          }}
         />
       </Box>
       <Typography variant="h1">Create an account</Typography>
       <Box
         component="form"
         className="register-container"
-        onSubmit={(e) => register(e)}
+        onSubmit={(e) => handleRegister(e)}
         sx={{
           width: { xs: "90%", sm: "50%", md: "40%", lg: "30%", xl: "20%" },
-          margin: "2rem 0"
+          margin: "2rem 0",
         }}
       >
         <Box>
           <InputLabel
-            sx={{ display: "flex", justifyContent: "flex-start" }}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              color: colors.primary[900],
+            }}
             htmlFor="email"
           >
             E-mail
@@ -94,7 +105,14 @@ function Register() {
           <TextField
             error={emailErrorMessage !== "" ? true : false}
             helperText={emailErrorMessage}
-            sx={{ width: "100%" }}
+            sx={{
+              width: "100%",
+              input: {
+                color: colors.primary[900],
+                backgroundColor: colors.backgroundWhite[100],
+                borderBottom: `1px solid ${colors.primary[900]}`,
+              },
+            }}
             size="small"
             id="email"
             margin="normal"
@@ -108,7 +126,11 @@ function Register() {
         </Box>
         <Box>
           <InputLabel
-            sx={{ display: "flex", justifyContent: "flex-start" }}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              color: colors.primary[900],
+            }}
             htmlFor="password"
           >
             Password
@@ -116,7 +138,14 @@ function Register() {
           <TextField
             error={passwordErrorMessage !== "" ? true : false}
             helperText={passwordErrorMessage}
-            sx={{ width: "100%" }}
+            sx={{
+              width: "100%",
+              input: {
+                color: colors.primary[900],
+                backgroundColor: colors.backgroundWhite[100],
+                borderBottom: `1px solid ${colors.primary[900]}`,
+              },
+            }}
             size="small"
             id="password"
             margin="normal"
@@ -137,13 +166,15 @@ function Register() {
           Register
         </Button>
       </Box>
-      <span className="auth-help-link">
+      <Typography variant="h5" mb="1rem">
         Already have an account?{" "}
-        <Link to="/login" style={{ color: "#434344" }}>
-          Log in
+        <Link to="/register" style={{ color: colors.primaryOrange[600] }}>
+          Sign up
         </Link>
-      </span>
-      <span style={{ color: "red", marginTop: "1rem" }}>{errorMessage}</span>
+      </Typography>
+      <Typography variant="h5" color="red">
+        {errorMessage}
+      </Typography>
       <RegisterSuccessModal open={isOpen} setIsOpen={setIsOpen} />
     </Box>
   );

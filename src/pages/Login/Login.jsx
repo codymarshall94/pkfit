@@ -1,49 +1,37 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase-config";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import InputLabel from "@mui/material/InputLabel";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  InputLabel,
+  useTheme,
+} from "@mui/material";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { tokens } from "../../theme";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
-  const [errorMesage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+  const { signIn } = useAuth();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
-  const login = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
-      console.log(user);
-      navigate("/");
+      await signIn(loginEmail, loginPassword);
     } catch (error) {
-      switch (error.code) {
-        case "auth/invalid-email":
-          setEmailErrorMessage("Invalid email");
-          break;
-        case "auth/user-disabled":
-          setEmailErrorMessage("User disabled");
-          break;
-        case "auth/user-not-found":
-          setEmailErrorMessage("User not found");
-          break;
-        case "auth/wrong-password":
-          setPasswordErrorMessage("Wrong password");
-          break;
-        default:
-          setErrorMessage("Something went wrong");
-          break;
+      if (error.message === "auth/invalid-email") {
+        setEmailErrorMessage(error.message);
+      } else if (error.message === "auth/wrong-password") {
+        setPasswordErrorMessage(error.message);
+      } else {
+        setErrorMessage(error.message);
       }
     }
   };
@@ -57,6 +45,7 @@ function Login() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        color: colors.primary[900],
       }}
     >
       <Box
@@ -67,28 +56,48 @@ function Login() {
           marginBottom: "1rem",
         }}
       >
-        <img
-          className="home-logo"
+        <Box
+          component="img"
+          src={require("../../images/logo/logo-no-background-color.png")}
           alt="logo"
-          src={require("../../images/logo/logo-no-background.png")}
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+          }}
         />
       </Box>
       <Typography variant="h1">Welcome Back</Typography>
       <Box
         component="form"
-        className="register-container"
-        onSubmit={(e) => login(e)}
+        onSubmit={(e) => handleLogin(e)}
         sx={{
           width: { xs: "90%", sm: "50%", md: "40%", lg: "30%", xl: "20%" },
-          margin: "2rem 0"
+          margin: "2rem 0",
         }}
       >
         <Box>
-          <InputLabel sx={{display:"flex", justifyContent: "flex-start"}}  htmlFor="email">Email</InputLabel>
+          <InputLabel
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              color: colors.primary[900],
+            }}
+            htmlFor="email"
+          >
+            Email
+          </InputLabel>
           <TextField
             error={emailErrorMessage ? true : false}
             helperText={emailErrorMessage}
-            sx={{ width: "100%" }}
+            sx={{
+              width: "100%",
+              input: {
+                color: colors.primary[900],
+                backgroundColor: colors.backgroundWhite[100],
+                borderBottom: `1px solid ${colors.primary[900]}`,
+              },
+            }}
             size="small"
             margin="normal"
             id="email"
@@ -99,11 +108,27 @@ function Login() {
           />
         </Box>
         <Box>
-          <InputLabel sx={{display:"flex", justifyContent: "flex-start"}}  htmlFor="password">Password</InputLabel>
+          <InputLabel
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              color: colors.primary[900],
+            }}
+            htmlFor="password"
+          >
+            Password
+          </InputLabel>
           <TextField
             error={passwordErrorMessage ? true : false}
             helperText={passwordErrorMessage}
-            sx={{ width: "100%" }}
+            sx={{
+              width: "100%",
+              input: {
+                color: colors.primary[900],
+                backgroundColor: colors.backgroundWhite[100],
+                borderBottom: `1px solid ${colors.primary[900]}`,
+              },
+            }}
             size="small"
             margin="normal"
             id="password"
@@ -122,14 +147,19 @@ function Login() {
           Login
         </Button>
       </Box>
-      <span style={{marginBottom: "1rem"}} className="auth-help-link">Forgot your password?</span>
-      <span className="auth-help-link">
+      <Typography variant="h5" mb="1rem">
+        Forgot your password?
+      </Typography>
+      <Typography variant="h5">
         Dont have an account yet?{" "}
-        <Link to="/register" style={{ color: "#434344" }}>
+        <Link to="/register" style={{ color: colors.primaryOrange[600] }}>
           Sign up
         </Link>
-      </span>
-      <span style={{ color: "red", marginTop: "1rem" }}>{errorMesage}</span>
+      </Typography>
+
+      <Typography variant="h5" color="red">
+        {errorMessage}
+      </Typography>
     </Box>
   );
 }
