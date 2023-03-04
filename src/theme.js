@@ -179,18 +179,22 @@ export const themeSettings = (mode) => {
       h1: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
         fontSize: 40,
+        fontWeight: 700,
       },
       h2: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
         fontSize: 32,
+        fontWeight: 600,
       },
       h3: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
         fontSize: 24,
+        fontWeight: 500,
       },
       h4: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
         fontSize: 20,
+        fontWeight: 500,
       },
       h5: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
@@ -199,6 +203,10 @@ export const themeSettings = (mode) => {
       h6: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
         fontSize: 14,
+      },
+      span: {
+        fontFamily: ["Montserrat", "sans-serif"].join(","),
+        fontSize: 12,
       },
     },
   };
