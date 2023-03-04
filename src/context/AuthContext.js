@@ -6,12 +6,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -40,9 +42,10 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       setCurrentUser(result.user);
+      navigate("/");
       return result;
     } catch (error) {
-      console.error(error);
+      console.log(error);
       throw error;
     }
   };
@@ -51,9 +54,9 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const result = await signOut(auth);
       setCurrentUser(null);
+      navigate("/");
       return result;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   };
