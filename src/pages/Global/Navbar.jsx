@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  MenuItem,
+  Avatar,
+  Tooltip,
+  Container,
+  Box,
+  useTheme,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import Person2Icon from "@mui/icons-material/Person2";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase-config";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import { tokens } from "../../theme";
 import { useAuth } from "../../context/AuthContext";
 
@@ -34,7 +33,7 @@ function Navbar() {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { currentUser } = useAuth();
+  const { currentUser, signOutUser } = useAuth();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -54,7 +53,7 @@ function Navbar() {
   const handleUserMenuClick = (setting) => {
     switch (setting) {
       case "Logout":
-        logout();
+        signOutUser();
         break;
       case "Saved Workouts":
         navigate("/saved-workouts");
@@ -63,17 +62,6 @@ function Navbar() {
         break;
     }
     handleCloseUserMenu();
-  };
-
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        navigate("/");
-        console.log("logged out");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const handleClickLink = (page) => {
@@ -89,9 +77,9 @@ function Navbar() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "3rem",
-        maxHeight: "3rem",
-        backgroundColor: "transparent",
+        minHeight: "2vh",
+        maxHeight: "2vh",
+        backgroundColor: colors.backgroundWhite[500],
         boxShadow: "none",
         padding: "2rem 0",
       }}
@@ -161,7 +149,6 @@ function Navbar() {
                       : colors.primary[300],
                   fontWeight: "600",
                   margin: "0 1rem",
-                  fontSize: "1.2rem",
                 }}
               >
                 {page.name}
@@ -199,20 +186,32 @@ function Navbar() {
             <>
               <Link
                 to="/login"
-                className="nav-link"
                 onClick={() => setActivePage("Login")}
+                style={{
+                  textDecoration: "none",
+                  color: colors.primary[900],
+                  fontWeight: "600",
+                  margin: "0 .5rem",
+                }}
               >
                 Login
               </Link>
-              <Button variant="contained" color="primary">
-                <Link
-                  to="/register"
-                  onClick={() => setActivePage("Sign Up")}
-                  className="sign-up-btn"
-                >
-                  Sign Up
-                </Link>
-              </Button>
+
+              <Link
+                to="/register"
+                onClick={() => setActivePage("Sign Up")}
+                style={{
+                  textDecoration: "none",
+                  color: "#fff",
+                  fontWeight: "600",
+                  margin: "0 .5rem",
+                  backgroundColor: colors.primaryOrange[500],
+                  padding: "0.5rem 1rem",
+                  borderRadius: "0.5rem",
+                }}
+              >
+                Sign Up
+              </Link>
             </>
           ) : (
             <Tooltip title="Open settings">
