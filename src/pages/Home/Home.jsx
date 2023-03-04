@@ -22,7 +22,44 @@ const cards = [
   },
 ];
 
-function Home() {
+const Card = ({ card }) => {
+  return (
+    <Box
+      sx={{
+        backgroundColor: card.backgroundColor,
+        width: {
+          xs: "calc(100% - 1rem)",
+          md: "calc(100% / 3 - 2rem)",
+          lg: "20rem",
+        },
+        minHeight: "15rem",
+        borderRadius: "1rem",
+        padding: "2rem",
+        margin: { xs: "0.5rem", md: "0 .5rem" },
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: "bold",
+          marginBottom: "1rem",
+        }}
+      >
+        {card.title}
+      </Typography>
+      <Typography
+        variant="h6"
+        sx={{
+          fontWeight: "600",
+        }}
+      >
+        {card.description}
+      </Typography>
+    </Box>
+  );
+};
+
+const Home = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -132,44 +169,15 @@ function Home() {
         }}
       >
         {cards.map((card, index) => (
-          <Box
+          <Card
             key={index}
-            sx={{
-              backgroundColor: card.backgroundColor,
-              // width with different screen sizes
-              width: {
-                xs: "calc(100% - 1rem)",
-                md: "calc(100% / 3 - 2rem)",
-                lg: "20rem",
-              },
-              minHeight: "15rem",
-              borderRadius: "1rem",
-              padding: "2rem",
-              margin: { xs: "0.5rem", md: "0 .5rem" },
-            }}
-          >
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: "1rem",
-              }}
-            >
-              {card.title}
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "600",
-              }}
-            >
-              {card.description}
-            </Typography>
-          </Box>
+            title={card.title}
+            card={card}
+          />
         ))}
       </Box>
     </Box>
   );
-}
+};
 
 export default Home;
