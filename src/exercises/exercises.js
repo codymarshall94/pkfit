@@ -475,7 +475,7 @@ export const EXERCISES = [
     isPower: false,
     isStrength: false,
     isConditioning: false,
-    isStatic: false,
+    isStatic: true,
     isWarmup: true,
     isCore: false,
   },
