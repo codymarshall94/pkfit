@@ -6,17 +6,8 @@
   font-family: "Montserrat", "sans-serif";
 }
 
-html,
-body,
-#root,
-.app,{
-  width: 100%;
-  margin: 0;
+html, body, .app, .app {
+  height: 100%;
   padding: 0;
-  overflow-y: hidden;
-}
-
-.app {
-  display: flex;
-  position: relative;
+  margin: 0;
 }
