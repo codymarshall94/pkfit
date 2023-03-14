@@ -1,0 +1,16 @@
+.signup-btn {
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    border: 2px solid hsla(0,0%,100%,.3);
+    color: white;
+    padding: .5rem 2rem;
+    font-weight: 600;
+    transition: all .2s ease-in-out;
+}
+
+.signup-btn:hover {
+    background-color: #FF0336;
+    color: white;
+    border: 2px solid #FF0336;
+}

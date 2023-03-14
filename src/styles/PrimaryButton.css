@@ -1,0 +1,40 @@
+.btn-large {
+  width: 20rem;
+}
+
+.btn-large::after {
+  content: " ";
+  position: absolute;
+  height: calc(3rem - 1px);
+  width: calc(20rem - 1px);
+  border: 1px solid #fff;
+  top: -12px;
+  left: 12px;
+  transition: all 0.3s ease;
+}
+
+
+.btn-large:hover::after {
+  top: -1px;
+  left: -1px;
+}
+
+.btn-small {
+  width: 10rem;
+}
+
+.btn-small:hover::after {
+  top: -1px;
+  left: -1px;
+}
+
+.btn-small::after {
+  content: " ";
+  position: absolute;
+  height: calc(3rem - 1px);
+  width: calc(10rem - 1px);
+  border: 1px solid #fff;
+  top: -12px;
+  left: 12px;
+  transition: all 0.3s ease;
+}
