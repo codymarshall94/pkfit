@@ -29,17 +29,14 @@ const useWorkoutInfo = () => {
   };
 
   const handleTypeClick = (workoutType) => {
-    console.log(workoutType);
     setWorkoutInfo({ ...workoutInfo, workoutType });
   };
 
   const handleTimeClick = (exerciseTime) => {
-    console.log(exerciseTime);
     setWorkoutInfo({ ...workoutInfo, exerciseTime });
   };
 
   const handleGoalClick = (goal) => {
-    console.log(goal);
     setWorkoutInfo({ ...workoutInfo, goal });
   };
 
