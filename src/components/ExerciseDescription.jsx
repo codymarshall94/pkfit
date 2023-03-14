@@ -39,7 +39,7 @@ const ExerciseDescription = ({ exercise }) => {
           <img src={exercise.image} alt=""/>
         ) : (
           <img
-            src={require("../images/placeholderthumb.png")}
+            src={require("../images/placeholderimg.jpg")}
             alt=""
           />
         )}
