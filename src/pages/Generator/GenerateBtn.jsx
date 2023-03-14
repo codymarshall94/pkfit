@@ -7,8 +7,9 @@ const GenerateBtn = ({ workoutInfo, generateWorkout }) => {
   return (
     <Box sx={{ margin: "2rem" }}>
       <Button
+        color="red"
         variant="contained"
-        color="secondary"
+        sx={{ fontWeight: "600" }}
         onClick={() => generateWorkout()}
         disabled={workoutType && exerciseTime && goal ? false : true}
       >
