@@ -2,20 +2,18 @@ import React, { useEffect, useState } from "react";
 import { setSelectedWorkout } from "../../redux/reducers/selectedWorkoutSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+// ========================================================================
 import { onSnapshot, query, where } from "firebase/firestore";
 import { colRef } from "../../firebase-config";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ClearIcon from "@mui/icons-material/Clear";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
 import { getAuth } from "firebase/auth";
-import { useTheme } from "@mui/material/styles";
-import { tokens } from "../../theme";
-import NoteAltIcon from "@mui/icons-material/NoteAlt";
+// ========================================================================
 import DialogModal from "../../components/DialogModal";
 import DeleteExercise from "../../components/DeleteExercise";
+import { Box, Typography, Button, useTheme } from "@mui/material";
+// ========================================================================
+import ClearIcon from "@mui/icons-material/Clear";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import PageHeader from "../../components/PageHeader";
 
 function SavedWorkouts() {
   const dispatch = useDispatch();
@@ -25,7 +23,6 @@ function SavedWorkouts() {
   const [selectedDelete, setSelectedDelete] = useState();
   const user = getAuth().currentUser;
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
     const q = query(colRef, where("user", "==", user.uid));
@@ -64,89 +61,76 @@ function SavedWorkouts() {
   } else {
     return (
       <>
-        <Box
-          sx={{
-            width: "100%",
-            padding: "1rem",
-            marginTop: "5rem",
-            color: colors.primary[900],
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h1">Saved Workouts</Typography>
-          {workouts.length === 0 && (
-            <Box sx={{ padding: "2rem" }}>
-              <NoteAltIcon sx={{ fontSize: 100 }} />
-              <Typography variant="h3">You have no saved workouts. </Typography>
-              <Link
-                to="/generator"
-                style={{
-                  color: colors.primaryOrange[500],
-                  textDecoration: "none",
-                  fontSize: "1.2rem",
-                }}
-              >
-                Click here to create one
-              </Link>
-            </Box>
-          )}
-          {workouts.map((workout) => (
-            <Box
-              key={workout.id}
-              sx={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                width: { sm: "100%", md: "50%", lg: "25%" },
-                margin: "1rem auto",
-                borderBottom: ".15rem solid black",
+        <PageHeader title="Saved Workouts" />
+        {workouts.length === 0 && (
+          <Box sx={{ padding: "2rem" }}>
+            <NoteAltIcon sx={{ fontSize: 100 }} />
+            <Typography variant="h3">You have no saved workouts. </Typography>
+            <Link
+              to="/generator"
+              style={{
+                color: theme.palette.primary.main,
+                textDecoration: "none",
+                fontSize: "1.2rem",
               }}
             >
-              <ListItemButton
-                sx={{
-                  padding: "1rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                }}
-                onClick={() => handleSelectedWorkout(workout)}
-              >
-                <ListItemText component="h1">
-                  {workout.name.toUpperCase()}
-                </ListItemText>
-                <ListItemText component="span">
-                  {workout.createdAt.toDate().toDateString()}
-                </ListItemText>
-              </ListItemButton>
-
-              <Button
-                variant="contained"
-                sx={{
-                  position: "absolute",
-                  right: "1rem",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  backgroundColor: "red",
-                }}
-                onClick={() => handleDeleteClick(workout.id)}
-              >
-                <ClearIcon />
-              </Button>
+              Click here to create one
+            </Link>
+          </Box>
+        )}
+        {workouts.map((workout) => (
+          <Box
+            key={workout.id}
+            onClick={() => handleSelectedWorkout(workout)}
+            sx={{
+              position: "relative",
+              backgroundColor: theme.palette.background.grey,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: { xs: "100%", md: "30rem" },
+              textAlign: { xs: "center", md: "left" },
+              p: "1rem",
+              margin: "0 auto",
+              mb: ".5rem",
+              cursor: "pointer",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "flex-start",
+              }}
+            >
+              <Typography variant="h5" fontWeight="bold">
+                {workout.name}
+              </Typography>
+              <Typography variant="h6" color="#A5A5A5" my=".5rem">
+                {workout.createdAt.toDate().toDateString()}
+              </Typography>
             </Box>
-          ))}
-          <DialogModal
-            open={open}
-            setOpen={setOpen}
-            children={
-              <DeleteExercise
-                selectedDelete={selectedDelete}
-                setOpen={setOpen}
-              />
-            }
-          />
-        </Box>
+
+            <Button
+              color="error"
+              variant="contained"
+              onClick={(e) => {
+                handleDeleteClick(workout.id);
+                e.stopPropagation();
+              }}
+            >
+              <ClearIcon />
+            </Button>
+          </Box>
+        ))}
+        <DialogModal
+          open={open}
+          setOpen={setOpen}
+          children={
+            <DeleteExercise selectedDelete={selectedDelete} setOpen={setOpen} />
+          }
+        />
       </>
     );
   }
