@@ -1,13 +1,10 @@
 import React from "react";
-import ExerciseList from "./ExerciseList";
+import SkillList from "./SkillList";
 import SkillHeader from "./SkillHeader";
-import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
-import { tokens } from "../../theme";
+import { Box, useTheme } from "@mui/material";
 
 function Skill() {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   return (
     <Box
       sx={{
@@ -15,11 +12,11 @@ function Skill() {
         flexDirection: "column",
         justifyContent: "center",
         marginTop: "5rem",
-        color: colors.primary[900],
+        color: theme.palette.text.primary,
       }}
     >
       <SkillHeader />
-      <ExerciseList />
+      <SkillList />
     </Box>
   );
 }
