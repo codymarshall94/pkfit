@@ -6,6 +6,7 @@ export const FREEPLANS = [
       "This is a beginner workout designed to increase the core principles of strength and movement for getting your first climb up. This workout is designed to be done 3 times a week for 4 weeks.",
     skillLevel: "Beginner",
     equipment: ["pull up bar", "wall"],
+    type: "upperbody",
     workout: [
       {
         name: "Pull up",
@@ -56,11 +57,12 @@ export const FREEPLANS = [
   },
   {
     id: 2,
-    name: "Total warmup",
+    name: "Lower warmup",
     description:
       "This leg warmup is designed to increase blood flow and movement patterns in the legs. Focus on full range of motion throughout every movement, a warmup should be treated the same as any working set.",
     skillLevel: "Beginner",
     equipment: ["No equipment"],
+    type: "lowerbody",
     workout: [
       {
         name: "Light jog",
@@ -137,6 +139,89 @@ export const FREEPLANS = [
         reps: "5-8s",
         sets: 2,
         rest: "30s",
+      },
+      {
+        name: "Pull up",
+        bodyWeight: true,
+        description:
+          "Starting with our main pulling muscles in the bottom position, We are going to work strength and endurance in the pull up. Although the climb up is very dynamic, we are going to keep very strict form to build a strong foundation.",
+        reps: 10,
+        sets: 3,
+        rest: 120,
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Upper warmup",
+    description:
+      "This warmup is specifically designed to warm up the upper body muscles, which are essential for performing movements such as cat hangs or vaults. With minimal equipment required, it targets all major upper body muscle groups, preparing them for the dynamic movements involved in these exercises.",
+    skillLevel: "Beginner",
+    equipment: ["Resistance band"],
+    type: "upperbody",
+    workout: [
+      {
+        name: "Jumping Jacks",
+        bodyWeight: true,
+        description:
+          "Jumping Jacks are a great way to warm up and get the blood flowing. Start with your feet together and arms by your sides, then jump up and spread your legs while raising your arms overhead. Jump back to the starting position and repeat.",
+        reps: 20,
+        sets: 2,
+        rest: 30,
+      },
+      {
+        name: "Downward Dog",
+        bodyWeight: true,
+        description:
+          "Start on all fours with your hands shoulder-width apart and your knees hip-width apart. Lift your hips up and back, straightening your arms and legs to form an inverted V-shape. Hold for a few seconds, then lower back down and repeat.",
+        reps: 10,
+        sets: 2,
+        rest: 30,
+      },
+      {
+        name: "Arm Circles",
+        bodyWeight: true,
+        description:
+          "Stand with your feet shoulder-width apart and extend your arms out to the sides at shoulder height. Slowly circle your arms forward for 10 reps, then reverse and circle them backwards for 10 reps.",
+        reps: 10,
+        sets: 2,
+        rest: 30,
+      },
+      {
+        name: "Resistance Band Pull Apart",
+        bodyWeight: false,
+        description:
+          "Hold a resistance band with both hands and pull it apart, squeezing your shoulder blades together. Slowly release and repeat.",
+        reps: 15,
+        sets: 2,
+        rest: 30,
+      },
+      {
+        name: "Bear Hold",
+        bodyWeight: true,
+        description:
+          "Start on all fours with your hands and feet shoulder-width apart. Lift your knees off the ground so that your body forms a straight line from your head to your heels. Hold for 30 seconds, then rest for 30 seconds and repeat.",
+        reps: "30s",
+        sets: 2,
+        rest: 30,
+      },
+      {
+        name: "Monkey Walk",
+        bodyWeight: true,
+        description:
+          "Squat down and place your hands on the ground in front of you. Walk your hands forward until you are in a plank position, then walk your feet forward to meet your hands. Stand up and repeat.",
+        reps: "10 per side",
+        sets: 2,
+        rest: 30,
+      },
+      {
+        name: "Incline Pushup",
+        bodyWeight: true,
+        description:
+          "Find a sturdy elevated surface such as a bench or step. Place your hands on the surface shoulder-width apart and lower your body down towards it, keeping your elbows close to your sides. Push back up and repeat.",
+        reps: 12,
+        sets: 2,
+        rest: 30,
       },
     ],
   },
