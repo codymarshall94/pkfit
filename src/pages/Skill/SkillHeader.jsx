@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
+const allDesc =
+  "All of the exercises that will help you improve your skills.";
 const jumpDesc =
   "Exercises that help with Precisions, Strides and overall leg strength.";
 const vaultDesc =
@@ -31,7 +33,7 @@ function ExerciseHeader() {
           ? balanceDesc
           : skill === "Climb"
           ? climbDesc
-          : "No Skill Selected"}
+          : allDesc}
       </Typography>
     </Box>
   );
