@@ -1,43 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { tokens } from "../../theme";
-import { Link } from "react-router-dom";
+import PrimaryButton from "../../components/PrimaryButton";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
 const cards = [
   {
-    title: "Ready Plans",
+    title: "READY PLANS",
     description: "Don't have time to create a workout? We've got you covered.",
-    backgroundColor: "#F3B634",
   },
   {
-    title: "Generate Fast",
+    title: "GENERATE FAST",
     description: "With our generator, you can create a workout in seconds.",
-    backgroundColor: "#C6ABFF",
   },
   {
-    title: "Save Workouts",
+    title: "SAVE WORKOUTS",
     description: "Once you've generated a workout, you can save it for later.",
-    backgroundColor: "#F7A082",
   },
 ];
 
 const Card = ({ card }) => {
+  const [showBackground, setShowBackground] = useState(false);
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
-        backgroundColor: card.backgroundColor,
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
         width: {
-          xs: "calc(100% - 1rem)",
-          md: "calc(100% / 3 - 2rem)",
-          lg: "20rem",
+          xs: "100%",
+          lg: "25rem",
         },
-        minHeight: "15rem",
-        borderRadius: "1rem",
+        minHeight: { xs: "15rem", lg: "20rem" },
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.background.default,
+        borderRadius: "2rem 0 2rem 0",
+        boxShadow: "0 2rem 5rem rgba(0, 0, 0, .25)",
         padding: "2rem",
-        margin: { xs: "0.5rem", md: "0 .5rem" },
+        margin: { xs: ".5rem", md: "0.5rem", lg: "-10rem 0.5rem 0 0.5rem" },
+        overflow: "hidden",
+        "&:hover": {
+          color: theme.palette.text.primary,
+        },
       }}
+      onMouseEnter={() => setShowBackground(true)}
+      onMouseLeave={() => setShowBackground(false)}
     >
+      <Box
+        component="img"
+        src={require("../../images/placeholderimg.jpg")}
+        alt="placeholder"
+        sx={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          position: "absolute",
+          top: "0",
+          left: "0",
+          opacity: showBackground ? ".2" : "0",
+          transition: "all .15s ease-in-out",
+        }}
+      />
+      <FitnessCenterIcon
+        sx={{
+          fontSize: "3rem",
+          color: theme.palette.red.main,
+          marginBottom: "1rem",
+        }}
+      />
       <Typography
         variant="h4"
         sx={{
@@ -47,21 +82,13 @@ const Card = ({ card }) => {
       >
         {card.title}
       </Typography>
-      <Typography
-        variant="h6"
-        sx={{
-          fontWeight: "600",
-        }}
-      >
-        {card.description}
-      </Typography>
+      <Typography variant="h6">{card.description}</Typography>
     </Box>
   );
 };
 
 const Home = () => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   return (
     <Box
@@ -70,7 +97,6 @@ const Home = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "3rem",
       }}
     >
       {/** Hero Section================================== */}
@@ -82,14 +108,17 @@ const Home = () => {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          backgroundColor: colors.backgroundWhite[500],
+          backgroundImage: `url(${require("../../images/homebg.png")})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <Box>
           <Typography
             variant="h1"
             sx={{
-              color: colors.primary[500],
+              color: theme.palette.text.secondary,
               fontWeight: "bold",
               textAlign: "center",
               marginBottom: "1rem",
@@ -101,7 +130,7 @@ const Home = () => {
           <Typography
             variant="h4"
             sx={{
-              color: colors.primary[400],
+              color: theme.palette.text.secondary,
               textAlign: "center", //wrap text
               whiteSpace: "normal",
               fontSize: { sm: "1rem", md: "1.25rem", lg: "1.5rem" },
@@ -117,63 +146,39 @@ const Home = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: { xs: "100%", sm: "60%", md: "50%", lg: "40%" },
+            width: { xs: "100%", sm: "60%", md: "50%", lg: "40%", xl: "30%" },
           }}
         >
           <Box
             component="img"
             src={require("../../images/homepage.png")}
             alt="homepage"
+            height="400px"
+            width="400px"
             sx={{
+              height: "100%",
               width: "100%",
             }}
           />
         </Box>
-        <Link
-          to="/generator"
-          style={{
-            textDecoration: "none",
-            color: colors.backgroundWhite[100],
-            minWidth: "25%",
-            maxWidth: "100%",
-            lineHeight: "1.5rem",
-            padding: "1rem",
-            borderRadius: "1rem",
-            textAlign: "center",
-            textTransform: "uppercase",
-            fontWeight: "bold",
-            fontSize: "1.25rem",
-            userSelect: "none",
-            border: "none",
-            backgroundColor: colors.primaryOrange[500],
-            "&:hover": {
-              backgroundColor: colors.primaryOrange[600],
-            },
-          }}
-        >
-          Generate Now
-        </Link>
+        <PrimaryButton route="/generator" text="Generate" size="btn-large" />
       </Box>
       {/** Custom Plans Section================================== */}
       <Box
         component="section"
         sx={{
-          backgroundColor: colors.backgroundWhite[100],
+          backgroundColor: theme.palette.background.grey,
           minHeight: "25vh",
           width: "100%",
           display: "flex",
-          flexDirection: { xs: "column", sm: "row", md: "row", lg: "row" },
+          flexDirection: { xs: "column", lg: "row" },
           justifyContent: "center",
           alignItems: "center",
-          padding: "2rem 0",
+          padding: "2rem 2rem",
         }}
       >
         {cards.map((card, index) => (
-          <Card
-            key={index}
-            title={card.title}
-            card={card}
-          />
+          <Card key={index} title={card.title} card={card} />
         ))}
       </Box>
     </Box>
