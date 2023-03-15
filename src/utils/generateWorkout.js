@@ -6,6 +6,16 @@ const cooldownReps = ["30s", "60s", "120s"];
 const coreReps = ["30s", "60s"];
 */
 
+const restLookup = {
+  1: 120,
+  3: 90,
+  5: 120,
+  6: 90,
+  8: 90,
+  10: 60,
+  12: 90,
+  15: 60,
+};
 const powerReps = [1, 3, 5];
 const strengthReps = [5, 6, 8, 10];
 const conditioningReps = [8, 10, 12, 15];
@@ -18,8 +28,13 @@ const repsLookup = {
   Conditioning: conditioningReps,
 };
 
-const filteredExercises = (type) =>
-  EXERCISES.filter((exer) => exer.exerciseType.includes(type));
+const filterExercises = (type) => {
+  if (type === "Full") {
+    return EXERCISES;
+  }
+  const filtered = EXERCISES.filter((exer) => exer.exerciseType.includes(type));
+  return filtered;
+};
 
 const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
 
@@ -45,6 +60,7 @@ const createWorkoutExercise = (exer, goal, time) => {
     name: exer.name,
     reps: reps,
     sets: sets,
+    rest: restLookup[reps],
     description: exer.description,
     image: exer.image,
     usedFor: exer.usedFor,
@@ -56,7 +72,7 @@ const createWorkoutExercise = (exer, goal, time) => {
 export const generateWorkout = (info) => {
   const { workoutType, goal, exerciseTime } = info;
   const exerciseAmount = exerciseAmountLookup[exerciseTime];
-  const exercises = filteredExercises(workoutType);
+  const exercises = filterExercises(workoutType);
   const shuffledExercises = shuffleArray(exercises);
   const workoutExercises = [];
 
