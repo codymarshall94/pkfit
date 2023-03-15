@@ -1,37 +1,34 @@
 import React from "react";
-import Workout from "../../components/WorkoutDisplay";
+import WorkoutDisplay from "../../components/WorkoutDisplay";
 import { useSelector } from "react-redux";
-import { Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
+import { Typography, Box } from "@mui/material";
+import PageHeader from "../../components/PageHeader";
+import TitleBackground from "../../components/TitleBackground";
 
 function SavedWorkout() {
   const workout = useSelector((state) => state.selectedWorkout.selectedWorkout);
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        marginTop: "5rem",
-        height: "100vh",
-        color: colors.primary[900],
-      }}
-    >
-      <Typography variant="h1" sx={{ margin: { xs: "1rem", sm: "2rem 0" } }}>
-        {workout.name}
-      </Typography>
-      <Box
-        sx={{
-          width: { xs: "100%", md: "50%" },
-        }}
-      >
-        <Workout workout={workout.exercises} />
+    <>
+      <PageHeader title="Saved Workout" />
+      <Box sx={{ position: "relative", width: "20rem", margin: "0 auto" }}>
+        <TitleBackground width="20rem" />
+        <Typography
+          variant="h1"
+          sx={{
+            margin: {
+              xs: "1rem",
+              sm: "2rem 0",
+              color: "white",
+              textAlign: "center",
+            },
+          }}
+        >
+          {workout.name.toUpperCase()}
+        </Typography>
       </Box>
-    </Box>
+      <WorkoutDisplay workout={workout.exercises} />
+    </>
   );
 }
 
