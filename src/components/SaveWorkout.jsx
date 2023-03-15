@@ -4,7 +4,6 @@ import { addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
 import { colRef } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { tokens } from "../theme";
 
 function SaveWorkout({ workout, setOpen }) {
   const [workoutName, setWorkoutName] = useState("");
@@ -12,7 +11,6 @@ function SaveWorkout({ workout, setOpen }) {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   const handleSave = async () => {
     try {
@@ -52,7 +50,6 @@ function SaveWorkout({ workout, setOpen }) {
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
-        padding: "0 1rem",
       }}
     >
       {workoutSaved ? (
@@ -69,13 +66,19 @@ function SaveWorkout({ workout, setOpen }) {
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Button
+              sx={{ marginX: ".5rem", minWidth: "5rem" }}
+              color="red"
               variant="contained"
-              sx={{ marginRight: ".5rem" }}
               onClick={() => handleSavedRedirect()}
             >
               Saved Workouts
             </Button>
-            <Button variant="outlined" onClick={() => handleClose()}>
+            <Button
+              sx={{ marginX: ".5rem", minWidth: "5rem" }}
+              color="grey"
+              variant="contained"
+              onClick={() => handleClose()}
+            >
               Close
             </Button>
           </Box>
@@ -99,8 +102,8 @@ function SaveWorkout({ workout, setOpen }) {
               margin: "auto",
               input: {
                 textAlign: "center",
-                color: colors.primary[900],
-                border: `2px solid ${colors.primary[900]}`,
+                color: theme.palette.text.primary,
+                border: `2px solid ${theme.palette.text.primary}`,
                 borderRadius: "5px",
               },
             }}
@@ -118,15 +121,17 @@ function SaveWorkout({ workout, setOpen }) {
             }}
           >
             <Button
-              sx={{ marginX: ".5rem" }}
+              sx={{ marginX: ".5rem", minWidth: "5rem" }}
+              color="red"
               variant="contained"
               onClick={() => handleSave()}
             >
               Save
             </Button>
             <Button
-              sx={{ marginX: ".5rem" }}
-              variant="outlined"
+              sx={{ marginX: ".5rem", minWidth: "5rem" }}
+              color="grey"
+              variant="contained"
               onClick={() => setOpen(false)}
             >
               Cancel
