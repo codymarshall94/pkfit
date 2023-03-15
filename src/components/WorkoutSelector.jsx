@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import { Button, ButtonGroup, Box, Typography } from "@mui/material";
-import { tokens } from "../theme";
 
 const typeOptions = ["Full", "Upper", "Lower"];
 const timeOptions = [10, 20, 30, 60];
@@ -15,7 +14,6 @@ const options = [
 
 const SelectorItem = ({ label, options, value, handleClick }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState(value);
 
   useEffect(() => {
@@ -25,8 +23,8 @@ const SelectorItem = ({ label, options, value, handleClick }) => {
   return (
     <Box>
       <Typography
-        variant="h3"
-        sx={{ margin: ".5rem 0", color: colors.primary[500] }}
+        variant="h5"
+        sx={{ margin: ".5rem 0", color: theme.palette.text.primary, fontWeight: 600 }}
       >
         {label}
       </Typography>
@@ -34,9 +32,10 @@ const SelectorItem = ({ label, options, value, handleClick }) => {
         {options.map((option) => (
           <Button
             key={option}
-            color="primary"
+            color="grey"
             variant={selected === option ? "contained" : "outlined"}
             onClick={() => handleClick(option)}
+            sx={{ borderRadius: "2rem" }}
           >
             {option}
           </Button>
