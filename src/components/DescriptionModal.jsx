@@ -1,14 +1,10 @@
 import React from "react";
 import { Box, Typography, Modal, Chip, Button, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { tokens } from "../theme";
 
-function DescriptionModal() {
+function DescriptionModal({ isOpen, handleClose}) {
   const { selectedItem } = useSelector((state) => state.modal);
-  const dispatch = useDispatch();
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   return (
       <Modal
@@ -28,11 +24,11 @@ function DescriptionModal() {
             maxWidth: {xs: "90%", lg: "30%"},
             maxHeight: "80vh",
             overflow: "hidden",
-            backgroundColor: "white",
+            backgroundColor: theme.palette.background.primary,
             borderRadius: ".25rem",
             boxShadow: 24,
             padding: "1rem",
-            color: colors.primary[900],
+            color: theme.palette.text.primary,
           }}
         >
           <Box
@@ -47,7 +43,7 @@ function DescriptionModal() {
               <img src={selectedItem.image} alt="" className="modal-image" />
             ) : (
               <img
-                src={require("../images/placeholderthumb.png")}
+                src={require("../images/placeholderimg.jpg")}
                 alt=""
                 className="modal-image"
               />
@@ -101,7 +97,7 @@ function DescriptionModal() {
               marginTop: "2rem",
             }}
           >
-            <Button variant="contained" onClick={() => dispatch(openModal())}>
+            <Button variant="contained" onClick={() => handleClose()}>
               Close
             </Button>
           </Box>
