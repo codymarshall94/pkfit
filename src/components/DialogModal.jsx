@@ -1,11 +1,8 @@
 import React from "react";
 import { Box, useTheme, Modal } from "@mui/material";
 
-import { tokens } from "../theme";
-
 const DialogModal = ({ open, setOpen, children }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
@@ -22,12 +19,12 @@ const DialogModal = ({ open, setOpen, children }) => {
           minWidth: { xs: "90%", sm: "50%", md: "40%", xl: "30%" },
           maxWidth: { xs: "90%", lg: "30%" },
           maxHeight: "80vh",
-          padding: "1rem",
+          padding: { xs: "1rem", md: "2rem 4rem"},
           overflow: "hidden",
           backgroundColor: "white",
           borderRadius: ".25rem",
           boxShadow: 24,
-          color: colors.primary[900],
+          color: theme.palette.text.primary,
         }}
       >
         {children}
