@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 import RegisterSuccessModal from "../../components/RegisterSuccessModal";
 import { useAuth } from "../../context/AuthContext";
-import { tokens } from "../../theme";
 
 function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -21,7 +20,6 @@ function Register() {
   const [isOpen, setIsOpen] = useState(false);
   const { createUser } = useAuth();
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -59,7 +57,7 @@ function Register() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        color: colors.primary[900],
+        color: theme.palette.text.primary,
       }}
     >
       <Box
@@ -72,7 +70,7 @@ function Register() {
       >
         <Box
           component="img"
-          src={require("../../images/logo/logo-no-background-color.png")}
+          src={require("../../images/logo/logo-black.png")}
           alt="logo"
           sx={{
             width: "100%",
@@ -96,7 +94,7 @@ function Register() {
             sx={{
               display: "flex",
               justifyContent: "flex-start",
-              color: colors.primary[900],
+              color: theme.palette.primary.main,
             }}
             htmlFor="email"
           >
@@ -108,9 +106,9 @@ function Register() {
             sx={{
               width: "100%",
               input: {
-                color: colors.primary[900],
-                backgroundColor: colors.backgroundWhite[100],
-                borderBottom: `1px solid ${colors.primary[900]}`,
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.background.white,
+                borderBottom: `1px solid ${theme.palette.text.primary}`,
               },
             }}
             size="small"
@@ -129,7 +127,7 @@ function Register() {
             sx={{
               display: "flex",
               justifyContent: "flex-start",
-              color: colors.primary[900],
+              color: theme.palette.text.primary,
             }}
             htmlFor="password"
           >
@@ -141,9 +139,9 @@ function Register() {
             sx={{
               width: "100%",
               input: {
-                color: colors.primary[900],
-                backgroundColor: colors.backgroundWhite[100],
-                borderBottom: `1px solid ${colors.primary[900]}`,
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.background.white,
+                borderBottom: `1px solid ${theme.palette.text.primary}`,
               },
             }}
             size="small"
@@ -168,8 +166,8 @@ function Register() {
       </Box>
       <Typography variant="h5" mb="1rem">
         Already have an account?{" "}
-        <Link to="/register" style={{ color: colors.primaryOrange[600] }}>
-          Sign up
+        <Link to="/login" style={{ color: theme.palette.text.primary }}>
+          Sign In
         </Link>
       </Typography>
       <Typography variant="h5" color="red">

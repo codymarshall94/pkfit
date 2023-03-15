@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { tokens } from "../../theme";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -19,7 +18,6 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const { signIn } = useAuth();
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -45,7 +43,7 @@ function Login() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        color: colors.primary[900],
+        color: theme.palette.text.primary,
       }}
     >
       <Box
@@ -58,7 +56,7 @@ function Login() {
       >
         <Box
           component="img"
-          src={require("../../images/logo/logo-no-background-color.png")}
+          src={require("../../images/logo/logo-black.png")}
           alt="logo"
           sx={{
             width: "100%",
@@ -81,7 +79,7 @@ function Login() {
             sx={{
               display: "flex",
               justifyContent: "flex-start",
-              color: colors.primary[900],
+              color: theme.palette.text.primary,
             }}
             htmlFor="email"
           >
@@ -93,9 +91,9 @@ function Login() {
             sx={{
               width: "100%",
               input: {
-                color: colors.primary[900],
-                backgroundColor: colors.backgroundWhite[100],
-                borderBottom: `1px solid ${colors.primary[900]}`,
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.background.white,
+                borderBottom: `1px solid ${theme.palette.text.primary}`,
               },
             }}
             size="small"
@@ -112,7 +110,7 @@ function Login() {
             sx={{
               display: "flex",
               justifyContent: "flex-start",
-              color: colors.primary[900],
+              color: theme.palette.text.primary,
             }}
             htmlFor="password"
           >
@@ -124,9 +122,9 @@ function Login() {
             sx={{
               width: "100%",
               input: {
-                color: colors.primary[900],
-                backgroundColor: colors.backgroundWhite[100],
-                borderBottom: `1px solid ${colors.primary[900]}`,
+                color: theme.palette.text.primary,
+                backgroundColor: theme.palette.background.white,
+                borderBottom: `1px solid ${theme.palette.text.primary}`,
               },
             }}
             size="small"
@@ -152,7 +150,7 @@ function Login() {
       </Typography>
       <Typography variant="h5">
         Dont have an account yet?{" "}
-        <Link to="/register" style={{ color: colors.primaryOrange[600] }}>
+        <Link to="/register" style={{ color: theme.palette.text.primary }}>
           Sign up
         </Link>
       </Typography>
