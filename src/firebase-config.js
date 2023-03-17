@@ -28,3 +28,4 @@ export const db = getFirestore();
 export const colRef = collection(db, "workouts");
 
 export const auth = getAuth(app);
+
