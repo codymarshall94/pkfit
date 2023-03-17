@@ -1,4 +1,4 @@
-import { FREEPLANS } from "../exercises/freeplans";
+import { FREEPLANS } from "../data/freeplans";
 
 export const getPlans = () => {
   try {
