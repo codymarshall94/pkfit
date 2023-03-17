@@ -1,7 +1,9 @@
 import React from "react";
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, Typography, Chip, useTheme } from "@mui/material";
+import TextUnderline from "./TextUnderline";
 
 const ChipItem = ({ item }) => {
+  const theme = useTheme();
   return (
     <Chip
       label={item}
@@ -9,8 +11,9 @@ const ChipItem = ({ item }) => {
       sx={{
         margin: ".25rem",
         padding: ".25rem",
-        backgroundColor: "orange",
-        color: "black",
+        backgroundColor: theme.palette.grey.main,
+        color: "white",
+        fontWeight: "bold",
       }}
     />
   );
@@ -36,12 +39,9 @@ const ExerciseDescription = ({ exercise }) => {
         }}
       >
         {exercise && exercise.image !== null ? (
-          <img src={exercise.image} alt=""/>
+          <img src={exercise.image} alt="" />
         ) : (
-          <img
-            src={require("../images/placeholderimg.jpg")}
-            alt=""
-          />
+          <img src={require("../images/placeholderimg.jpg")} alt="" />
         )}
       </Box>
       <Box>
@@ -55,6 +55,7 @@ const ExerciseDescription = ({ exercise }) => {
         >
           {exercise.name}
         </Typography>
+
         <Typography
           variant="h6"
           component="h2"
@@ -62,21 +63,22 @@ const ExerciseDescription = ({ exercise }) => {
         >
           Instructions
         </Typography>
-        <Typography sx={{ mt: 2 }}>
-          {exercise.description}
-        </Typography>
-        <Box>
-          <Typography
-            variant="h6"
-            component="h2"
-            sx={{ mt: 2, fontWeight: "bold" }}
-          >
-            Great For
-          </Typography>
-          {exercise.usedFor.map((use) => (
-            <ChipItem item={use} key={use} />
-          ))}
-        </Box>
+        <Typography sx={{ mt: 2 }}>{exercise.description}</Typography>
+        {exercise?.usedFor && (
+          <Box>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{ mt: 2, fontWeight: "bold" }}
+            >
+              Great For
+            </Typography>
+
+            {exercise.usedFor.map((use) => (
+              <ChipItem item={use} key={use} />
+            ))}
+          </Box>
+        )}
       </Box>
     </Box>
   );
