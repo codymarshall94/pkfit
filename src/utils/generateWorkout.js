@@ -1,4 +1,4 @@
-import { EXERCISES } from "../exercises/exercises";
+import { EXERCISES } from "../data/exercises";
 
 /*
 const warmupReps = [10, 20, "30s", "60s"];
