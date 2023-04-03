@@ -2,7 +2,7 @@ import React from "react";
 import WorkoutDisplay from "../../components/WorkoutDisplay";
 import { useSelector } from "react-redux";
 import { Typography, Box } from "@mui/material";
-import PageHeader from "../../components/PageHeader";
+import PageHeader from "../../components/UI/PageHeader";
 import TitleBackground from "../../components/TitleBackground";
 
 function SavedWorkout() {

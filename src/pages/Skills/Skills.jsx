@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import PageHeader from "../../components/PageHeader";
+import PageHeader from "../../components/UI/PageHeader";
 import SkillsCard from "./SkillsCard";
 
 const skills = [
