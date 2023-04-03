@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { EXERCISES } from "../../exercises/exercises";
+import { EXERCISES } from "../../data/exercises";
 import { useSelector } from "react-redux";
 import { Box, Typography, useTheme } from "@mui/material";
 import DialogModal from "../../components/DialogModal";
