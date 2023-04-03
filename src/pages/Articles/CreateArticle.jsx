@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
-  Input,
   InputLabel,
   Select,
   TextField,
@@ -95,7 +94,7 @@ const CreateArticle = () => {
         required
       >
         {articleType.map((type) => (
-          <option value={type.value}>{type.label}</option>
+          <option key={type.value} value={type.value}>{type.label}</option>
         ))}
       </Select>
 
