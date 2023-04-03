@@ -1,8 +1,24 @@
 import React from "react";
 import { Typography, Box, useTheme } from "@mui/material";
 import ExerciseItem from "./ExerciseItem";
+import { motion, AnimatePresence } from "framer-motion";
 
-const WorkoutDisplay = ({ workout, setSelectedExercise }) => {
+const containerStagger = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+
+    transition: {
+      staggerChildren: 0.7,
+      delayChildren: 0,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+
+const WorkoutDisplay = ({ workout, setSelectedExercise, toggle }) => {
   const theme = useTheme();
   if (workout) {
     return (
@@ -18,15 +34,25 @@ const WorkoutDisplay = ({ workout, setSelectedExercise }) => {
         >
           Workout Overview
         </Typography>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          {workout.map((exer) => (
-            <ExerciseItem
-              key={exer.name}
-              exercise={exer}
-              setSelectedExercise={setSelectedExercise}
-            />
-          ))}
-        </Box>
+        <AnimatePresence mode="wait">
+          <Box
+            component={motion.div}
+            variants={containerStagger}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            sx={{ display: "flex", flexDirection: "column" }}
+          >
+            {workout.map((exer) => (
+              <ExerciseItem
+                key={exer.name}
+                exercise={exer}
+                setSelectedExercise={setSelectedExercise}
+                toggle={toggle}
+              />
+            ))}
+          </Box>
+        </AnimatePresence>
       </>
     );
   }
