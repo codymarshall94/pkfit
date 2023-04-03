@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryButton from "../../components/UI/PrimaryButton";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
 const cards = [
