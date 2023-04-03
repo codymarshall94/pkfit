@@ -25,6 +25,7 @@ const pages = [
   { name: "Home", link: "/" },
   { name: "Skills", link: "/skills" },
   { name: "Plans", link: "/plans" },
+  { name: "Articles", link: "/articles"},
   { name: "Generator", link: "/generator" },
 ];
 const settings = ["Saved Workouts", "Logout"];
