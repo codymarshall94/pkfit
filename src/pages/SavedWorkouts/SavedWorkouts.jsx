@@ -13,7 +13,7 @@ import { Box, Typography, Button, useTheme } from "@mui/material";
 // ========================================================================
 import ClearIcon from "@mui/icons-material/Clear";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
-import PageHeader from "../../components/PageHeader";
+import PageHeader from "../../components/UI/PageHeader";
 
 function SavedWorkouts() {
   const dispatch = useDispatch();
@@ -93,6 +93,7 @@ function SavedWorkouts() {
               p: "1rem",
               margin: "0 auto",
               mb: ".5rem",
+              marginTop: ".5rem",
               cursor: "pointer",
             }}
           >
