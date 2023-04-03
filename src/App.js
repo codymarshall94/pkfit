@@ -18,9 +18,9 @@ import { theme } from "./theme";
 import Articles from "./pages/Articles/Articles";
 import Article from "./pages/Articles/Article";
 import CreateArticle from "./pages/Articles/CreateArticle";
+import AdminPanelRoute from "./components/routelayouts/AdminPanelRoute";
 
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
@@ -36,7 +36,9 @@ function App() {
             <Route path="/skills/:id" element={<Skill />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/articles/:id" element={<Article />} />
-            <Route path="/createarticle" element={<CreateArticle />} />
+            <Route element={<AdminPanelRoute />}>
+              <Route path="/createarticle" element={<CreateArticle />} />
+            </Route>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route element={<ProtectedRoute />}>
