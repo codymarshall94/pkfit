@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Typography, Chip, useTheme } from "@mui/material";
-import TextUnderline from "./TextUnderline";
 
 const ChipItem = ({ item }) => {
   const theme = useTheme();
