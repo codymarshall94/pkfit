@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import TitleBackground from "../../components/TitleBackground";
 
-const allDesc =
-  "All of the exercises that will help you improve your skills.";
+const allDesc = "All of the exercises that will help you improve your skills.";
 const jumpDesc =
   "Exercises that help with Precisions, Strides and overall leg strength.";
 const vaultDesc =
@@ -18,10 +18,23 @@ function ExerciseHeader() {
   const { skill } = useSelector((state) => state.skills);
 
   return (
-    <Box sx={{ position: "relative", padding: "2rem", textAlign:"center" }}>
-      <Typography variant="h1" sx={{ marginBottom: "2rem", fontWeight: "bold" }}>
-        {skill}
-      </Typography>
+    <Box sx={{ padding: "2rem", textAlign: "center" }}>
+      <Box
+        sx={{
+          position: "relative",
+          marginBottom: "2rem",
+          width: "20rem",
+          margin: "0 auto",
+        }}
+      >
+        <Typography
+          variant="h1"
+          sx={{ marginBottom: "2rem", fontWeight: "bold", color: "white" }}
+        >
+          {skill}
+        </Typography>
+        <TitleBackground width="20rem" />
+      </Box>
       <Typography variant="h4">
         {skill === "Jump"
           ? jumpDesc
