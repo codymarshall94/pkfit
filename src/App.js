@@ -11,14 +11,16 @@ import SavedWorkouts from "./pages/SavedWorkouts/SavedWorkouts";
 import SavedWorkout from "./pages/SavedWorkout/SavedWorkout";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { AuthContextProvider } from "./context/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/routelayouts/ProtectedRoute";
 import Plans from "./pages/Plans/Plans";
 import PlanDetails from "./pages/Plans/PlanDetails";
 import { theme } from "./theme";
-import { useModal } from "./hooks/useModal";
-import Modal from "./components/Modal";
+import Articles from "./pages/Articles/Articles";
+import Article from "./pages/Articles/Article";
+import CreateArticle from "./pages/Articles/CreateArticle";
+
 function App() {
-  const [isShowingModal, toggleModal] = useModal();
+
   return (
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
@@ -32,6 +34,9 @@ function App() {
             <Route path="/plans/:id" element={<PlanDetails />} />
             <Route path="/skills" element={<Skills />} />
             <Route path="/skills/:id" element={<Skill />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:id" element={<Article />} />
+            <Route path="/createarticle" element={<CreateArticle />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route element={<ProtectedRoute />}>
@@ -40,7 +45,6 @@ function App() {
             </Route>
             <Route path="*" element={<Home />} />
           </Routes>
-          <Modal isShowing={isShowingModal} hide={toggleModal} />
         </div>
       </AuthContextProvider>
     </ThemeProvider>
