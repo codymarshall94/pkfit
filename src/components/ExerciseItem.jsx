@@ -1,11 +1,32 @@
 import { Typography, Button, useTheme, Grid } from "@mui/material";
+import { motion } from "framer-motion";
 
-const GreyButton = ({ text }) => {
+const fadeInVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+
+const GreyButton = ({ text, exercise, setSelectedExercise, toggle }) => {
   const theme = useTheme();
+
+  const handleClick = () => {
+    setSelectedExercise(exercise);
+    toggle();
+  };
 
   return (
     <Button
       variant="contained"
+      onClick={() => handleClick()}
       sx={{
         backgroundColor: "#575455",
         color: "#fff",
@@ -29,17 +50,26 @@ const GreyButton = ({ text }) => {
 const ExerciseGridItem = ({ header, info }) => {
   return (
     <Grid item xs={3}>
-      <Typography variant="h5" color="#A5A5A5" my=".5rem">{header}</Typography>
-      <Typography variant="h5" fontWeight="bold">{info}</Typography>
+      <Typography variant="h5" color="#A5A5A5" my=".5rem">
+        {header}
+      </Typography>
+      <Typography variant="h5" fontWeight="bold">
+        {info}
+      </Typography>
     </Grid>
   );
 };
 
-const ExerciseItem = ({ exercise, setSelectedExercise }) => {
+const ExerciseItem = ({ exercise, setSelectedExercise, toggle }) => {
   const theme = useTheme();
   const { name, reps, rest } = exercise;
   return (
     <Grid
+      component={motion.div}
+      variants={fadeInVariant}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       container
       sx={{
         backgroundColor: theme.palette.background.grey,
@@ -49,7 +79,7 @@ const ExerciseItem = ({ exercise, setSelectedExercise }) => {
         alignItems: "center",
         width: { xs: "100%", md: "80%", lg: "60%", xl: "50%" },
         margin: "0 auto",
-        textAlign: { xs: "center", md: "left"},
+        textAlign: { xs: "center", md: "left" },
         p: "1rem",
         mb: ".5rem",
       }}
@@ -58,7 +88,12 @@ const ExerciseItem = ({ exercise, setSelectedExercise }) => {
       <ExerciseGridItem header="Reps" info={reps} />
       <ExerciseGridItem header="Rest" info={rest} />
       <Grid item xs={3} sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <GreyButton text="View" onClick={() => setSelectedExercise(exercise)} />
+        <GreyButton
+          text="View"
+          toggle={toggle}
+          exercise={exercise}
+          setSelectedExercise={setSelectedExercise}
+        />
       </Grid>
     </Grid>
   );
