@@ -76,24 +76,11 @@ export const generateWorkout = (info) => {
   const shuffledExercises = shuffleArray(exercises);
   const workoutExercises = [];
 
-  if (goal === "Power") {
-    for (let i = 0; i < exerciseAmount; i++) {
-      workoutExercises.push(
-        createWorkoutExercise(shuffledExercises[i], goal, exerciseTime)
-      );
-    }
-  } else if (goal === "Strength") {
-    for (let i = 0; i < exerciseAmount; i++) {
-      workoutExercises.push(
-        createWorkoutExercise(shuffledExercises[i], goal, exerciseTime)
-      );
-    }
-  } else if (goal === "Conditioning") {
-    for (let i = 0; i < exerciseAmount; i++) {
-      workoutExercises.push(
-        createWorkoutExercise(shuffledExercises[i], goal, exerciseTime)
-      );
-    }
+  for (let i = 0; i < exerciseAmount; i++) {
+    workoutExercises.push(
+      createWorkoutExercise(shuffledExercises[i], goal, exerciseTime)
+    );
   }
+
   return workoutExercises;
 };
