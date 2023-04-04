@@ -1,4 +1,4 @@
-# My Awesome Project
+# PKFit- Parkour Fitness App
 Welcome to PKFit, your one-stop-shop for parkour fitness! With PKFit, you'll have access to parkour content, custom workout plans, and user accounts to track your progress.
 
 **Link to project:** https://pkfit.netlify.app/
