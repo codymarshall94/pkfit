@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import WorkoutSelector from "../../components/WorkoutSelector";
+import GenerateSelector from "./GenerateSelector";
 import GenerateBtn from "./GenerateBtn";
 import WorkoutDisplay from "../../components/WorkoutDisplay";
 import SaveWorkout from "../../components/SaveWorkout";
 import DialogModal from "../../components/DialogModal";
 import useWorkoutInfo from "../../hooks/useWorkoutInfo";
 import { generateWorkout } from "../../utils/generateWorkout";
+import useModal from "../../hooks/useModal";
+import ExerciseDescription from "../../components/ExerciseDescription";
+import GenerateModal from "../../components/GenerateModal";
 
 const GeneratorFooter = ({ workout, setOpen }) => {
   const theme = useTheme();
@@ -73,6 +76,7 @@ function Generator() {
   const [workout, setWorkout] = useState(null);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [open, setOpen] = useState(false);
+  const { isShowing, toggle } = useModal();
   const {
     workoutInfo,
     handleTypeClick,
@@ -107,7 +111,7 @@ function Generator() {
           flexDirection: "column",
         }}
       >
-        <WorkoutSelector
+        <GenerateSelector
           handleTypeClick={handleTypeClick}
           handleTimeClick={handleTimeClick}
           handleGoalClick={handleGoalClick}
@@ -126,6 +130,12 @@ function Generator() {
       <WorkoutDisplay
         workout={workout}
         setSelectedExercise={setSelectedExercise}
+        toggle={toggle} //gotta figure out why cant usehook in greybtn component
+      />
+      <GenerateModal
+        show={isShowing}
+        hide={toggle}
+        children={<ExerciseDescription exercise={selectedExercise} />}
       />
       <DialogModal
         open={open}
