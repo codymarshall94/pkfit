@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import MDEditor from "@uiw/react-md-editor";
 
 const labelStyle = {
   color: "black",
@@ -28,16 +29,19 @@ const articleType = [
 const CreateArticle = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const [content, setContent] = useState("");
   const [article, setArticle] = useState({
     author: "",
     title: "",
-    content: "",
     tags: [],
     articleType: "",
     readLength: "",
   });
 
+  console.log(content);
+
   const handleChange = (e) => {
+    console.log(e.target.name);
     if (e.target.name === "tags") {
       setArticle({
         ...article,
@@ -53,22 +57,22 @@ const CreateArticle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const todaysDate = new Date();
-    const date = {
-      month: todaysDate.getMonth(),
-      day: todaysDate.getDate(),
-      year: todaysDate.getFullYear(),
-    };
+    const todaysDate = new Date().toLocaleDateString("en-us", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
     const newArticle = {
       author: {
         id: currentUser.uid,
-        name: article.author,
+        name: "Cody Marshall"
       },
       title: article.title,
       type: article.articleType,
-      content: article.content,
+      content: content,
       tags: article.tags,
-      dateCreated: date,
+      dateCreated: todaysDate,
       readLength: article.readLength,
     };
     createArticle(newArticle);
@@ -94,22 +98,11 @@ const CreateArticle = () => {
         required
       >
         {articleType.map((type) => (
-          <option key={type.value} value={type.value}>{type.label}</option>
+          <option key={type.value} value={type.value}>
+            {type.label}
+          </option>
         ))}
       </Select>
-
-      <InputLabel htmlFor="author" sx={labelStyle}>
-        {" "}
-        Author{" "}
-      </InputLabel>
-      <TextField
-        id="author"
-        variant="outlined"
-        onChange={(e) => handleChange(e)}
-        name="author"
-        value={article.author}
-        required
-      />
       <InputLabel htmlFor="title" sx={labelStyle}>
         {" "}
         Title
@@ -126,14 +119,24 @@ const CreateArticle = () => {
         {" "}
         Content{" "}
       </InputLabel>
-      <TextField
+      <MDEditor
         id="content"
-        variant="outlined"
-        maxRows={10}
-        multiline
-        onChange={(e) => handleChange(e)}
         name="content"
-        value={article.content}
+        value={content}
+        onChange={setContent}
+        required
+      />
+      <InputLabel htmlFor="readLength" sx={labelStyle}>
+        {" "}
+        Read Length{" "}
+      </InputLabel>
+      <TextField
+        type="number"
+        id="readLength"
+        variant="outlined"
+        onChange={(e) => handleChange(e)}
+        name="readLength"
+        value={article.readLength}
         required
       />
       <InputLabel htmlFor="tags" sx={labelStyle}>
