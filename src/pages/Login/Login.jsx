@@ -145,9 +145,10 @@ function Login() {
           Login
         </Button>
       </Box>
-      <Typography variant="h5" mb="1rem">
-        Forgot your password?
-      </Typography>
+      <Link to="/forgot-password" style={{ color: theme.palette.text.primary }}>
+        <Typography variant="h5">Forgot Password?</Typography>
+      </Link>
+
       <Typography variant="h5">
         Dont have an account yet?{" "}
         <Link to="/register" style={{ color: theme.palette.text.primary }}>
