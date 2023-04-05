@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import LoadingSpinner from "../LoadingSpinner";
@@ -6,8 +5,6 @@ import LoadingSpinner from "../LoadingSpinner";
 const AdminPanelRoute = () => {
   const { currentUser, loading } = useAuth();
   const navigate = useNavigate();
-
-  console.log(currentUser);
 
   if (loading) {
     return <LoadingSpinner />
