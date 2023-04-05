@@ -38,6 +38,7 @@ const SignUpButton = () => {
       to="/register"
       className="signup-btn"
       onClick={() => navigate("/signup")}
+      style={{ whiteSpace: "nowrap"}}
     >
       Sign Up
     </Link>
