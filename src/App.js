@@ -19,6 +19,7 @@ import Articles from "./pages/Articles/Articles";
 import Article from "./pages/Articles/Article";
 import CreateArticle from "./pages/Articles/CreateArticle";
 import AdminPanelRoute from "./components/routelayouts/AdminPanelRoute";
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             </Route>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/saved-workouts" element={<SavedWorkouts />} />
               <Route path="/saved-workouts/:id" element={<SavedWorkout />} />
