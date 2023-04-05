@@ -1,25 +1,47 @@
-import React, { useState } from "react";
-import { EXERCISES } from "../../data/exercises";
-import { useSelector } from "react-redux";
-import { Box, Typography, useTheme } from "@mui/material";
+import React from "react";
+import { Box, Typography, useTheme, Grid } from "@mui/material";
 import DialogModal from "../../components/DialogModal";
 import ExerciseDescription from "../../components/ExerciseDescription";
-import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+const fadeInVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      mass: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};
 
 const SkillItem = ({ exer, handleSelect }) => {
   const theme = useTheme();
 
   return (
-    <Box
+    <Grid
+      item
+      xs={12}
+      sm={4}
+      md={4}
+      lg={4}
+      xl={3}
       onClick={() => handleSelect(exer)}
+      component={motion.div}
+      variants={fadeInVariant}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       sx={{
         backgroundColor: theme.palette.background.grey,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        height: "20rem",
-        width: { xs: "100%", md: "80%", lg: "60%", xl: "50%" },
-        margin: "0 auto",
+        margin: ".5rem",
         textAlign: { xs: "center", md: "left" },
         p: "1rem",
         mb: ".5rem",
@@ -59,53 +81,62 @@ const SkillItem = ({ exer, handleSelect }) => {
       >
         {exer.name}
       </Typography>
-    </Box>
+    </Grid>
   );
 };
 
-function ExerciseList() {
-  const { skill } = useSelector((state) => state.skills);
-  const [open, setOpen] = useState(false);
-  const [selectedExercise, setSelectedExercise] = useState(null);
-  const [filteredExercises, setFilteredExercises] = useState([]);
-
-  useEffect(() => {
-    if(skill === "All") return setFilteredExercises(EXERCISES);
-    const filterExercises = EXERCISES.sort((a, b) => {
-      //sorting alphabetically before filtering out the category
-      return a.name === b.name ? 0 : a.name < b.name ? -1 : 1;
-    }).filter((exer) => exer.category.includes(skill));
-    setFilteredExercises(filterExercises);
-  }, [skill]);
-
-  const handleSelect = (exer) => {
-    setSelectedExercise(exer);
-    setOpen(true);
-  };
-
+function ExerciseList({
+  selectedExercise,
+  open,
+  setOpen,
+  handleSelect,
+  filteredExercises,
+}) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        pt: "2rem",
-      }}
-    >
-      {filteredExercises.map((exer) => (
-        <SkillItem
-          exer={exer}
-          setOpen={setOpen}
-          key={exer.id}
-          handleSelect={handleSelect}
-        />
-      ))}
+    <>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {filteredExercises.length === 0 && (
+          <Typography variant="h5" sx={{ textAlign: "center" }}>
+            No exercises found
+          </Typography>
+        )}
+      </Box>
+      <AnimatePresence mode="exitBeforeEnter">
+        <Grid
+          component={motion.div}
+          layout
+          container
+          spacing={2}
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            margin: "0 auto",
+          }}
+        >
+          {filteredExercises.map((exer) => (
+            <SkillItem
+              exer={exer}
+              setOpen={setOpen}
+              key={exer.id}
+              handleSelect={handleSelect}
+            />
+          ))}
+        </Grid>
+      </AnimatePresence>
       <DialogModal
         open={open}
         setOpen={setOpen}
         children={<ExerciseDescription exercise={selectedExercise} />}
       />
-    </Box>
+    </>
   );
 }
 
