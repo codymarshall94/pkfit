@@ -4,6 +4,7 @@ import { getArticle } from "../../utils/getArticles";
 import { Typography, Box } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
 
 const Article = () => {
   const { id } = useParams();
@@ -31,18 +32,26 @@ const Article = () => {
       >
         {article.title}
       </Typography>
-      <Typography variant="h4">{article.author?.name}</Typography>
+      <Typography variant="h4" fontWeight="bold">
+        {article.author?.name}
+      </Typography>
       <Box
         sx={{
           display: "flex",
         }}
       >
+        <Typography variant="h5" sx={{ marginRight: "1rem" }}>
+          {article.dateCreated}
+        </Typography>
         <AccessTimeIcon sx={{ marginRight: "0.5rem" }} />
 
-        <Typography variant="h5">{article.readTime} min read</Typography>
+        <Typography variant="h5">{article.readLength} min read</Typography>
       </Box>
       <Box sx={{ marginTop: "2rem" }}>
-        <ReactMarkdown children={article.content} />
+        <ReactMarkdown
+          children={article.content}
+          remarkPlugins={[remarkBreaks]}
+        />
       </Box>
     </Box>
   );
