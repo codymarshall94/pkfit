@@ -7,7 +7,6 @@ const fadeInVariant = {
     opacity: 1,
     transition: {
       duration: 0.4,
-      
     },
   },
   exit: {
@@ -34,7 +33,7 @@ const GreyButton = ({ text, exercise, setSelectedExercise, toggle }) => {
         fontSize: "1rem",
         height: "3rem",
         position: "relative",
-        margin: "1rem",
+        textAlign: "center",
         transition: "all 0.3s ease-in-out",
         borderRadius: "2rem",
         "&:hover": {
@@ -78,8 +77,8 @@ const ExerciseItem = ({ exercise, setSelectedExercise, toggle }) => {
         justifyContent: "space-between",
         alignItems: "center",
         width: { xs: "100%", md: "80%", lg: "60%", xl: "50%" },
-        margin: "0 auto",
         textAlign: { xs: "center", md: "left" },
+        margin: "0 auto",
         p: "1rem",
         mb: ".5rem",
       }}
