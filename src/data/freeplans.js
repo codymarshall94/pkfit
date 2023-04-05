@@ -140,15 +140,6 @@ export const FREEPLANS = [
         sets: 2,
         rest: "30s",
       },
-      {
-        name: "Pull up",
-        bodyWeight: true,
-        description:
-          "Starting with our main pulling muscles in the bottom position, We are going to work strength and endurance in the pull up. Although the climb up is very dynamic, we are going to keep very strict form to build a strong foundation.",
-        reps: 10,
-        sets: 3,
-        rest: 120,
-      },
     ],
   },
   {
