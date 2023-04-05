@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +39,16 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const resetPassword = async (email) => {
+    try {
+      const result = await sendPasswordResetEmail(auth, email);
+      return result;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   const signIn = async (email, password) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
@@ -61,6 +72,8 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+
+
   /* const getCurrentUser = () => {
     return currentUser;
   };
@@ -73,6 +86,7 @@ export const AuthContextProvider = ({ children }) => {
         signOutUser,
         currentUser,
         loading,
+        resetPassword,
       }}
     >
       {children}
