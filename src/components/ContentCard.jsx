@@ -94,7 +94,7 @@ const ContentCard = ({ title, subtitle, tags, link, linkText }) => {
         flexDirection: "column",
         padding: "2rem",
         width: { xs: "100%", sm: "100%", md: "100%", lg: "100%" },
-        minHeight: "30rem",
+        minHeight: { xs: "100%", sm: "100%", md: "100%", lg: "30rem" },
         my: "1rem",
         mx: { xs: "1rem", sm: ".5rem" },
         overflow: "hidden",
