@@ -14,6 +14,8 @@ import { Box, Typography, Button, useTheme } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import PageHeader from "../../components/UI/PageHeader";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import PrimaryButton from "../../components/UI/PrimaryButton";
 
 function SavedWorkouts() {
   const dispatch = useDispatch();
@@ -57,25 +59,19 @@ function SavedWorkouts() {
   };
 
   if (!workouts) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   } else {
     return (
       <>
         <PageHeader title="Saved Workouts" />
         {workouts.length === 0 && (
-          <Box sx={{ padding: "2rem" }}>
-            <NoteAltIcon sx={{ fontSize: 100 }} />
-            <Typography variant="h3">You have no saved workouts. </Typography>
-            <Link
-              to="/generator"
-              style={{
-                color: theme.palette.primary.main,
-                textDecoration: "none",
-                fontSize: "1.2rem",
-              }}
-            >
-              Click here to create one
-            </Link>
+          <Box sx={{ padding: "2rem", textAlign: "center" }}>
+            <NoteAltIcon sx={{ fontSize: 50 }} />
+            <Typography variant="h3">No saved workouts. </Typography>
+            <Typography variant="h5" color={theme.palette.text.primary}>
+              Click the button below to generate a workout.
+            </Typography>
+            <PrimaryButton route="/generator" text="Generator" size="large" />
           </Box>
         )}
         {workouts.map((workout) => (
