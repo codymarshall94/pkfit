@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { setSelectedWorkout } from "../../redux/reducers/selectedWorkoutSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // ========================================================================
 import { onSnapshot, query, where } from "firebase/firestore";
 import { colRef } from "../../firebase-config";
