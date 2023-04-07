@@ -9,6 +9,7 @@ import SaveWorkout from "../../components/SaveWorkout";
 import DialogModal from "../../components/DialogModal";
 import useWorkoutInfo from "../../hooks/useWorkoutInfo";
 import { generateWorkout } from "../../utils/generateWorkout";
+import { generateUpdateWorkout } from "../../utils/generateUpdateWorkout";
 import useModal from "../../hooks/useModal";
 import ExerciseDescription from "../../components/ExerciseDescription";
 import GenerateModal from "../../components/GenerateModal";
@@ -85,10 +86,13 @@ function Generator() {
     handleCoreClick,
     handleWarmupClick,
     handleCooldownClick,
+    handleWeightedClick,
+    handlePullClick,
+    handlePushClick,
   } = useWorkoutInfo();
 
   const handleGenerateClick = () => {
-    const workout = generateWorkout(workoutInfo);
+    const workout = generateUpdateWorkout(workoutInfo);
     setWorkout(workout);
   };
 
@@ -99,7 +103,6 @@ function Generator() {
         flexDirection: "column",
         justifyContent: "flex-start",
         backgroundColor: "#FDFBFE",
-        minHeight: "100vh",
         width: "100%",
       }}
     >
@@ -119,9 +122,15 @@ function Generator() {
           handleCoreClick={handleCoreClick}
           handleWarmupClick={handleWarmupClick}
           handleCooldownClick={handleCooldownClick}
+          handleWeightedClick={handleWeightedClick}
+          handlePullClick={handlePullClick}
+          handlePushClick={handlePushClick}
           workoutType={workoutInfo.workoutType}
           exerciseTime={workoutInfo.exerciseTime}
           goal={workoutInfo.goal}
+          weighted={workoutInfo.weighted}
+          push={workoutInfo.push}
+          pull={workoutInfo.pull}
         />
         <GenerateBtn
           generateWorkout={handleGenerateClick}
