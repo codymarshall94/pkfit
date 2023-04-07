@@ -92,6 +92,7 @@ function ExerciseList({
   handleSelect,
   filteredExercises,
 }) {
+
   return (
     <>
       <Box
@@ -125,7 +126,7 @@ function ExerciseList({
             <SkillItem
               exer={exer}
               setOpen={setOpen}
-              key={exer.id}
+              key={exer.name}
               handleSelect={handleSelect}
             />
           ))}
