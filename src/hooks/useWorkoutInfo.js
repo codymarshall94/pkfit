@@ -5,6 +5,9 @@ const useWorkoutInfo = () => {
     workoutType: null,
     exerciseTime: null,
     goal: null,
+    push: true,
+    pull: true,
+    weighted: true,
     warmup: false,
     cooldown: false,
     core: false,
@@ -18,6 +21,21 @@ const useWorkoutInfo = () => {
 
   const handleWarmupClick = () => {
     setWorkoutInfo({ ...workoutInfo, warmup: !workoutInfo.warmup });
+  };
+
+  const handleWeightedClick = (value) => {
+    console.log(value, "value", workoutInfo.weighted, "weighted");
+    setWorkoutInfo({ ...workoutInfo, weighted: value });
+  };
+
+   const handlePushClick = (value) => {
+    console.log(value, "value", workoutInfo.push, "push");
+    setWorkoutInfo({ ...workoutInfo, push: value });
+  };
+
+  const handlePullClick = (value) => {
+    console.log(value, "value", workoutInfo.pull, "pull");
+    setWorkoutInfo({ ...workoutInfo, pull: value });
   };
 
   const handleCooldownClick = () => {
@@ -49,6 +67,9 @@ const useWorkoutInfo = () => {
     handleWarmupClick,
     handleCooldownClick,
     handleCoreClick,
+    handleWeightedClick,
+    handlePushClick,
+    handlePullClick,
   };
 };
 
