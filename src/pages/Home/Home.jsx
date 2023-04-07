@@ -112,6 +112,7 @@ const Home = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          minWidth: "100%",
         }}
       >
         <Box>
