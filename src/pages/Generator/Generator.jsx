@@ -3,16 +3,15 @@ import { Box, Button, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import GenerateSelector from "./GenerateSelector";
+import ExerciseDescription from "../../components/ExerciseDescription";
+import GenerateModal from "../../components/GenerateModal";
 import GenerateBtn from "./GenerateBtn";
 import WorkoutDisplay from "../../components/WorkoutDisplay";
 import SaveWorkout from "../../components/SaveWorkout";
 import DialogModal from "../../components/DialogModal";
 import useWorkoutInfo from "../../hooks/useWorkoutInfo";
-import { generateWorkout } from "../../utils/generateWorkout";
 import { generateUpdateWorkout } from "../../utils/generateUpdateWorkout";
 import useModal from "../../hooks/useModal";
-import ExerciseDescription from "../../components/ExerciseDescription";
-import GenerateModal from "../../components/GenerateModal";
 
 const GeneratorFooter = ({ workout, setOpen }) => {
   const theme = useTheme();
@@ -30,7 +29,7 @@ const GeneratorFooter = ({ workout, setOpen }) => {
         },
       }}
     >
-      {workout ? (
+      {workout.length !== 0 ? (
         <Box sx={{ margin: "1rem 0" }}>
           {currentUser ? (
             <Button
@@ -74,7 +73,7 @@ const GeneratorFooter = ({ workout, setOpen }) => {
 };
 
 function Generator() {
-  const [workout, setWorkout] = useState(null);
+  const [workout, setWorkout] = useState([]);
   const [selectedExercise, setSelectedExercise] = useState(null);
   const [open, setOpen] = useState(false);
   const { isShowing, toggle } = useModal();
@@ -83,15 +82,12 @@ function Generator() {
     handleTypeClick,
     handleTimeClick,
     handleGoalClick,
-    handleCoreClick,
-    handleWarmupClick,
-    handleCooldownClick,
-    handleWeightedClick,
     handlePullClick,
     handlePushClick,
+    handleWeightedClick,
   } = useWorkoutInfo();
 
-  const handleGenerateClick = () => {
+  const generateWorkout = () => {
     const workout = generateUpdateWorkout(workoutInfo);
     setWorkout(workout);
   };
@@ -119,21 +115,18 @@ function Generator() {
           handleTypeClick={handleTypeClick}
           handleTimeClick={handleTimeClick}
           handleGoalClick={handleGoalClick}
-          handleCoreClick={handleCoreClick}
-          handleWarmupClick={handleWarmupClick}
-          handleCooldownClick={handleCooldownClick}
-          handleWeightedClick={handleWeightedClick}
           handlePullClick={handlePullClick}
           handlePushClick={handlePushClick}
+          handleWeightedClick={handleWeightedClick}
           workoutType={workoutInfo.workoutType}
           exerciseTime={workoutInfo.exerciseTime}
           goal={workoutInfo.goal}
-          weighted={workoutInfo.weighted}
-          push={workoutInfo.push}
           pull={workoutInfo.pull}
+          push={workoutInfo.push}
+          weighted={workoutInfo.weighted}
         />
         <GenerateBtn
-          generateWorkout={handleGenerateClick}
+          generateWorkout={generateWorkout}
           workoutInfo={workoutInfo}
         />
       </Box>
