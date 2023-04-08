@@ -46,9 +46,9 @@ const GreyButton = ({ text, exercise, setSelectedExercise, toggle }) => {
   );
 };
 
-const ExerciseGridItem = ({ header, info }) => {
+const ExerciseGridItem = ({ header, info, xs, md }) => {
   return (
-    <Grid item xs={3}>
+    <Grid item xs={xs} md={md}>
       <Typography variant="h5" color="#A5A5A5" my=".5rem">
         {header}
       </Typography>
@@ -61,7 +61,13 @@ const ExerciseGridItem = ({ header, info }) => {
 
 const ExerciseItem = ({ exercise, setSelectedExercise, toggle }) => {
   const theme = useTheme();
-  const { name, reps, rest } = exercise;
+  const { name, reps, rest, sets } = exercise;
+  const itemInfoGrid = [
+    { header: "Exercise", info: name, xs: 6, md: 3, spacing: "flex-start" },
+    { header: "Sets", info: sets, xs: 6, md: 1, spacing: "flex-end" },
+    { header: "Reps", info: reps, xs: 6, md: 1, spacing: "flex-end" },
+    { header: "Rest", info: rest, xs: 6, md: 1, spacing: "flex-end" },
+  ];
   return (
     <Grid
       component={motion.div}
@@ -73,7 +79,7 @@ const ExerciseItem = ({ exercise, setSelectedExercise, toggle }) => {
       sx={{
         backgroundColor: theme.palette.background.grey,
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         width: { xs: "100%", md: "80%", lg: "60%", xl: "50%" },
@@ -83,10 +89,25 @@ const ExerciseItem = ({ exercise, setSelectedExercise, toggle }) => {
         mb: ".5rem",
       }}
     >
-      <ExerciseGridItem header="Exercise" info={name} />
-      <ExerciseGridItem header="Reps" info={reps} />
-      <ExerciseGridItem header="Rest" info={rest} />
-      <Grid item xs={3} sx={{ display: "flex", justifyContent: "flex-end" }}>
+      {itemInfoGrid.map((item) => (
+        <ExerciseGridItem
+          key={item.header}
+          header={item.header}
+          info={item.info}
+          xs={item.xs}
+          md={item.md}
+          spacing={item.spacing}
+        />
+      ))}
+      <Grid
+        item
+        xs={12}
+        md={2}
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "center", md: "flex-end" },
+        }}
+      >
         <GreyButton
           text="View"
           toggle={toggle}
