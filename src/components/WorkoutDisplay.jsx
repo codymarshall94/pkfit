@@ -20,7 +20,7 @@ const containerStagger = {
 
 const WorkoutDisplay = ({ workout, setSelectedExercise, toggle }) => {
   const theme = useTheme();
-  if (workout) {
+  if (workout.length !== 0) {
     return (
       <>
         <Typography
