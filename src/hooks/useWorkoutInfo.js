@@ -8,42 +8,21 @@ const useWorkoutInfo = () => {
     push: true,
     pull: true,
     weighted: true,
-    warmup: false,
-    cooldown: false,
-    core: false,
   });
-
-  const handleGenerateWorkout = () => {
-    setWorkoutInfo({
-      ...workoutInfo,
-    });
-  };
-
-  const handleWarmupClick = () => {
-    setWorkoutInfo({ ...workoutInfo, warmup: !workoutInfo.warmup });
-  };
 
   const handleWeightedClick = (value) => {
     console.log(value, "value", workoutInfo.weighted, "weighted");
-    setWorkoutInfo({ ...workoutInfo, weighted: value });
+    setWorkoutInfo((prevState) => ({ ...prevState, weighted: value }));
   };
 
-   const handlePushClick = (value) => {
+  const handlePushClick = (value) => {
     console.log(value, "value", workoutInfo.push, "push");
-    setWorkoutInfo({ ...workoutInfo, push: value });
+    setWorkoutInfo((prevState) => ({ ...prevState, push: value }));
   };
 
   const handlePullClick = (value) => {
     console.log(value, "value", workoutInfo.pull, "pull");
-    setWorkoutInfo({ ...workoutInfo, pull: value });
-  };
-
-  const handleCooldownClick = () => {
-    setWorkoutInfo({ ...workoutInfo, cooldown: !workoutInfo.cooldown });
-  };
-
-  const handleCoreClick = () => {
-    setWorkoutInfo({ ...workoutInfo, core: !workoutInfo.core });
+    setWorkoutInfo((prevState) => ({ ...prevState, pull: value }));
   };
 
   const handleTypeClick = (workoutType) => {
@@ -63,10 +42,6 @@ const useWorkoutInfo = () => {
     handleTypeClick,
     handleTimeClick,
     handleGoalClick,
-    handleGenerateWorkout,
-    handleWarmupClick,
-    handleCooldownClick,
-    handleCoreClick,
     handleWeightedClick,
     handlePushClick,
     handlePullClick,
