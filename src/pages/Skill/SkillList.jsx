@@ -45,6 +45,7 @@ const SkillItem = ({ exer, handleSelect }) => {
         textAlign: { xs: "center", md: "left" },
         p: "1rem",
         mb: ".5rem",
+        cursor: "pointer",
       }}
     >
       {exer.image !== null ? (
