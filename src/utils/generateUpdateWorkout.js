@@ -1,11 +1,5 @@
 import EXERCISESS from "../data/exercisess";
 
-/*
-const warmupReps = [10, 20, "30s", "60s"];
-const cooldownReps = ["30s", "60s", "120s"];
-const coreReps = ["30s", "60s"];
-*/
-
 const restLookup = {
   1: 120,
   3: 90,
@@ -21,6 +15,7 @@ const strengthReps = [5, 6, 8, 10];
 const conditioningReps = [8, 10, 12, 15];
 const setsLookup = { 10: 3, 20: 3, 30: 4, 60: 5 };
 const exerciseAmountLookup = { 10: 3, 20: 3, 30: 4, 60: 5 };
+const staticSets = ["20s", "30s", "40s", "50s", "60s"];
 
 const repsLookup = {
   Power: powerReps,
@@ -28,8 +23,46 @@ const repsLookup = {
   Conditioning: conditioningReps,
 };
 
+const getUpperPush = (weighted) => {
+  if (weighted) {
+    return [
+      ...EXERCISESS.weighted.upperbody.push,
+      ...EXERCISESS.bodyweight.upperbody.push,
+    ].flat();
+  } else {
+    return [...EXERCISESS.bodyweight.upperbody.push].flat();
+  }
+};
+
+const getUpperPull = (weighted) => {
+  if (weighted) {
+    return [
+      ...EXERCISESS.weighted.upperbody.pull,
+      ...EXERCISESS.bodyweight.upperbody.pull,
+    ].flat();
+  } else {
+    return [...EXERCISESS.bodyweight.upperbody.pull].flat();
+  }
+};
+
+const getLower = (weighted) => {
+  if (weighted) {
+    return [
+      ...EXERCISESS.weighted.lowerbody,
+      ...EXERCISESS.bodyweight.lowerbody,
+    ].flat();
+  } else {
+    return [...EXERCISESS.bodyweight.lowerbody].flat();
+  }
+};
+
 const createUpdateWorkoutExercise = (exer, goal, time) => {
-  const reps = calculateReps(goal);
+  let reps = 0;
+  if (exer.isStatic) {
+    reps = calculateStaticReps();
+  } else {
+    reps = calculateReps(goal);
+  }
   const sets = calculateSets(time);
   return {
     id: exer.id,
@@ -53,75 +86,36 @@ const fullBodyExercises = (weighted) => {
       ...EXERCISESS.bodyweight.lowerbody,
       ...EXERCISESS.bodyweight.upperbody.push,
       ...EXERCISESS.bodyweight.upperbody.pull,
-    ];
+    ].flat();
   } else {
     fullBodyList = [
       ...EXERCISESS.bodyweight.lowerbody,
       ...EXERCISESS.bodyweight.upperbody.push,
       ...EXERCISESS.bodyweight.upperbody.pull,
-    ];
+    ].flat();
   }
   return fullBodyList;
 };
 
 const filterExercises = (type, weighted, push, pull) => {
-  if (type === "Full") {
-    return fullBodyExercises(weighted);
-  }
-
-  let exerciseList = [];
-  if (weighted) {
-    if (type === "Lower") {
-      exerciseList = [
-        ...EXERCISESS.weighted.lowerbody,
-        ...EXERCISESS.bodyweight.lowerbody,
-      ];
-      return exerciseList;
-    } else if (type === "Upper") {
+  switch (type) {
+    case "Full":
+      return fullBodyExercises(weighted);
+    case "Lower":
+      return getLower(weighted);
+    case "Upper":
       if (push && pull) {
-        exerciseList = [
-          ...EXERCISESS.weighted.upperbody.push,
-          ...EXERCISESS.weighted.upperbody.pull,
-          ...EXERCISESS.bodyweight.upperbody.push,
-          ...EXERCISESS.bodyweight.upperbody.pull,
-        ];
+        return [...getUpperPush(weighted), ...getUpperPull(weighted)].flat();
       } else if (push) {
-        exerciseList = [
-          ...EXERCISESS.weighted.upperbody.push,
-          ...EXERCISESS.bodyweight.upperbody.push,
-        ];
+        return getUpperPush(weighted);
       } else if (pull) {
-        exerciseList = [
-          ...EXERCISESS.weighted.upperbody.pull,
-          ...EXERCISESS.bodyweight.upperbody.pull,
-        ];
+        return getUpperPull(weighted);
       }
-    }
-  } else {
-    if (type === "Lower") exerciseList = [...EXERCISESS.bodyweight.lowerbody];
-    else if (type === "Upper") {
-      if (push && pull) {
-        exerciseList = [
-          ...EXERCISESS.bodyweight.upperbody.push,
-          ...EXERCISESS.bodyweight.upperbody.pull,
-        ];
-      } else if (push) {
-        exerciseList = [...EXERCISESS.bodyweight.upperbody.push];
-      } else if (pull) {
-        exerciseList = [...EXERCISESS.bodyweight.upperbody.pull];
-      }
-    }
+      break;
+    default:
+      return [];
   }
-  return exerciseList;
 };
-
-//steps to follow
-//1. filter exercises based on type
-//2. check to see if the exercise can be weighted or not
-//3. if it can be weighted, check to see if the user has selected weighted or not
-//4. if it can be weighted and the user has selected weighted, add the weighted exercise to the array
-//5. if it can be weighted and the user has not selected weighted, add the non-weighted exercise to the array
-//6. if it cannot be weighted, add the non-weighted exercise to the array
 
 const filterExercisesByGoal = (exercises, goal) => {
   const filteredExercises = exercises.filter((exer) => {
@@ -133,6 +127,11 @@ const filterExercisesByGoal = (exercises, goal) => {
 const shuffleArray = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const sliceArray = (arr, amount) => arr.slice(0, amount);
+
+const calculateStaticReps = () => {
+  const randomIndex = Math.floor(Math.random() * staticSets.length);
+  return staticSets[randomIndex];
+};
 
 const calculateReps = (goal) => {
   const reps = repsLookup[goal];
