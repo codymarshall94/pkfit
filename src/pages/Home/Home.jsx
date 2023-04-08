@@ -3,26 +3,39 @@ import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import PrimaryButton from "../../components/UI/PrimaryButton";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import PageSplit from "./PageSplit";
+import TitleBackground from "../../components/TitleBackground";
+import GradeIcon from "@mui/icons-material/Grade";
+import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
+
+const iconStyle = {
+  fontSize: "3rem",
+  color: "#FF0336",
+  marginBottom: "1rem",
+};
 
 const cards = [
   {
     title: "READY PLANS",
     description: "Don't have time to create a workout? We've got you covered.",
+    icon: <FitnessCenterIcon sx={iconStyle} />,
   },
   {
     title: "GENERATE FAST",
     description: "With our generator, you can create a workout in seconds.",
+    icon: <ElectricBoltIcon sx={iconStyle} />,
   },
   {
     title: "SAVE WORKOUTS",
     description: "Once you've generated a workout, you can save it for later.",
+    icon: <GradeIcon sx={iconStyle} />,
   },
 ];
 
 const Card = ({ card }) => {
   const [showBackground, setShowBackground] = useState(false);
   const theme = useTheme();
-
+  const { title, description, icon } = card;
   return (
     <Box
       sx={{
@@ -66,13 +79,7 @@ const Card = ({ card }) => {
           transition: "all .15s ease-in-out",
         }}
       />
-      <FitnessCenterIcon
-        sx={{
-          fontSize: "3rem",
-          color: theme.palette.red.main,
-          marginBottom: "1rem",
-        }}
-      />
+      {icon}
       <Typography
         variant="h4"
         sx={{
@@ -80,9 +87,9 @@ const Card = ({ card }) => {
           marginBottom: "1rem",
         }}
       >
-        {card.title}
+        {title}
       </Typography>
-      <Typography variant="h6">{card.description}</Typography>
+      <Typography variant="h6">{description}</Typography>
     </Box>
   );
 };
@@ -179,8 +186,61 @@ const Home = () => {
         }}
       >
         {cards.map((card, index) => (
-          <Card key={index} title={card.title} card={card} />
+          <Card key={index} card={card} />
         ))}
+      </Box>
+      {/** Articles Section================================== */}
+      <PageSplit
+        text="Curated articles and tips to help you reach your fitness goals."
+        link="/articles"
+      />
+      {/** Plans Section================================== */}
+      <Box
+        component="section"
+        sx={{
+          minHeight: "50vh",
+          width: "100%",
+          padding: "2rem",
+        }}
+      >
+        <Box
+          sx={{
+            position: "relative",
+            width: "20rem",
+            margin: "0 auto",
+            marginTop: "3rem",
+          }}
+        >
+          <Typography
+            variant="h2"
+            sx={{
+              marginBottom: "2rem",
+              fontWeight: "bold",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            Go Further
+          </Typography>
+          <TitleBackground width="20rem" />
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box textAlign="center" sx={{ margin: "2rem 0" }}>
+            <Typography variant="h2">
+              Take Your Training And Skills To The Next Level
+            </Typography>
+            <Typography variant="h5">
+              With our crafted training plans, you can always be improving.
+            </Typography>
+            <FitnessCenterIcon sx={{ fontSize: "5rem", color: "#FF0336", marginTop: "2rem" }} />
+          </Box>
+          <PrimaryButton route="/plans" text="View Plans" size="btn-large" />
+        </Box>
       </Box>
     </Box>
   );
